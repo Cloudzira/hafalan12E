@@ -124,7 +124,7 @@
       margin-bottom: 20px;
     }
 
-    /* Pemisahan Kelompok Tombol Kelas (Kelas Putra & Kelas Putri) */
+    /* Pemisahan Kelompok Tombol Kelas */
     .class-group {
       margin-bottom: 14px;
     }
@@ -219,9 +219,9 @@
     }
 
     .btn-screenshot {
-      background: rgba(16, 185, 129, 0.15);
-      color: var(--neon-green);
-      border: 1px solid var(--neon-green);
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--neon-blue);
+      border: 1px solid var(--neon-blue);
       padding: 5px 12px;
       border-radius: 18px;
       font-size: 0.75rem;
@@ -230,12 +230,12 @@
       font-family: inherit;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       transition: all 0.2s ease;
     }
 
     .btn-screenshot:hover {
-      background: var(--neon-green);
+      background: var(--neon-blue);
       color: #ffffff;
     }
 
@@ -288,7 +288,7 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Table Layout - Font Ukuran Ringkas & Kompak */
+    /* Table Layout */
     .table-container {
       background: var(--card-bg);
       border-radius: 14px;
@@ -465,8 +465,8 @@
           <button class="btn-change" onclick="resetClassSelection()" data-html2canvas-ignore="true">
             <i class="fa-solid fa-rotate-left"></i> PILIH KELAS
           </button>
-          <button class="btn-screenshot" onclick="sendToWhatsAppGuru(event)" data-html2canvas-ignore="true">
-            <i class="fa-brands fa-whatsapp"></i> KIRIM LAPORAN KE WA
+          <button class="btn-screenshot" onclick="downloadImage(event)" data-html2canvas-ignore="true">
+            <i class="fa-solid fa-download"></i> UNDUH GAMBAR
           </button>
         </div>
 
@@ -627,17 +627,16 @@
       `;
     }
 
-    /* Fungsi Unduh / Kirim Laporan Kompatibel Chrome HP & Desktop */
-    async function sendToWhatsAppGuru(e) {
+    /* Fungsi Unduh Gambar Murni (Chrome HP & Laptop Kompatibel) */
+    async function downloadImage(e) {
       const exportArea = document.getElementById('exportArea');
       const btn = e.currentTarget;
       const originalText = btn.innerHTML;
       
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Memproses...';
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Mengunduh...';
       btn.disabled = true;
 
       try {
-        // 1. Capture elemen menggunakan html2canvas
         const canvas = await html2canvas(exportArea, {
           backgroundColor: '#0b0f19',
           scale: 2,
@@ -649,32 +648,11 @@
         });
 
         const fileName = `Laporan_Hafalan_${currentClass.replace(/\s+/g, '_')}.png`;
-
-        // 2. Coba kirim via Web Share API (Sangat kompatibel untuk HP)
-        if (navigator.canShare) {
-          try {
-            const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png', 1.0));
-            if (blob) {
-              const file = new File([blob], fileName, { type: 'image/png' });
-              if (navigator.canShare({ files: [file] })) {
-                await navigator.share({
-                  files: [file],
-                  title: `Laporan Hafalan ${currentClass}`,
-                  text: `Laporan Capaian Hafalan Al Quran ${currentClass}`
-                });
-                return; // Selesai jika berhasil diproses melalui Web Share
-              }
-            }
-          } catch (shareErr) {
-            if (shareErr.name === 'AbortError') return; // Batal jika user menutup menu share
-          }
-        }
-
-        // 3. Fallback Khusus Chrome HP (Buka di Tab Baru agar bisa 'Tekan Lama' -> Simpan/Share)
         const dataUrl = canvas.toDataURL('image/png');
         const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
         if (isMobile) {
+          // Solusi Chrome HP: Buka di Tab Baru agar siswa bisa Tekan Lama -> Simpan Gambar
           const newWindow = window.open();
           if (newWindow) {
             newWindow.document.write(`
@@ -685,11 +663,11 @@
                   <style>
                     body { background: #0b0f19; color: #fff; font-family: sans-serif; text-align: center; padding: 20px; margin: 0; }
                     img { max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); margin-top: 15px; }
-                    p { font-size: 0.9rem; color: #10b981; margin-bottom: 10px; line-height: 1.4; }
+                    p { font-size: 0.85rem; color: #10b981; margin-bottom: 10px; line-height: 1.4; }
                   </style>
                 </head>
                 <body>
-                  <p>📌 <b>Tekan lama gambar di bawah</b> lalu pilih <b>"Simpan Gambar"</b> atau <b>"Bagikan Gambar"</b> ke WhatsApp Guru.</p>
+                  <p>📌 <b>Tekan lama gambar di bawah</b> lalu pilih <b>"Simpan Gambar"</b> (Download Image).</p>
                   <img src="${dataUrl}" alt="Laporan Hafalan" />
                 </body>
               </html>
@@ -698,7 +676,7 @@
             alert('Izinkan Pop-up di Chrome Anda untuk melihat & mengunduh gambar.');
           }
         } else {
-          // 4. Direct Download untuk pengguna PC / Laptop
+          // Direct Download untuk Laptop / PC
           const link = document.createElement('a');
           link.href = dataUrl;
           link.download = fileName;
