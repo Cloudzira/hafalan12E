@@ -75,7 +75,7 @@
     }
 
     .container {
-      max-width: 1000px;
+      max-width: 900px;
       margin: 0 auto;
       width: 100%;
     }
@@ -308,7 +308,7 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Table Horizontal Layout (Menyamping) */
+    /* Table Layout */
     .table-container {
       background: var(--card-bg);
       backdrop-filter: blur(20px);
@@ -339,8 +339,8 @@
     }
 
     .student-table th.col-no { width: 80px; text-align: center; }
-    .student-table th.col-nama { width: 30%; }
-    .student-table th.col-capaian { width: 32%; }
+    .student-table th.col-nama { width: 45%; }
+    .student-table th.col-capaian { width: 45%; }
 
     .student-table td {
       padding: 14px 18px;
@@ -404,11 +404,6 @@
       color: var(--text-main);
     }
 
-    .capaian-tag i {
-      font-size: 0.8rem;
-    }
-
-    .capaian-tag i.fa-bookmark { color: var(--neon-blue); }
     .capaian-tag i.fa-star { color: var(--neon-purple); }
 
     .no-results {
@@ -489,7 +484,6 @@
             <tr>
               <th class="col-no">No</th>
               <th class="col-nama">Nama Siswa</th>
-              <th class="col-capaian">Capaian Awal</th>
               <th class="col-capaian">Capaian Akhir</th>
             </tr>
           </thead>
@@ -577,7 +571,7 @@
       if (!data || data.length === 0) {
         tableBody.innerHTML = `
           <tr>
-            <td colspan="4">
+            <td colspan="3">
               <div class="no-results">
                 <i class="fa-regular fa-folder-open" style="font-size: 2rem; margin-bottom: 10px; color: var(--neon-green);"></i>
                 <p>Tidak ada data siswa untuk kelas ini.</p>
@@ -599,12 +593,6 @@
             <div class="student-name">
               <div class="avatar">${initial}</div>
               <span>${item.nama || '-'}</span>
-            </div>
-          </td>
-          <td>
-            <div class="capaian-tag">
-              <i class="fa-solid fa-bookmark"></i>
-              <span>${item.capaianAwal || '-'}</span>
             </div>
           </td>
           <td>
@@ -632,7 +620,7 @@
       const tableBody = document.getElementById('tableBody');
       tableBody.innerHTML = `
         <tr>
-          <td colspan="4">
+          <td colspan="3">
             <div style="text-align: center; color: #f87171; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); padding: 18px; border-radius: 12px; margin: 20px;">
               <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.2rem; margin-bottom: 6px;"></i>
               <p style="font-weight: 600; font-size: 0.9rem;">${message}</p>
