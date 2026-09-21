@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Laporan Capaian Hafalan Siswi</title>
+  <title>Capaian HafalanKu</title>
   
   <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -312,34 +312,51 @@
   </div>
 
   <script>
-    // URL Deployment Google Apps Script Anda
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyACwYLb61IpF5qZtJstldD7co-3j-pkPKs-KucQUIeiHbsdtDlVoNGd-50hIF17czpPg/exec";
+    // URL Deployment Google Apps Script Terbaru Anda
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyPO-G1ASo01Bb9zqYvsQVieZ4tYe9mhbbnv7aeZ3bdxQ56xoF3Rgq4rwP9uE6yHRBesA/exec";
 
     let allData = [];
 
-    // Jalankan pengambilan data saat halaman dibuka
+    // Jalankan pengambilan data menggunakan metode JSONP
     window.onload = function() {
-      fetchData();
+      fetchDataJSONP();
     };
 
-    function fetchData() {
-      fetch(SCRIPT_URL)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error("Gagal mengambil data dari server");
-          }
-          return response.json();
-        })
-        .then(data => {
-          renderCards(data);
-        })
-        .catch(err => {
-          showError(err);
-        });
+    function fetchDataJSONP() {
+      // Membuat nama callback acak yang unik
+      const callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
+      
+      // Mendaftarkan callback fungsi ke objek global window
+      window[callbackName] = function(data) {
+        delete window[callbackName];
+        if (script.parentNode) {
+          document.body.removeChild(script);
+        }
+        renderCards(data);
+      };
+
+      // Membuat tag script secara dinamis untuk request JSONP
+      const script = document.createElement('script');
+      script.src = `${SCRIPT_URL}?callback=${callbackName}`;
+      
+      script.onerror = function() {
+        delete window[callbackName];
+        if (script.parentNode) {
+          document.body.removeChild(script);
+        }
+        showError(new Error("Gagal terhubung ke Google Apps Script"));
+      };
+
+      document.body.appendChild(script);
     }
 
     function renderCards(data) {
-      allData = data;
+      if (data && data.error) {
+        showError(new Error(data.error));
+        return;
+      }
+      
+      allData = Array.isArray(data) ? data : [];
       document.getElementById('loading').style.display = 'none';
       const container = document.getElementById('gridContainer');
       container.style.display = 'grid';
@@ -364,7 +381,7 @@
       }
 
       data.forEach(item => {
-        // Ambil inisial huruf pertama nama untuk avatar
+        // Ambil huruf pertama nama untuk ditampilkan sebagai avatar
         const initial = item.nama ? item.nama.charAt(0).toUpperCase() : '?';
 
         const card = document.createElement('div');
@@ -399,7 +416,7 @@
     function filterData() {
       const query = document.getElementById('searchInput').value.toLowerCase();
       const filtered = allData.filter(item => 
-        item.nama && item.nama.toLowerCase().includes(query)
+        item.nama && item.nama.toString().toLowerCase().includes(query)
       );
       displayFilteredData(filtered);
     }
