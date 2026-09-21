@@ -40,7 +40,7 @@
       background: var(--bg-gradient);
       min-height: 100vh;
       color: var(--text-main);
-      padding: 40px 20px;
+      padding: 30px 15px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -75,7 +75,7 @@
     }
 
     .container {
-      max-width: 900px;
+      max-width: 850px;
       margin: 0 auto;
       width: 100%;
     }
@@ -83,97 +83,97 @@
     /* Header Styling */
     .header {
       text-align: center;
-      margin-bottom: 35px;
+      margin-bottom: 25px;
     }
 
     .header .subtitle {
-      font-size: 0.8rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 3px;
+      letter-spacing: 2.5px;
       color: var(--neon-green);
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .header h1 {
-      font-size: 2rem;
+      font-size: 1.5rem;
       background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       font-weight: 700;
-      letter-spacing: -0.5px;
+      letter-spacing: -0.3px;
     }
 
     .header-divider {
-      width: 70px;
-      height: 3px;
+      width: 50px;
+      height: 2px;
       background: linear-gradient(90deg, var(--neon-green), var(--neon-blue), var(--neon-purple));
       margin: 0 auto;
-      border-radius: 3px;
+      border-radius: 2px;
     }
 
     /* Portal Class Selection Box */
     .login-box {
-      max-width: 520px;
+      max-width: 480px;
       margin: 0 auto;
       background: var(--card-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      padding: 35px 30px;
-      border-radius: 20px;
+      padding: 28px 24px;
+      border-radius: 16px;
       border: 1px solid var(--card-border);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), var(--shadow-neon);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), var(--shadow-neon);
       text-align: center;
     }
 
     .login-box i.icon-header {
-      font-size: 2.5rem;
+      font-size: 2rem;
       background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
     }
 
     .login-box h2 {
-      font-size: 1.35rem;
-      margin-bottom: 8px;
+      font-size: 1.15rem;
+      margin-bottom: 6px;
       color: #fff;
       font-weight: 700;
     }
 
     .login-box p {
-      font-size: 0.88rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
-      margin-bottom: 25px;
+      margin-bottom: 20px;
     }
 
     /* Grid Tombol Pilihan Kelas */
     .class-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      gap: 10px;
     }
 
     .btn-class-option {
       background: rgba(15, 23, 42, 0.8);
       border: 1px solid var(--card-border);
       color: var(--text-main);
-      padding: 14px 10px;
-      border-radius: 12px;
-      font-size: 0.95rem;
-      font-weight: 700;
+      padding: 10px 8px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.25s ease;
       font-family: inherit;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
     }
 
     .btn-class-option i {
-      font-size: 1rem;
+      font-size: 0.88rem;
       color: var(--neon-blue);
       transition: color 0.25s ease;
     }
@@ -182,8 +182,8 @@
       background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
       border-color: var(--neon-green);
       color: #ffffff;
-      transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(16, 185, 129, 0.25);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
     }
 
     .btn-class-option:hover i {
@@ -202,23 +202,23 @@
       background: var(--card-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      padding: 16px 24px;
-      border-radius: 16px;
+      padding: 12px 18px;
+      border-radius: 12px;
       border: 1px solid var(--card-border);
       box-shadow: var(--shadow-neon);
-      margin-bottom: 25px;
+      margin-bottom: 18px;
       flex-wrap: wrap;
-      gap: 15px;
+      gap: 12px;
     }
 
     .class-badge {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .class-badge h2 {
-      font-size: 1.25rem;
+      font-size: 1.05rem;
       color: #fff;
       font-weight: 700;
     }
@@ -227,43 +227,44 @@
       background: rgba(255, 255, 255, 0.05);
       color: var(--neon-green);
       border: 1px solid var(--neon-green);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.8rem;
+      padding: 5px 12px;
+      border-radius: 16px;
+      font-size: 0.72rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
       font-family: inherit;
+      letter-spacing: 0.3px;
     }
 
     .btn-change:hover {
       background: var(--neon-green);
       color: #0b0f19;
-      box-shadow: 0 0 12px var(--neon-green);
+      box-shadow: 0 0 10px var(--neon-green);
     }
 
     .search-box {
       position: relative;
       flex: 1;
-      max-width: 320px;
+      max-width: 280px;
     }
 
     .search-box i {
       position: absolute;
-      left: 14px;
+      left: 12px;
       top: 50%;
       transform: translateY(-50%);
       color: var(--neon-blue);
-      font-size: 0.9rem;
+      font-size: 0.8rem;
     }
 
     .search-box input {
       width: 100%;
-      padding: 9px 14px 9px 38px;
+      padding: 7px 12px 7px 32px;
       border: 1px solid var(--card-border);
-      border-radius: 25px;
+      border-radius: 20px;
       outline: none;
-      font-size: 0.88rem;
+      font-size: 0.8rem;
       background: rgba(15, 23, 42, 0.8);
       color: var(--text-main);
       transition: all 0.3s ease;
@@ -272,21 +273,21 @@
 
     .search-box input:focus {
       border-color: var(--neon-blue);
-      box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+      box-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
     }
 
     /* Loading Spinner */
     .loading {
       text-align: center;
-      padding: 50px 0;
+      padding: 40px 0;
       display: none;
     }
 
     .spinner {
       display: inline-block;
-      width: 40px;
-      height: 40px;
-      border: 3px solid rgba(16, 185, 129, 0.1);
+      width: 32px;
+      height: 32px;
+      border: 2px solid rgba(16, 185, 129, 0.1);
       border-radius: 50%;
       border-top-color: var(--neon-green);
       animation: spin 1s infinite linear;
@@ -297,14 +298,14 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Table Layout */
+    /* Table Layout - Ringkas & Kompak */
     .table-container {
       background: var(--card-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border-radius: 16px;
+      border-radius: 12px;
       border: 1px solid var(--card-border);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
       overflow-x: auto;
     }
 
@@ -312,28 +313,28 @@
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      font-size: 0.9rem;
+      font-size: 0.82rem; /* Ukuran font tabel diperkecil */
     }
 
     .student-table th {
-      background: rgba(15, 23, 42, 0.8);
-      padding: 14px 18px;
+      background: rgba(15, 23, 42, 0.85);
+      padding: 10px 14px;
       font-weight: 600;
-      font-size: 0.78rem;
+      font-size: 0.7rem; /* Font header lebih padat & profesional */
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
       color: var(--text-muted);
       border-bottom: 1px solid var(--card-border);
       white-space: nowrap;
     }
 
-    .student-table th.col-no { width: 80px; text-align: center; }
+    .student-table th.col-no { width: 60px; text-align: center; }
     .student-table th.col-nama { width: 45%; }
     .student-table th.col-capaian { width: 45%; }
 
     .student-table td {
-      padding: 14px 18px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 9px 14px; /* Menipiskan baris agar tabel tidak terlalu lebar */
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
       color: var(--text-main);
       vertical-align: middle;
       transition: background 0.2s ease;
@@ -353,26 +354,27 @@
 
     .no-badge {
       display: inline-block;
-      font-size: 0.8rem;
+      font-size: 0.72rem;
       font-weight: 600;
       color: var(--neon-blue);
-      background: rgba(59, 130, 246, 0.12);
-      border: 1px solid rgba(59, 130, 246, 0.25);
-      padding: 2px 8px;
-      border-radius: 8px;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      padding: 1px 6px;
+      border-radius: 6px;
     }
 
     .student-name {
-      font-weight: 600;
+      font-weight: 500;
       color: #ffffff;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 9px;
     }
 
+    /* Ukuran Avatar Dibuat Lebih Proporsional */
     .avatar {
-      width: 32px;
-      height: 32px;
+      width: 25px;
+      height: 25px;
       border-radius: 50%;
       background: rgba(16, 185, 129, 0.12);
       color: var(--neon-green);
@@ -380,7 +382,7 @@
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.72rem;
       border: 1px solid rgba(16, 185, 129, 0.25);
       flex-shrink: 0;
     }
@@ -388,24 +390,29 @@
     .capaian-tag {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      font-size: 0.88rem;
-      color: var(--text-main);
+      gap: 6px;
+      font-size: 0.8rem;
+      color: #e2e8f0;
+      font-weight: 500;
     }
 
-    .capaian-tag i.fa-star { color: var(--neon-purple); }
+    .capaian-tag i.fa-star { 
+      color: var(--neon-purple); 
+      font-size: 0.75rem; 
+    }
 
     .no-results {
       text-align: center;
-      padding: 50px 20px;
+      padding: 40px 20px;
       color: var(--text-muted);
+      font-size: 0.82rem;
     }
 
     @media (max-width: 600px) {
       .class-grid { grid-template-columns: repeat(2, 1fr); }
       .top-bar { flex-direction: column; align-items: stretch; }
       .search-box { max-width: 100%; }
-      .student-table th, .student-table td { padding: 12px 10px; font-size: 0.85rem; }
+      .student-table th, .student-table td { padding: 8px 10px; font-size: 0.78rem; }
     }
   </style>
 </head>
@@ -424,7 +431,7 @@
       <div class="login-box">
         <i class="fa-solid fa-graduation-cap icon-header"></i>
         <h2>PILIH KELAS</h2>
-        <p>Klik kelas Anda untuk langsung melihat laporan</p>
+        <p>Klik kelas Anda untuk melihat laporan capaian hafalan</p>
         
         <div class="class-grid">
           <button type="button" class="btn-class-option" onclick="selectClass('XII A')">
@@ -481,7 +488,7 @@
       <!-- Loading State -->
       <div id="loading" class="loading">
         <div class="spinner"></div>
-        <p style="margin-top: 15px; color: var(--text-muted); font-size: 0.88rem;">Mengambil data kelas...</p>
+        <p style="margin-top: 12px; color: var(--text-muted); font-size: 0.8rem;">Mengambil data kelas...</p>
       </div>
 
       <!-- Table Container -->
@@ -531,13 +538,12 @@
       document.getElementById('tableContainer').style.display = 'none';
 
       try {
-        // Menggunakan parameter _t timestamp agar terhindar dari caching browser HP
         const targetUrl = `${SCRIPT_URL}?kelas=${encodeURIComponent(namaKelas)}&_t=${new Date().getTime()}`;
         
         const response = await fetch(targetUrl, {
           method: "GET",
           redirect: "follow",
-          credentials: "omit" // Mengabaikan cookie Google agar tidak bentrok di browser HP
+          credentials: "omit"
         });
 
         if (!response.ok) {
@@ -573,7 +579,7 @@
           <tr>
             <td colspan="3">
               <div class="no-results">
-                <i class="fa-regular fa-folder-open" style="font-size: 2rem; margin-bottom: 10px; color: var(--neon-green);"></i>
+                <i class="fa-regular fa-folder-open" style="font-size: 1.8rem; margin-bottom: 8px; color: var(--neon-green);"></i>
                 <p>Tidak ada data siswa untuk kelas ini.</p>
               </div>
             </td>
@@ -621,9 +627,9 @@
       tableBody.innerHTML = `
         <tr>
           <td colspan="3">
-            <div style="text-align: center; color: #f87171; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); padding: 18px; border-radius: 12px; margin: 20px;">
-              <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.2rem; margin-bottom: 6px;"></i>
-              <p style="font-weight: 600; font-size: 0.9rem;">${message}</p>
+            <div style="text-align: center; color: #f87171; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); padding: 14px; border-radius: 10px; margin: 15px;">
+              <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.1rem; margin-bottom: 5px;"></i>
+              <p style="font-weight: 600; font-size: 0.82rem;">${message}</p>
             </div>
           </td>
         </tr>
