@@ -11,10 +11,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+  <!-- Library html2canvas untuk Fitur Screenshot -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
   <style>
     :root {
       /* Palette Dark Glassmorphism Modern & Soft */
-      --bg-gradient: radial-gradient(circle at 50% 0%, #111827 0%, #0b0f19 100%);
+      --bg-gradient: #0b0f19;
       
       --neon-green: #10b981;  /* Soft Emerald Green */
       --neon-blue: #3b82f6;   /* Soft Royal Blue */
@@ -23,7 +26,7 @@
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       
-      --card-bg: rgba(17, 24, 39, 0.7);
+      --card-bg: #111827;
       --card-border: rgba(255, 255, 255, 0.08);
       
       --shadow-neon: 0 10px 30px -10px rgba(59, 130, 246, 0.2);
@@ -37,41 +40,16 @@
 
     body {
       font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
-      background: var(--bg-gradient);
+      background-color: #0b0f19;
+      background-image: radial-gradient(circle at 50% 0%, #111827 0%, #0b0f19 100%);
       min-height: 100vh;
       color: var(--text-main);
-      padding: 40px 20px;
+      padding: 30px 20px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       position: relative;
       overflow-x: hidden;
-    }
-
-    /* Soft Ambient Glowing Orbs */
-    body::before, body::after {
-      content: '';
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(140px);
-      z-index: -1;
-      opacity: 0.25;
-    }
-
-    body::before {
-      width: 350px;
-      height: 350px;
-      background: var(--neon-purple);
-      top: -5%;
-      left: 10%;
-    }
-
-    body::after {
-      width: 400px;
-      height: 400px;
-      background: var(--neon-blue);
-      bottom: -5%;
-      right: 10%;
     }
 
     .container {
@@ -83,34 +61,36 @@
     /* Header Styling */
     .header {
       text-align: center;
-      margin-bottom: 35px;
+      margin-bottom: 30px;
+      padding-top: 10px;
     }
 
     .header .subtitle {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       text-transform: uppercase;
-      letter-spacing: 3px;
+      letter-spacing: 2.5px;
       color: var(--neon-green);
       font-weight: 700;
       margin-bottom: 8px;
+      line-height: 1.4;
     }
 
     .header h1 {
       font-size: 2rem;
-      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #ffffff;
       margin-bottom: 12px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      line-height: 1.2;
     }
 
     .header-divider {
-      width: 70px;
-      height: 3px;
+      width: 80px;
+      height: 4px;
       background: linear-gradient(90deg, var(--neon-green), var(--neon-blue), var(--neon-purple));
       margin: 0 auto;
-      border-radius: 3px;
+      border-radius: 4px;
     }
 
     /* Portal Class Selection Box */
@@ -118,20 +98,16 @@
       max-width: 520px;
       margin: 0 auto;
       background: var(--card-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
       padding: 35px 30px;
       border-radius: 20px;
       border: 1px solid var(--card-border);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), var(--shadow-neon);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
       text-align: center;
     }
 
     .login-box i.icon-header {
       font-size: 2.5rem;
-      background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--neon-green);
       margin-bottom: 15px;
     }
 
@@ -156,7 +132,7 @@
     }
 
     .btn-class-option {
-      background: rgba(15, 23, 42, 0.8);
+      background: rgba(15, 23, 42, 0.9);
       border: 1px solid var(--card-border);
       color: var(--text-main);
       padding: 14px 10px;
@@ -175,19 +151,13 @@
     .btn-class-option i {
       font-size: 1rem;
       color: var(--neon-blue);
-      transition: color 0.25s ease;
     }
 
     .btn-class-option:hover {
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+      background: rgba(59, 130, 246, 0.2);
       border-color: var(--neon-green);
       color: #ffffff;
-      transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(16, 185, 129, 0.25);
-    }
-
-    .btn-class-option:hover i {
-      color: var(--neon-green);
+      transform: translateY(-2px);
     }
 
     /* Dashboard Section */
@@ -200,12 +170,9 @@
       justify-content: space-between;
       align-items: center;
       background: var(--card-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
       padding: 16px 24px;
       border-radius: 16px;
       border: 1px solid var(--card-border);
-      box-shadow: var(--shadow-neon);
       margin-bottom: 25px;
       flex-wrap: wrap;
       gap: 15px;
@@ -214,7 +181,8 @@
     .class-badge {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     .class-badge h2 {
@@ -232,14 +200,29 @@
       font-size: 0.8rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s ease;
       font-family: inherit;
     }
 
-    .btn-change:hover {
-      background: var(--neon-green);
-      color: #0b0f19;
-      box-shadow: 0 0 12px var(--neon-green);
+    /* Tombol Screenshot Baru */
+    .btn-screenshot {
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--neon-blue);
+      border: 1px solid var(--neon-blue);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-screenshot:hover {
+      background: var(--neon-blue);
+      color: #ffffff;
     }
 
     .search-box {
@@ -264,15 +247,9 @@
       border-radius: 25px;
       outline: none;
       font-size: 0.88rem;
-      background: rgba(15, 23, 42, 0.8);
+      background: rgba(15, 23, 42, 0.9);
       color: var(--text-main);
-      transition: all 0.3s ease;
       font-family: inherit;
-    }
-
-    .search-box input:focus {
-      border-color: var(--neon-blue);
-      box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
     }
 
     /* Loading Spinner */
@@ -300,8 +277,6 @@
     /* Table Layout */
     .table-container {
       background: var(--card-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
       border-radius: 16px;
       border: 1px solid var(--card-border);
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
@@ -316,7 +291,7 @@
     }
 
     .student-table th {
-      background: rgba(15, 23, 42, 0.8);
+      background: rgba(15, 23, 42, 0.95);
       padding: 14px 18px;
       font-weight: 600;
       font-size: 0.78rem;
@@ -336,20 +311,9 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.04);
       color: var(--text-main);
       vertical-align: middle;
-      transition: background 0.2s ease;
     }
 
-    .student-table tbody tr:hover td {
-      background: rgba(255, 255, 255, 0.03);
-    }
-
-    .student-table tbody tr:last-child td {
-      border-bottom: none;
-    }
-
-    .td-no {
-      text-align: center;
-    }
+    .td-no { text-align: center; }
 
     .no-badge {
       display: inline-block;
@@ -411,7 +375,7 @@
 </head>
 <body>
 
-  <div class="container">
+  <div class="container" id="exportArea">
     
     <!-- 1. Form Pilih Kelas -->
     <div id="loginSection">
@@ -467,12 +431,16 @@
       <div class="top-bar">
         <div class="class-badge">
           <h2 id="displayClassName">Kelas ...</h2>
-          <button class="btn-change" onclick="resetClassSelection()">
+          <button class="btn-change" onclick="resetClassSelection()" data-html2canvas-ignore="true">
             <i class="fa-solid fa-rotate-left"></i> PILIH KELAS
+          </button>
+          <!-- Tombol Screenshot Ditambahkan di Sini -->
+          <button class="btn-screenshot" onclick="takeScreenshot()" data-html2canvas-ignore="true">
+            <i class="fa-solid fa-camera"></i> SCREENSHOT
           </button>
         </div>
 
-        <div class="search-box">
+        <div class="search-box" data-html2canvas-ignore="true">
           <i class="fa-solid fa-magnifying-glass"></i>
           <input type="text" id="searchInput" placeholder="Cari nama..." onkeyup="filterData()">
         </div>
@@ -531,13 +499,12 @@
       document.getElementById('tableContainer').style.display = 'none';
 
       try {
-        // Menggunakan parameter _t timestamp agar terhindar dari caching browser HP
         const targetUrl = `${SCRIPT_URL}?kelas=${encodeURIComponent(namaKelas)}&_t=${new Date().getTime()}`;
         
         const response = await fetch(targetUrl, {
           method: "GET",
           redirect: "follow",
-          credentials: "omit" // Mengabaikan cookie Google agar tidak bentrok di browser HP
+          credentials: "omit"
         });
 
         if (!response.ok) {
@@ -628,6 +595,35 @@
           </td>
         </tr>
       `;
+    }
+
+    /* Fungsi untuk Mengambil & Mengunduh Screenshot Laporan */
+    function takeScreenshot() {
+      const exportArea = document.getElementById('exportArea');
+      
+      // Mengubah warna tombol sementara
+      const btn = event.currentTarget;
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Menyimpan...';
+      btn.disabled = true;
+
+      html2canvas(exportArea, {
+        backgroundColor: '#0b0f19',
+        scale: 2, // Kualitas tinggi
+        useCORS: true
+      }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = `Laporan_Hafalan_${currentClass.replace(/\s+/g, '_')}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }).catch(err => {
+        alert('Gagal mengambil screenshot: ' + err);
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      });
     }
   </script>
 </body>
