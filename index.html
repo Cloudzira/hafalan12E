@@ -124,7 +124,7 @@
       margin-bottom: 20px;
     }
 
-    /* Pemisahan Kelompok Tombol Kelas (ABCD & EFGH) */
+    /* Pemisahan Kelompok Tombol Kelas */
     .class-group {
       margin-bottom: 14px;
     }
@@ -288,7 +288,7 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Table Layout - Font Lebih Kecil & Kompak */
+    /* Table Layout */
     .table-container {
       background: var(--card-bg);
       border-radius: 14px;
@@ -301,14 +301,14 @@
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      font-size: 0.75rem; /* Diperkecil dari 0.82rem */
+      font-size: 0.75rem;
     }
 
     .student-table th {
       background: rgba(15, 23, 42, 0.95);
       padding: 8px 12px;
       font-weight: 600;
-      font-size: 0.68rem; /* Diperkecil dari 0.72rem */
+      font-size: 0.68rem;
       text-transform: uppercase;
       letter-spacing: 0.8px;
       color: var(--text-muted);
@@ -321,7 +321,7 @@
     .student-table th.col-capaian { width: 45%; }
 
     .student-table td {
-      padding: 7px 12px; /* Padding lebih ringkas */
+      padding: 7px 12px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.04);
       color: var(--text-main);
       vertical-align: middle;
@@ -331,7 +331,7 @@
 
     .no-badge {
       display: inline-block;
-      font-size: 0.68rem; /* Diperkecil */
+      font-size: 0.68rem;
       font-weight: 600;
       color: var(--neon-blue);
       background: rgba(59, 130, 246, 0.12);
@@ -342,7 +342,7 @@
 
     .student-name {
       font-weight: 600;
-      font-size: 0.76rem; /* Diperkecil dari 0.83rem */
+      font-size: 0.76rem;
       color: #ffffff;
       display: flex;
       align-items: center;
@@ -350,7 +350,7 @@
     }
 
     .avatar {
-      width: 22px; /* Diperkecil dari 26px */
+      width: 22px;
       height: 22px;
       border-radius: 50%;
       background: rgba(16, 185, 129, 0.12);
@@ -359,7 +359,7 @@
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      font-size: 0.68rem; /* Diperkecil */
+      font-size: 0.68rem;
       border: 1px solid rgba(16, 185, 129, 0.25);
       flex-shrink: 0;
     }
@@ -368,7 +368,7 @@
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      font-size: 0.75rem; /* Diperkecil dari 0.81rem */
+      font-size: 0.75rem;
       color: var(--text-main);
     }
 
@@ -409,9 +409,9 @@
         <h2>PILIH KELAS</h2>
         <p>Klik kelas Anda untuk langsung melihat laporan</p>
         
-        <!-- Kelompok 1: XII A - XII D -->
+        <!-- Kelompok 1: Kelas Putra (XII A - XII D) -->
         <div class="class-group">
-          <div class="class-group-label"><i class="fa-solid fa-layer-group"></i> Kelas A - D</div>
+          <div class="class-group-label"><i class="fa-solid fa-mars"></i> Kelas Putra</div>
           <div class="class-grid">
             <button type="button" class="btn-class-option" onclick="selectClass('XII A')">
               <i class="fa-solid fa-users"></i> XII A
@@ -428,9 +428,9 @@
           </div>
         </div>
 
-        <!-- Kelompok 2: XII E - XII H -->
+        <!-- Kelompok 2: Kelas Putri (XII E - XII H) -->
         <div class="class-group">
-          <div class="class-group-label"><i class="fa-solid fa-layer-group"></i> Kelas E - H</div>
+          <div class="class-group-label"><i class="fa-solid fa-venus"></i> Kelas Putri</div>
           <div class="class-grid">
             <button type="button" class="btn-class-option" onclick="selectClass('XII E')">
               <i class="fa-solid fa-users"></i> XII E
@@ -627,7 +627,7 @@
       `;
     }
 
-    /* Fungsi Screenshot Laporan */
+    /* Fungsi Auto-Download Screenshot */
     function takeScreenshot(e) {
       const exportArea = document.getElementById('exportArea');
       const btn = e.currentTarget;
@@ -641,14 +641,18 @@
         useCORS: true
       }).then(canvas => {
         const link = document.createElement('a');
-        link.download = `Laporan_Hafalan_${currentClass.replace(/\s+/g, '_')}.png`;
-        link.href = canvas.toDataURL('image/png');
+        const fileName = `Laporan_Hafalan_${currentClass.replace(/\s+/g, '_')}.png`;
+        
+        link.setAttribute('download', fileName);
+        link.setAttribute('href', canvas.toDataURL('image/png'));
+        document.body.appendChild(link);
         link.click();
+        document.body.removeChild(link);
 
         btn.innerHTML = originalText;
         btn.disabled = false;
       }).catch(err => {
-        alert('Gagal mengambil screenshot: ' + err);
+        alert('Gagal mengunduh screenshot: ' + err);
         btn.innerHTML = originalText;
         btn.disabled = false;
       });
