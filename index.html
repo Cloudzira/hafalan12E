@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kelas XII - Laporan Hafalan</title>
+  <title>Kelas XII</title>
   
   <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -138,9 +138,6 @@
       text-align: left;
       margin-bottom: 8px;
       padding-left: 4px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
 
     .class-grid {
@@ -219,11 +216,6 @@
       font-weight: 600;
       cursor: pointer;
       font-family: inherit;
-      transition: all 0.2s ease;
-    }
-
-    .btn-change:hover {
-      background: rgba(16, 185, 129, 0.2);
     }
 
     .btn-screenshot {
@@ -245,11 +237,6 @@
     .btn-screenshot:hover {
       background: var(--neon-blue);
       color: #ffffff;
-    }
-
-    .btn-screenshot:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
     }
 
     .search-box {
@@ -424,9 +411,7 @@
         
         <!-- Kelompok 1: Kelas Putra -->
         <div class="class-group">
-          <div class="class-group-label">
-            <i class="fa-solid fa-mars" style="color: var(--neon-blue);"></i> Kelas Putra
-          </div>
+          <div class="class-group-label"><i class="fa-solid fa-angle-right"></i> Kelas Putra</div>
           <div class="class-grid">
             <button type="button" class="btn-class-option" onclick="selectClass('XII A')">
               <i class="fa-solid fa-users"></i> XII A
@@ -445,9 +430,7 @@
 
         <!-- Kelompok 2: Kelas Putri -->
         <div class="class-group">
-          <div class="class-group-label">
-            <i class="fa-solid fa-venus" style="color: var(--neon-purple);"></i> Kelas Putri
-          </div>
+          <div class="class-group-label"><i class="fa-solid fa-angle-right"></i> Kelas Putri</div>
           <div class="class-grid">
             <button type="button" class="btn-class-option" onclick="selectClass('XII E')">
               <i class="fa-solid fa-users"></i> XII E
@@ -644,53 +627,38 @@
       `;
     }
 
-    /* Fungsi Screenshot & Auto-Download Optimal */
+    /* Fungsi Auto-Download / Share Screenshot Kompatibel dengan HP & Desktop */
     async function takeScreenshot(e) {
+      const exportArea = document.getElementById('exportArea');
       const btn = e.currentTarget;
       const originalText = btn.innerHTML;
       
-      // 1. Tampilkan status loading
       btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Menyimpan...';
       btn.disabled = true;
 
-      const targetElement = document.getElementById('dashboardSection') || document.getElementById('exportArea');
-
       try {
-        // Tunggu Font & Icon FontAwesome ter-load penuh
-        if (document.fonts && document.fonts.ready) {
-          await document.fonts.ready;
-        }
-
-        // 2. Render Canvas dengan Konfigurasi Presisi
-        const canvas = await html2canvas(targetElement, {
+        const canvas = await html2canvas(exportArea, {
           backgroundColor: '#0b0f19',
-          scale: 2,                  // Kualitas HD
-          useCORS: true,              // Izinkan Font & Icon eksternal
-          allowTaint: false,
+          scale: 2,
+          useCORS: true,
           logging: false,
-          scrollX: 0,
-          scrollY: -window.scrollY,   // Mencegah hasil screenshot terpotong/kosong saat scroll
-          windowWidth: document.documentElement.offsetWidth,
-          windowHeight: document.documentElement.offsetHeight,
-          ignoreElements: (element) => {
-            // Sembunyikan elemen tombol dan input saat screenshot
-            return element.getAttribute('data-html2canvas-ignore') === 'true';
-          }
+          allowTaint: true,
+          windowWidth: exportArea.scrollWidth,
+          windowHeight: exportArea.scrollHeight
         });
 
         const fileName = `Laporan_Hafalan_${currentClass.replace(/\s+/g, '_')}.png`;
 
-        // 3. Konversi Canvas ke Blob
-        const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png', 1.0));
-
-        if (!blob) {
-          throw new Error("Gagal mengonversi gambar.");
-        }
+        const blob = await new Promise((resolve, reject) => {
+          canvas.toBlob((b) => {
+            if (b) resolve(b);
+            else reject(new Error("Gagal mengonversi gambar ke Blob."));
+          }, 'image/png', 1.0);
+        });
 
         const file = new File([blob], fileName, { type: 'image/png' });
 
-        // 4. Web Share API (Khusus Browser Mobile / HP)
-        let sharedSuccessfully = false;
+        // 1. Dukungan Khusus Peramban HP (Web Share API)
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
           try {
             await navigator.share({
@@ -698,36 +666,30 @@
               title: `Laporan Hafalan ${currentClass}`,
               text: `Laporan Capaian Hafalan Al Quran ${currentClass}`
             });
-            sharedSuccessfully = true;
+            return;
           } catch (shareErr) {
-            if (shareErr.name === 'AbortError') {
-              sharedSuccessfully = true; // Dianggap sukses jika user membatalkan modal share
-            }
+            if (shareErr.name === 'AbortError') return;
           }
         }
 
-        // 5. Fallback Download Langsung (Desktop / Browser tanpa Web Share)
-        if (!sharedSuccessfully) {
-          const blobUrl = URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = blobUrl;
-          link.download = fileName;
-          link.style.display = 'none';
-          
-          document.body.appendChild(link);
-          link.click();
-          
-          setTimeout(() => {
-            document.body.removeChild(link);
-            URL.revokeObjectURL(blobUrl);
-          }, 1000);
-        }
+        // 2. Fallback Unduh Langsung via Blob URL
+        const blobUrl = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.style.display = 'none';
+        link.href = blobUrl;
+        link.download = fileName;
+        
+        document.body.appendChild(link);
+        link.click();
+        
+        setTimeout(() => {
+          document.body.removeChild(link);
+          URL.revokeObjectURL(blobUrl);
+        }, 500);
 
       } catch (err) {
-        console.error("Screenshot Error:", err);
         alert('Gagal mengambil screenshot: ' + err.message);
       } finally {
-        // Kembalikan tombol ke keadaan awal
         btn.innerHTML = originalText;
         btn.disabled = false;
       }
