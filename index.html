@@ -11,25 +11,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- Library html2canvas untuk Screenshot -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
   <style>
     :root {
-      /* Palette Dark Glassmorphism Modern & Soft */
-      --bg-gradient: radial-gradient(circle at 50% 0%, #111827 0%, #0b0f19 100%);
+      /* Palette Dark Glassmorphism Presisi */
+      --bg-gradient: radial-gradient(circle at 50% 0%, #0d1322 0%, #070a12 100%);
       
-      --neon-green: #10b981;  /* Soft Emerald Green */
-      --neon-blue: #3b82f6;   /* Soft Royal Blue */
-      --neon-purple: #8b5cf6; /* Soft Violet Purple */
+      --neon-green: #10b981;  
+      --neon-blue: #3b82f6;   
+      --neon-purple: #8b5cf6; 
       
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       
-      --card-bg: rgba(17, 24, 39, 0.7);
+      --card-bg: rgba(15, 23, 42, 0.75);
       --card-border: rgba(255, 255, 255, 0.08);
-      
-      --shadow-neon: 0 10px 30px -10px rgba(59, 130, 246, 0.2);
+      --shadow-neon: 0 10px 30px -10px rgba(59, 130, 246, 0.15);
     }
 
     * {
@@ -43,10 +39,10 @@
       background: var(--bg-gradient);
       min-height: 100vh;
       color: var(--text-main);
-      padding: 30px 15px;
+      padding: 24px 16px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      align-items: center;
       position: relative;
       overflow-x: hidden;
     }
@@ -58,67 +54,68 @@
       border-radius: 50%;
       filter: blur(140px);
       z-index: -1;
-      opacity: 0.25;
+      opacity: 0.2;
     }
 
     body::before {
-      width: 350px;
-      height: 350px;
+      width: 300px;
+      height: 300px;
       background: var(--neon-purple);
       top: -5%;
       left: 10%;
     }
 
     body::after {
-      width: 400px;
-      height: 400px;
+      width: 350px;
+      height: 350px;
       background: var(--neon-blue);
       bottom: -5%;
       right: 10%;
     }
 
     .container {
-      max-width: 850px;
+      max-width: 800px;
       margin: 0 auto;
       width: 100%;
     }
 
-    /* Header Styling */
+    /* Header Styling Presisi */
     .header {
       text-align: center;
-      margin-bottom: 25px;
+      margin-bottom: 24px;
+      padding-top: 10px;
     }
 
     .header .subtitle {
       font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 2.5px;
+      letter-spacing: 2px;
       color: var(--neon-green);
       font-weight: 700;
       margin-bottom: 6px;
     }
 
     .header h1 {
-      font-size: 1.5rem;
-      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+      font-size: 1.6rem;
+      background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 10px;
-      font-weight: 700;
-      letter-spacing: -0.3px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
     }
 
     .header-divider {
       width: 50px;
-      height: 2px;
+      height: 3px;
       background: linear-gradient(90deg, var(--neon-green), var(--neon-blue), var(--neon-purple));
       margin: 0 auto;
-      border-radius: 2px;
+      border-radius: 3px;
     }
 
     /* Portal Class Selection Box */
     .login-box {
-      max-width: 480px;
+      max-width: 500px;
       margin: 0 auto;
       background: var(--card-bg);
       backdrop-filter: blur(20px);
@@ -126,12 +123,12 @@
       padding: 28px 24px;
       border-radius: 16px;
       border: 1px solid var(--card-border);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), var(--shadow-neon);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
       text-align: center;
     }
 
     .login-box i.icon-header {
-      font-size: 2rem;
+      font-size: 2.2rem;
       background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -139,31 +136,19 @@
     }
 
     .login-box h2 {
-      font-size: 1.15rem;
+      font-size: 1.25rem;
       margin-bottom: 6px;
       color: #fff;
       font-weight: 700;
     }
 
     .login-box p {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
       margin-bottom: 20px;
     }
 
-    /* Pemisahan Kelompok Tombol Kelas (ABCD & EFGH) */
-    .class-groups-wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .class-group-divider {
-      border-top: 1px dashed var(--card-border);
-      position: relative;
-      margin: 4px 0;
-    }
-
+    /* Grid Tombol Pilihan Kelas */
     .class-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -174,35 +159,28 @@
       background: rgba(15, 23, 42, 0.8);
       border: 1px solid var(--card-border);
       color: var(--text-main);
-      padding: 10px 8px;
+      padding: 12px 8px;
       border-radius: 10px;
-      font-size: 0.82rem;
-      font-weight: 600;
+      font-size: 0.88rem;
+      font-weight: 700;
       cursor: pointer;
-      transition: all 0.25s ease;
+      transition: all 0.2s ease;
       font-family: inherit;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
     }
 
     .btn-class-option i {
-      font-size: 0.88rem;
+      font-size: 0.95rem;
       color: var(--neon-blue);
-      transition: color 0.25s ease;
     }
 
     .btn-class-option:hover {
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+      background: rgba(59, 130, 246, 0.15);
       border-color: var(--neon-green);
       color: #ffffff;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
-    }
-
-    .btn-class-option:hover i {
-      color: var(--neon-green);
     }
 
     /* Dashboard Section */
@@ -210,115 +188,85 @@
       display: none;
     }
 
+    /* Top Bar Kartu Ringkas */
     .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       background: var(--card-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      padding: 12px 18px;
-      border-radius: 12px;
+      padding: 18px 20px;
+      border-radius: 16px;
       border: 1px solid var(--card-border);
       box-shadow: var(--shadow-neon);
       margin-bottom: 18px;
-      flex-wrap: wrap;
-      gap: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
     }
 
     .class-badge {
       display: flex;
       align-items: center;
-      gap: 10px;
+      justify-content: space-between;
+      width: 100%;
     }
 
     .class-badge h2 {
-      font-size: 1.05rem;
+      font-size: 1.15rem;
       color: #fff;
       font-weight: 700;
+      letter-spacing: -0.2px;
     }
 
     .btn-change {
-      background: rgba(255, 255, 255, 0.05);
+      background: transparent;
       color: var(--neon-green);
-      border: 1px solid var(--neon-green);
+      border: 1px solid rgba(16, 185, 129, 0.4);
       padding: 5px 12px;
-      border-radius: 16px;
-      font-size: 0.72rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.25s ease;
       font-family: inherit;
-      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
     .btn-change:hover {
       background: var(--neon-green);
       color: #0b0f19;
-      box-shadow: 0 0 10px var(--neon-green);
-    }
-
-    .controls-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .btn-screenshot {
-      background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
-      color: #fff;
-      border: none;
-      padding: 7px 14px;
-      border-radius: 20px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-family: inherit;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-    }
-
-    .btn-screenshot:hover {
-      opacity: 0.9;
-      transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
     }
 
     .search-box {
       position: relative;
-      flex: 1;
-      max-width: 220px;
+      width: 100%;
     }
 
     .search-box i {
       position: absolute;
-      left: 12px;
+      left: 14px;
       top: 50%;
       transform: translateY(-50%);
       color: var(--neon-blue);
-      font-size: 0.8rem;
+      font-size: 0.85rem;
     }
 
     .search-box input {
       width: 100%;
-      padding: 7px 12px 7px 32px;
+      padding: 10px 14px 10px 38px;
       border: 1px solid var(--card-border);
-      border-radius: 20px;
+      border-radius: 12px;
       outline: none;
-      font-size: 0.8rem;
-      background: rgba(15, 23, 42, 0.8);
+      font-size: 0.85rem;
+      background: rgba(10, 15, 26, 0.6);
       color: var(--text-main);
-      transition: all 0.3s ease;
+      transition: all 0.25s ease;
       font-family: inherit;
     }
 
     .search-box input:focus {
       border-color: var(--neon-blue);
-      box-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
     }
 
     /* Loading Spinner */
@@ -330,9 +278,9 @@
 
     .spinner {
       display: inline-block;
-      width: 32px;
-      height: 32px;
-      border: 2px solid rgba(16, 185, 129, 0.1);
+      width: 36px;
+      height: 36px;
+      border: 3px solid rgba(16, 185, 129, 0.1);
       border-radius: 50%;
       border-top-color: var(--neon-green);
       animation: spin 1s infinite linear;
@@ -343,14 +291,14 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Table Layout - Ringkas & Kompak */
+    /* Table Layout Presisi */
     .table-container {
       background: var(--card-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border-radius: 12px;
+      border-radius: 16px;
       border: 1px solid var(--card-border);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
       overflow-x: auto;
     }
 
@@ -358,14 +306,14 @@
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      font-size: 0.82rem;
+      font-size: 0.85rem;
     }
 
     .student-table th {
-      background: rgba(15, 23, 42, 0.85);
-      padding: 10px 14px;
-      font-weight: 600;
-      font-size: 0.7rem;
+      background: rgba(10, 15, 26, 0.7);
+      padding: 12px 14px;
+      font-weight: 700;
+      font-size: 0.72rem;
       text-transform: uppercase;
       letter-spacing: 0.8px;
       color: var(--text-muted);
@@ -373,20 +321,15 @@
       white-space: nowrap;
     }
 
-    .student-table th.col-no { width: 60px; text-align: center; }
-    .student-table th.col-nama { width: 45%; }
-    .student-table th.col-capaian { width: 45%; }
+    .student-table th.col-no { width: 50px; text-align: center; }
+    .student-table th.col-nama { width: 50%; }
+    .student-table th.col-capaian { width: 40%; }
 
     .student-table td {
-      padding: 9px 14px;
+      padding: 12px 14px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.03);
       color: var(--text-main);
       vertical-align: middle;
-      transition: background 0.2s ease;
-    }
-
-    .student-table tbody tr:hover td {
-      background: rgba(255, 255, 255, 0.03);
     }
 
     .student-table tbody tr:last-child td {
@@ -398,36 +341,37 @@
     }
 
     .no-badge {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      font-size: 0.75rem;
+      font-weight: 700;
       color: var(--neon-blue);
-      background: rgba(59, 130, 246, 0.1);
-      border: 1px solid rgba(59, 130, 246, 0.2);
-      padding: 1px 6px;
-      border-radius: 6px;
+      background: rgba(59, 130, 246, 0.15);
+      border-radius: 50%;
     }
 
     .student-name {
-      font-weight: 500;
+      font-weight: 600;
       color: #ffffff;
       display: flex;
       align-items: center;
-      gap: 9px;
+      gap: 10px;
     }
 
     .avatar {
-      width: 25px;
-      height: 25px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
-      background: rgba(16, 185, 129, 0.12);
+      background: rgba(16, 185, 129, 0.15);
       color: var(--neon-green);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      font-size: 0.72rem;
-      border: 1px solid rgba(16, 185, 129, 0.25);
+      font-size: 0.75rem;
       flex-shrink: 0;
     }
 
@@ -435,29 +379,23 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-size: 0.8rem;
-      color: #e2e8f0;
-      font-weight: 500;
+      font-size: 0.85rem;
+      color: var(--text-main);
     }
 
     .capaian-tag i.fa-star { 
       color: var(--neon-purple); 
-      font-size: 0.75rem; 
+      font-size: 0.8rem;
     }
 
     .no-results {
       text-align: center;
       padding: 40px 20px;
       color: var(--text-muted);
-      font-size: 0.82rem;
     }
 
     @media (max-width: 600px) {
       .class-grid { grid-template-columns: repeat(2, 1fr); }
-      .top-bar { flex-direction: column; align-items: stretch; }
-      .controls-right { flex-direction: column; align-items: stretch; }
-      .search-box { max-width: 100%; }
-      .student-table th, .student-table td { padding: 8px 10px; font-size: 0.78rem; }
     }
   </style>
 </head>
@@ -476,106 +414,87 @@
       <div class="login-box">
         <i class="fa-solid fa-graduation-cap icon-header"></i>
         <h2>PILIH KELAS</h2>
-        <p>Klik kelas Anda untuk melihat laporan capaian hafalan</p>
+        <p>Klik kelas Anda untuk langsung melihat laporan</p>
         
-        <div class="class-groups-wrapper">
-          <!-- Kelompok 1: XII A - XII D -->
-          <div class="class-grid">
-            <button type="button" class="btn-class-option" onclick="selectClass('XII A')">
-              <i class="fa-solid fa-users"></i> XII A
-            </button>
-            <button type="button" class="btn-class-option" onclick="selectClass('XII B')">
-              <i class="fa-solid fa-users"></i> XII B
-            </button>
-            <button type="button" class="btn-class-option" onclick="selectClass('XII C')">
-              <i class="fa-solid fa-users"></i> XII C
-            </button>
-            <button type="button" class="btn-class-option" onclick="selectClass('XII D')">
-              <i class="fa-solid fa-users"></i> XII D
-            </button>
-          </div>
-
-          <!-- Pemisah Kelompok Tombol -->
-          <div class="class-group-divider"></div>
-
-          <!-- Kelompok 2: XII E - XII H -->
-          <div class="class-grid">
-            <button type="button" class="btn-class-option" onclick="selectClass('XII E')">
-              <i class="fa-solid fa-users"></i> XII E
-            </button>
-            <button type="button" class="btn-class-option" onclick="selectClass('XII F')">
-              <i class="fa-solid fa-users"></i> XII F
-            </button>
-            <button type="button" class="btn-class-option" onclick="selectClass('XII G')">
-              <i class="fa-solid fa-users"></i> XII G
-            </button>
-            <button type="button" class="btn-class-option" onclick="selectClass('XII H')">
-              <i class="fa-solid fa-users"></i> XII H
-            </button>
-          </div>
+        <div class="class-grid">
+          <button type="button" class="btn-class-option" onclick="selectClass('XII A')">
+            <i class="fa-solid fa-users"></i> XII A
+          </button>
+          <button type="button" class="btn-class-option" onclick="selectClass('XII B')">
+            <i class="fa-solid fa-users"></i> XII B
+          </button>
+          <button type="button" class="btn-class-option" onclick="selectClass('XII C')">
+            <i class="fa-solid fa-users"></i> XII C
+          </button>
+          <button type="button" class="btn-class-option" onclick="selectClass('XII D')">
+            <i class="fa-solid fa-users"></i> XII D
+          </button>
+          <button type="button" class="btn-class-option" onclick="selectClass('XII E')">
+            <i class="fa-solid fa-users"></i> XII E
+          </button>
+          <button type="button" class="btn-class-option" onclick="selectClass('XII F')">
+            <i class="fa-solid fa-users"></i> XII F
+          </button>
+          <button type="button" class="btn-class-option" onclick="selectClass('XII G')">
+            <i class="fa-solid fa-users"></i> XII G
+          </button>
+          <button type="button" class="btn-class-option" onclick="selectClass('XII H')">
+            <i class="fa-solid fa-users"></i> XII H
+          </button>
         </div>
       </div>
     </div>
 
     <!-- 2. Dashboard Section -->
     <div id="dashboardSection" class="dashboard">
-      <!-- Area yang akan di-screenshot -->
-      <div id="exportArea">
-        <header class="header">
-          <div class="subtitle">Laporan Capaian Hafalan Kelas XII</div>
-          <h1>PROGRES HAFALAN</h1>
-          <div class="header-divider"></div>
-        </header>
+      <header class="header">
+        <div class="subtitle">Laporan Capaian Hafalan Kelas XII</div>
+        <h1>PROGRES HAFALAN</h1>
+        <div class="header-divider"></div>
+      </header>
 
-        <!-- Top Bar / Controls -->
-        <div class="top-bar">
-          <div class="class-badge">
-            <h2 id="displayClassName">Kelas ...</h2>
-            <button class="btn-change" id="btnChangeClass" onclick="resetClassSelection()">
-              <i class="fa-solid fa-rotate-left"></i> PILIH KELAS
-            </button>
-          </div>
-
-          <div class="controls-right">
-            <button class="btn-screenshot" id="btnScreenshot" onclick="takeFullScreenshot()">
-              <i class="fa-solid fa-camera"></i> <span>Download Gambar</span>
-            </button>
-
-            <div class="search-box" id="searchBoxContainer">
-              <i class="fa-solid fa-magnifying-glass"></i>
-              <input type="text" id="searchInput" placeholder="Cari nama..." onkeyup="filterData()">
-            </div>
-          </div>
+      <!-- Top Bar / Controls -->
+      <div class="top-bar">
+        <div class="class-badge">
+          <h2 id="displayClassName">Kelas ...</h2>
+          <button class="btn-change" onclick="resetClassSelection()">
+            <i class="fa-solid fa-rotate-left"></i> PILIH KELAS
+          </button>
         </div>
 
-        <!-- Table Container -->
-        <div id="tableContainer" class="table-container">
-          <table class="student-table">
-            <thead>
-              <tr>
-                <th class="col-no">No</th>
-                <th class="col-nama">Nama Siswa</th>
-                <th class="col-capaian">Capaian Akhir</th>
-              </tr>
-            </thead>
-            <tbody id="tableBody">
-              <!-- Data dimasukkan via JS -->
-            </tbody>
-          </table>
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="searchInput" placeholder="Cari nama..." onkeyup="filterData()">
         </div>
       </div>
 
       <!-- Loading State -->
       <div id="loading" class="loading">
         <div class="spinner"></div>
-        <p style="margin-top: 12px; color: var(--text-muted); font-size: 0.8rem;">Mengambil data kelas...</p>
+        <p style="margin-top: 15px; color: var(--text-muted); font-size: 0.85rem;">Mengambil data kelas...</p>
+      </div>
+
+      <!-- Table Container -->
+      <div id="tableContainer" class="table-container">
+        <table class="student-table">
+          <thead>
+            <tr>
+              <th class="col-no">No</th>
+              <th class="col-nama">Nama Siswa</th>
+              <th class="col-capaian">Capaian Akhir</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- Data dimasukkan via JS -->
+          </tbody>
+        </table>
       </div>
     </div>
 
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzXWT83MQxjmu3H5UUgz6rNcOhokyuLRITamFnAeqxzV3UngpwtI0DRlYvcHVrnM93S_w/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyITqk9x-1tGV0rHApjIAun-ZujrNCJ7V2rQyBGuSzfT_7o0yzUXjvi0nqDYu7TLdhABA/exec";
 
     let currentClass = "";
     let allData = [];
@@ -619,14 +538,7 @@
         if (result.error) {
           showError(result.error);
         } else {
-          // Menyaring baris kosong / tidak valid
-          const validStudents = (result.data || []).filter(item => {
-            const hasNama = item.nama && item.nama.toString().trim() !== '';
-            const hasNo = item.no && item.no.toString().trim() !== '' && item.no.toString().trim() !== '-';
-            return hasNama && hasNo;
-          });
-
-          renderTable(validStudents);
+          renderTable(result.data || []);
         }
       } catch (err) {
         showError("Gagal mengambil data. Pastikan koneksi internet stabil dan coba lagi.");
@@ -650,7 +562,7 @@
           <tr>
             <td colspan="3">
               <div class="no-results">
-                <i class="fa-regular fa-folder-open" style="font-size: 1.8rem; margin-bottom: 8px; color: var(--neon-green);"></i>
+                <i class="fa-regular fa-folder-open" style="font-size: 2rem; margin-bottom: 10px; color: var(--neon-green);"></i>
                 <p>Tidak ada data siswa untuk kelas ini.</p>
               </div>
             </td>
@@ -691,63 +603,6 @@
       displayFilteredData(filtered);
     }
 
-    /* Fungsi untuk mengambil screenshot seluruh data dalam 1 kelas */
-    async function takeFullScreenshot() {
-      const exportArea = document.getElementById('exportArea');
-      const btnScreenshot = document.getElementById('btnScreenshot');
-      const btnChangeClass = document.getElementById('btnChangeClass');
-      const searchBoxContainer = document.getElementById('searchBoxContainer');
-
-      // Ubah status tombol screenshot saat proses berlangsung
-      const originalBtnText = btnScreenshot.innerHTML;
-      btnScreenshot.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Processing...`;
-      btnScreenshot.style.pointerEvents = "none";
-
-      // Sembunyikan elemen yang tidak perlu ditangkap dalam gambar (tombol & search bar)
-      btnChangeClass.style.visibility = 'hidden';
-      btnScreenshot.style.visibility = 'hidden';
-      searchBoxContainer.style.visibility = 'hidden';
-
-      // Pastikan kata pencarian dikosongkan agar menampilkan seluruh siswa saat screenshot
-      const currentSearch = document.getElementById('searchInput').value;
-      if (currentSearch) {
-        displayFilteredData(allData);
-      }
-
-      try {
-        // Ambil screenshot area tabel menggunakan html2canvas
-        const canvas = await html2canvas(exportArea, {
-          backgroundColor: '#0b0f19', // Background yang sama dengan tema gelap
-          scale: 2,                   // Kualitas gambar tajam (HD)
-          useCORS: true,              // Mendukung pemuatan font eksternal
-          logging: false
-        });
-
-        // Buat file unduhan berupa PNG
-        const image = canvas.toDataURL("image/png");
-        const link = document.createElement('a');
-        link.download = `Progres_Hafalan_${currentClass.replace(/\s+/g, '_')}.png`;
-        link.href = image;
-        link.click();
-
-      } catch (err) {
-        alert("Gagal mengambil screenshot. Silakan coba lagi.");
-        console.error(err);
-      } finally {
-        // Kembalikan tombol & search bar ke tampilan semula
-        btnChangeClass.style.visibility = 'visible';
-        btnScreenshot.style.visibility = 'visible';
-        searchBoxContainer.style.visibility = 'visible';
-        btnScreenshot.innerHTML = originalBtnText;
-        btnScreenshot.style.pointerEvents = "auto";
-
-        // Kembalikan hasil filter jika sebelumnya pengguna melakukan pencarian
-        if (currentSearch) {
-          filterData();
-        }
-      }
-    }
-
     function showError(message) {
       document.getElementById('loading').style.display = 'none';
       document.getElementById('tableContainer').style.display = 'block';
@@ -755,9 +610,9 @@
       tableBody.innerHTML = `
         <tr>
           <td colspan="3">
-            <div style="text-align: center; color: #f87171; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); padding: 14px; border-radius: 10px; margin: 15px;">
-              <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.1rem; margin-bottom: 5px;"></i>
-              <p style="font-weight: 600; font-size: 0.82rem;">${message}</p>
+            <div style="text-align: center; color: #f87171; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); padding: 18px; border-radius: 12px; margin: 20px;">
+              <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.2rem; margin-bottom: 6px;"></i>
+              <p style="font-weight: 600; font-size: 0.9rem;">${message}</p>
             </div>
           </td>
         </tr>
