@@ -124,7 +124,7 @@
       margin-bottom: 20px;
     }
 
-    /* Pemisahan Kelompok Tombol Kelas */
+    /* Pemisahan Kelompok Tombol Kelas (Kelas Putra & Kelas Putri) */
     .class-group {
       margin-bottom: 14px;
     }
@@ -288,7 +288,7 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Table Layout */
+    /* Table Layout - Font Ukuran Ringkas & Kompak */
     .table-container {
       background: var(--card-bg);
       border-radius: 14px;
@@ -409,7 +409,7 @@
         <h2>PILIH KELAS</h2>
         <p>Klik kelas Anda untuk langsung melihat laporan</p>
         
-        <!-- Kelompok 1: Kelas Putra (XII A - XII D) -->
+        <!-- Kelompok 1: Kelas Putra -->
         <div class="class-group">
           <div class="class-group-label"><i class="fa-solid fa-mars"></i> Kelas Putra</div>
           <div class="class-grid">
@@ -428,7 +428,7 @@
           </div>
         </div>
 
-        <!-- Kelompok 2: Kelas Putri (XII E - XII H) -->
+        <!-- Kelompok 2: Kelas Putri -->
         <div class="class-group">
           <div class="class-group-label"><i class="fa-solid fa-venus"></i> Kelas Putri</div>
           <div class="class-grid">
@@ -627,35 +627,73 @@
       `;
     }
 
-    /* Fungsi Auto-Download Screenshot */
-    function takeScreenshot(e) {
+    /* Fungsi Auto-Download / Share Screenshot Kompatibel dengan HP & Desktop */
+    async function takeScreenshot(e) {
       const exportArea = document.getElementById('exportArea');
       const btn = e.currentTarget;
       const originalText = btn.innerHTML;
+      
       btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Menyimpan...';
       btn.disabled = true;
 
-      html2canvas(exportArea, {
-        backgroundColor: '#0b0f19',
-        scale: 2,
-        useCORS: true
-      }).then(canvas => {
-        const link = document.createElement('a');
-        const fileName = `Laporan_Hafalan_${currentClass.replace(/\s+/g, '_')}.png`;
-        
-        link.setAttribute('download', fileName);
-        link.setAttribute('href', canvas.toDataURL('image/png'));
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+      try {
+        const canvas = await html2canvas(exportArea, {
+          backgroundColor: '#0b0f19',
+          scale: 2,
+          useCORS: true,
+          logging: false
+        });
 
+        const fileName = `Laporan_Hafalan_${currentClass.replace(/\s+/g, '_')}.png`;
+
+        canvas.toBlob(async (blob) => {
+          if (!blob) {
+            throw new Error("Gagal mengonversi gambar.");
+          }
+
+          const file = new File([blob], fileName, { type: 'image/png' });
+
+          // 1. Dukungan Khusus Peramban HP (Web Share API)
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            try {
+              await navigator.share({
+                files: [file],
+                title: `Laporan Hafalan ${currentClass}`,
+                text: `Laporan Capaian Hafalan Al Quran ${currentClass}`
+              });
+              btn.innerHTML = originalText;
+              btn.disabled = false;
+              return;
+            } catch (shareErr) {
+              if (shareErr.name === 'AbortError') {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                return;
+              }
+            }
+          }
+
+          // 2. Fallback Unduh Langsung via Blob URL
+          const blobUrl = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = blobUrl;
+          link.download = fileName;
+          
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+
+          setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+        }, 'image/png');
+
+      } catch (err) {
+        alert('Gagal mengambil screenshot: ' + err.message);
         btn.innerHTML = originalText;
         btn.disabled = false;
-      }).catch(err => {
-        alert('Gagal mengunduh screenshot: ' + err);
-        btn.innerHTML = originalText;
-        btn.disabled = false;
-      });
+      }
     }
   </script>
 </body>
