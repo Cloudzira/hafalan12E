@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kelas XII</title>
+  <title>Kelas L XII</title>
   
   <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -219,9 +219,9 @@
     }
 
     .btn-screenshot {
-      background: rgba(59, 130, 246, 0.15);
-      color: var(--neon-blue);
-      border: 1px solid var(--neon-blue);
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--neon-green);
+      border: 1px solid var(--neon-green);
       padding: 5px 12px;
       border-radius: 18px;
       font-size: 0.75rem;
@@ -235,7 +235,7 @@
     }
 
     .btn-screenshot:hover {
-      background: var(--neon-blue);
+      background: var(--neon-green);
       color: #ffffff;
     }
 
@@ -465,8 +465,8 @@
           <button class="btn-change" onclick="resetClassSelection()" data-html2canvas-ignore="true">
             <i class="fa-solid fa-rotate-left"></i> PILIH KELAS
           </button>
-          <button class="btn-screenshot" onclick="takeScreenshot(event)" data-html2canvas-ignore="true">
-            <i class="fa-solid fa-camera"></i> SCREENSHOT
+          <button class="btn-screenshot" onclick="sendToWhatsAppGuru(event)" data-html2canvas-ignore="true">
+            <i class="fa-brands fa-whatsapp"></i> KIRIM LAPORAN KE WA
           </button>
         </div>
 
@@ -627,13 +627,13 @@
       `;
     }
 
-    /* Fungsi Auto-Download / Share Screenshot Kompatibel dengan HP & Desktop */
-    async function takeScreenshot(e) {
+    /* Fungsi Mengambil Screenshot & Membuka WhatsApp untuk Kirim Gambar */
+    async function sendToWhatsAppGuru(e) {
       const exportArea = document.getElementById('exportArea');
       const btn = e.currentTarget;
       const originalText = btn.innerHTML;
       
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Menyimpan...';
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Memproses...';
       btn.disabled = true;
 
       try {
@@ -652,19 +652,19 @@
         const blob = await new Promise((resolve, reject) => {
           canvas.toBlob((b) => {
             if (b) resolve(b);
-            else reject(new Error("Gagal mengonversi gambar ke Blob."));
+            else reject(new Error("Gagal mengonversi gambar."));
           }, 'image/png', 1.0);
         });
 
         const file = new File([blob], fileName, { type: 'image/png' });
 
-        // 1. Dukungan Khusus Peramban HP (Web Share API)
+        // Fitur Utama: Web Share API (Langsung membuka WhatsApp beserta File Gambarnya)
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
           try {
             await navigator.share({
               files: [file],
               title: `Laporan Hafalan ${currentClass}`,
-              text: `Laporan Capaian Hafalan Al Quran ${currentClass}`
+              text: `Assalamu'alaikum Warahmatullahi Wabarakatuh.\n\nBerikut terlampir Laporan Capaian Hafalan Al Quran untuk *${currentClass}*.`
             });
             return;
           } catch (shareErr) {
@@ -672,7 +672,7 @@
           }
         }
 
-        // 2. Fallback Unduh Langsung via Blob URL
+        // Fallback jika dibuka dari Peramban Desktop yang tidak mendukung kirim gambar via Share API
         const blobUrl = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.style.display = 'none';
@@ -686,6 +686,8 @@
           document.body.removeChild(link);
           URL.revokeObjectURL(blobUrl);
         }, 500);
+
+        alert('Gambar screenshot berhasil diunduh. Silakan lampirkan file gambar tersebut ke obrolan WhatsApp Guru.');
 
       } catch (err) {
         alert('Gagal mengambil screenshot: ' + err.message);
