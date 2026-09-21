@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kelas L XII</title>
+  <title>Kelas XII</title>
   
   <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -627,7 +627,7 @@
       `;
     }
 
-    /* Fungsi Mengambil Screenshot & Membuka WhatsApp untuk Kirim Gambar */
+    /* Fungsi Unduh / Kirim Laporan Kompatibel Chrome HP & Desktop */
     async function sendToWhatsAppGuru(e) {
       const exportArea = document.getElementById('exportArea');
       const btn = e.currentTarget;
@@ -637,6 +637,7 @@
       btn.disabled = true;
 
       try {
+        // 1. Capture elemen menggunakan html2canvas
         const canvas = await html2canvas(exportArea, {
           backgroundColor: '#0b0f19',
           scale: 2,
@@ -649,48 +650,65 @@
 
         const fileName = `Laporan_Hafalan_${currentClass.replace(/\s+/g, '_')}.png`;
 
-        const blob = await new Promise((resolve, reject) => {
-          canvas.toBlob((b) => {
-            if (b) resolve(b);
-            else reject(new Error("Gagal mengonversi gambar."));
-          }, 'image/png', 1.0);
-        });
-
-        const file = new File([blob], fileName, { type: 'image/png' });
-
-        // Fitur Utama: Web Share API (Langsung membuka WhatsApp beserta File Gambarnya)
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        // 2. Coba kirim via Web Share API (Sangat kompatibel untuk HP)
+        if (navigator.canShare) {
           try {
-            await navigator.share({
-              files: [file],
-              title: `Laporan Hafalan ${currentClass}`,
-              text: `Assalamu'alaikum Warahmatullahi Wabarakatuh.\n\nBerikut terlampir Laporan Capaian Hafalan Al Quran untuk *${currentClass}*.`
-            });
-            return;
+            const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png', 1.0));
+            if (blob) {
+              const file = new File([blob], fileName, { type: 'image/png' });
+              if (navigator.canShare({ files: [file] })) {
+                await navigator.share({
+                  files: [file],
+                  title: `Laporan Hafalan ${currentClass}`,
+                  text: `Laporan Capaian Hafalan Al Quran ${currentClass}`
+                });
+                return; // Selesai jika berhasil diproses melalui Web Share
+              }
+            }
           } catch (shareErr) {
-            if (shareErr.name === 'AbortError') return;
+            if (shareErr.name === 'AbortError') return; // Batal jika user menutup menu share
           }
         }
 
-        // Fallback jika dibuka dari Peramban Desktop yang tidak mendukung kirim gambar via Share API
-        const blobUrl = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.style.display = 'none';
-        link.href = blobUrl;
-        link.download = fileName;
-        
-        document.body.appendChild(link);
-        link.click();
-        
-        setTimeout(() => {
-          document.body.removeChild(link);
-          URL.revokeObjectURL(blobUrl);
-        }, 500);
+        // 3. Fallback Khusus Chrome HP (Buka di Tab Baru agar bisa 'Tekan Lama' -> Simpan/Share)
+        const dataUrl = canvas.toDataURL('image/png');
+        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-        alert('Gambar screenshot berhasil diunduh. Silakan lampirkan file gambar tersebut ke obrolan WhatsApp Guru.');
+        if (isMobile) {
+          const newWindow = window.open();
+          if (newWindow) {
+            newWindow.document.write(`
+              <html lang="id">
+                <head>
+                  <title>Laporan Hafalan ${currentClass}</title>
+                  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                  <style>
+                    body { background: #0b0f19; color: #fff; font-family: sans-serif; text-align: center; padding: 20px; margin: 0; }
+                    img { max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); margin-top: 15px; }
+                    p { font-size: 0.9rem; color: #10b981; margin-bottom: 10px; line-height: 1.4; }
+                  </style>
+                </head>
+                <body>
+                  <p>📌 <b>Tekan lama gambar di bawah</b> lalu pilih <b>"Simpan Gambar"</b> atau <b>"Bagikan Gambar"</b> ke WhatsApp Guru.</p>
+                  <img src="${dataUrl}" alt="Laporan Hafalan" />
+                </body>
+              </html>
+            `);
+          } else {
+            alert('Izinkan Pop-up di Chrome Anda untuk melihat & mengunduh gambar.');
+          }
+        } else {
+          // 4. Direct Download untuk pengguna PC / Laptop
+          const link = document.createElement('a');
+          link.href = dataUrl;
+          link.download = fileName;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
 
       } catch (err) {
-        alert('Gagal mengambil screenshot: ' + err.message);
+        alert('Gagal mengambil gambar: ' + err.message);
       } finally {
         btn.innerHTML = originalText;
         btn.disabled = false;
