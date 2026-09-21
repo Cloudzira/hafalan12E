@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hafalan Kelas XII</title>
+  <title>Kelas XII</title>
   
   <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- Library html2canvas untuk Fitur Screenshot -->
+  <!-- Library html2canvas untuk Fitur Tangkap Gambar -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <style>
@@ -218,10 +218,11 @@
       font-family: inherit;
     }
 
+    /* Tombol Kirim WA */
     .btn-screenshot {
-      background: rgba(59, 130, 246, 0.15);
-      color: var(--neon-blue);
-      border: 1px solid var(--neon-blue);
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--neon-green);
+      border: 1px solid var(--neon-green);
       padding: 5px 12px;
       border-radius: 18px;
       font-size: 0.75rem;
@@ -235,8 +236,8 @@
     }
 
     .btn-screenshot:hover {
-      background: var(--neon-blue);
-      color: #ffffff;
+      background: var(--neon-green);
+      color: #0b0f19;
     }
 
     .search-box {
@@ -288,7 +289,7 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Table Layout - Font Ukuran Ringkas & Kompak */
+    /* Table Layout */
     .table-container {
       background: var(--card-bg);
       border-radius: 14px;
@@ -465,8 +466,8 @@
           <button class="btn-change" onclick="resetClassSelection()" data-html2canvas-ignore="true">
             <i class="fa-solid fa-rotate-left"></i> PILIH KELAS
           </button>
-          <button class="btn-screenshot" onclick="takeScreenshot(event)" data-html2canvas-ignore="true">
-            <i class="fa-solid fa-camera"></i> SCREENSHOT
+          <button class="btn-screenshot" onclick="shareToWhatsApp(event)" data-html2canvas-ignore="true">
+            <i class="fa-brands fa-whatsapp"></i> KIRIM WA
           </button>
         </div>
 
@@ -627,13 +628,13 @@
       `;
     }
 
-    /* Fungsi Auto-Download / Share Screenshot Kompatibel dengan HP & Desktop */
-    async function takeScreenshot(e) {
+    /* Fungsi Menangkap Gambar dan Langsung Buka Kirim WhatsApp */
+    async function shareToWhatsApp(e) {
       const exportArea = document.getElementById('exportArea');
       const btn = e.currentTarget;
       const originalText = btn.innerHTML;
       
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Menyimpan...';
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Memproses...';
       btn.disabled = true;
 
       try {
@@ -648,12 +649,15 @@
 
         canvas.toBlob(async (blob) => {
           if (!blob) {
-            throw new Error("Gagal mengonversi gambar.");
+            alert("Gagal memproses gambar.");
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            return;
           }
 
           const file = new File([blob], fileName, { type: 'image/png' });
 
-          // 1. Dukungan Khusus Peramban HP (Web Share API)
+          // Cek jika browser HP mendukung fitur Berbagi File (Web Share API)
           if (navigator.canShare && navigator.canShare({ files: [file] })) {
             try {
               await navigator.share({
@@ -661,36 +665,32 @@
                 title: `Laporan Hafalan ${currentClass}`,
                 text: `Laporan Capaian Hafalan Al Quran ${currentClass}`
               });
-              btn.innerHTML = originalText;
-              btn.disabled = false;
-              return;
             } catch (shareErr) {
-              if (shareErr.name === 'AbortError') {
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-                return;
-              }
+              // Pengguna membatalkan dialog kirim
             }
+          } else {
+            // Jika buka di Komputer / Browser lama yang tidak mendukung Web Share API,
+            // Maka gambar akan otomatis diunduh dan membuka WhatsApp Web
+            const blobUrl = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = blobUrl;
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+
+            // Buka WhatsApp Web
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent('Berikut Laporan Capaian Hafalan ' + currentClass)}`, '_blank');
           }
-
-          // 2. Fallback Unduh Langsung via Blob URL
-          const blobUrl = URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = blobUrl;
-          link.download = fileName;
-          
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-
-          setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
 
           btn.innerHTML = originalText;
           btn.disabled = false;
         }, 'image/png');
 
       } catch (err) {
-        alert('Gagal mengambil screenshot: ' + err.message);
+        alert('Gagal mengambil laporan: ' + err.message);
         btn.innerHTML = originalText;
         btn.disabled = false;
       }
