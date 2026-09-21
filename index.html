@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kelas L XII</title>
+  <title>Kelas XII</title>
   
   <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -204,6 +204,18 @@
       font-size: 1.1rem;
       color: #fff;
       font-weight: 700;
+    }
+
+    /* Style khusus untuk teks tanggal di hasil download */
+    .download-date-tag {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-left: auto;
+      padding: 4px 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 6px;
+      border: 1px solid var(--card-border);
     }
 
     .btn-change {
@@ -459,7 +471,7 @@
       </header>
 
       <!-- Top Bar / Controls -->
-      <div class="top-bar">
+      <div class="top-bar" id="topBarElement">
         <div class="class-badge">
           <h2 id="displayClassName">Kelas ...</h2>
           <button class="btn-change" onclick="resetClassSelection()" data-html2canvas-ignore="true">
@@ -627,14 +639,33 @@
       `;
     }
 
+    /* Fungsi Mementukan Format Hari & Tanggal dalam Bahasa Indonesia */
+    function getFormattedDate() {
+      const now = new Date();
+      const options = { 
+        weekday: 'long', 
+        day: 'numeric', 
+        month: 'long', 
+        year: 'numeric' 
+      };
+      return now.toLocaleDateString('id-ID', options);
+    }
+
     /* Fungsi Unduh Gambar PNG Langsung Tersimpan (Satu Klik di Laptop & HP) */
     async function downloadImage(e) {
       const exportArea = document.getElementById('exportArea');
+      const topBar = document.getElementById('topBarElement');
       const btn = e.currentTarget;
       const originalText = btn.innerHTML;
       
       btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Mengunduh...';
       btn.disabled = true;
+
+      // 1. Tambahkan sementara elemen tanggal di sebelah paling kanan Top Bar
+      const dateElement = document.createElement('div');
+      dateElement.className = 'download-date-tag';
+      dateElement.innerHTML = `<i class="fa-regular fa-calendar-days" style="margin-right: 5px;"></i>${getFormattedDate()}`;
+      topBar.appendChild(dateElement);
 
       try {
         const canvas = await html2canvas(exportArea, {
@@ -671,6 +702,10 @@
       } catch (err) {
         alert('Gagal mengambil gambar: ' + err.message);
       } finally {
+        // 2. Hapus kembali elemen tanggal agar tidak mengganggu tampilan web utama
+        if (dateElement && dateElement.parentNode) {
+          dateElement.parentNode.removeChild(dateElement);
+        }
         btn.innerHTML = originalText;
         btn.disabled = false;
       }
