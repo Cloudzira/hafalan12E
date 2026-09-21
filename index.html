@@ -8,25 +8,25 @@
   <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     :root {
-      /* Palette Dark Glassmorphism Neon */
-      --bg-gradient: radial-gradient(circle at 10% 20%, #0d0f18 0%, #05060a 90%);
-      --neon-green: #00ffcc;
-      --neon-blue: #0099ff;
-      --neon-purple: #a855f7;
+      /* Palette Dark Glassmorphism Modern & Soft */
+      --bg-gradient: radial-gradient(circle at 50% 0%, #111827 0%, #0b0f19 100%);
       
-      --text-main: #f1f5f9;
+      --neon-green: #10b981;  /* Soft Emerald Green */
+      --neon-blue: #3b82f6;   /* Soft Royal Blue */
+      --neon-purple: #8b5cf6; /* Soft Violet Purple */
+      
+      --text-main: #f8fafc;
       --text-muted: #94a3b8;
       
-      --card-bg: rgba(15, 23, 42, 0.65);
-      --card-border: rgba(255, 255, 255, 0.12);
+      --card-bg: rgba(17, 24, 39, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
       
-      --shadow-neon: 0 0 25px rgba(0, 255, 204, 0.15);
-      --shadow-hover: 0 10px 30px rgba(168, 85, 247, 0.3);
+      --shadow-neon: 0 10px 30px -10px rgba(59, 130, 246, 0.2);
     }
 
     * {
@@ -36,7 +36,7 @@
     }
 
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
       background: var(--bg-gradient);
       min-height: 100vh;
       color: var(--text-main);
@@ -48,34 +48,34 @@
       overflow-x: hidden;
     }
 
-    /* Ambient Glowing Background Orbs */
+    /* Soft Ambient Glowing Orbs */
     body::before, body::after {
       content: '';
       position: fixed;
       border-radius: 50%;
-      filter: blur(120px);
+      filter: blur(140px);
       z-index: -1;
-      opacity: 0.35;
+      opacity: 0.25;
     }
 
     body::before {
-      width: 320px;
-      height: 320px;
+      width: 350px;
+      height: 350px;
       background: var(--neon-purple);
-      top: 5%;
+      top: -5%;
       left: 10%;
     }
 
     body::after {
-      width: 380px;
-      height: 380px;
+      width: 400px;
+      height: 400px;
       background: var(--neon-blue);
-      bottom: 10%;
+      bottom: -5%;
       right: 10%;
     }
 
     .container {
-      max-width: 1100px;
+      max-width: 1000px;
       margin: 0 auto;
       width: 100%;
     }
@@ -87,51 +87,48 @@
     }
 
     .header .subtitle {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       text-transform: uppercase;
-      letter-spacing: 4px;
+      letter-spacing: 3px;
       color: var(--neon-green);
       font-weight: 700;
       margin-bottom: 8px;
-      text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
     }
 
     .header h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2.2rem;
-      background: linear-gradient(135deg, #ffffff 0%, var(--neon-blue) 50%, var(--neon-purple) 100%);
+      font-size: 2rem;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 12px;
-      font-weight: 800;
-      letter-spacing: 1px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
     }
 
     .header-divider {
-      width: 80px;
+      width: 70px;
       height: 3px;
       background: linear-gradient(90deg, var(--neon-green), var(--neon-blue), var(--neon-purple));
       margin: 0 auto;
-      border-radius: 2px;
-      box-shadow: 0 0 12px var(--neon-blue);
+      border-radius: 3px;
     }
 
     /* Portal Class Input Box */
     .login-box {
-      max-width: 450px;
+      max-width: 420px;
       margin: 0 auto;
       background: var(--card-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       padding: 35px 30px;
-      border-radius: 24px;
+      border-radius: 20px;
       border: 1px solid var(--card-border);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), var(--shadow-neon);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), var(--shadow-neon);
       text-align: center;
     }
 
     .login-box i.icon-header {
-      font-size: 2.8rem;
+      font-size: 2.5rem;
       background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -139,14 +136,14 @@
     }
 
     .login-box h2 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.5rem;
+      font-size: 1.35rem;
       margin-bottom: 8px;
       color: #fff;
+      font-weight: 700;
     }
 
     .login-box p {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: var(--text-muted);
       margin-bottom: 25px;
     }
@@ -158,49 +155,50 @@
 
     .input-group label {
       display: block;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
+      letter-spacing: 1px;
       color: var(--neon-green);
       margin-bottom: 8px;
     }
 
     .input-group input {
       width: 100%;
-      padding: 14px 18px;
+      padding: 12px 16px;
       border: 1px solid var(--card-border);
-      border-radius: 14px;
-      font-size: 1rem;
+      border-radius: 12px;
+      font-size: 0.95rem;
       outline: none;
       background: rgba(15, 23, 42, 0.8);
       color: var(--text-main);
       transition: all 0.3s ease;
+      font-family: inherit;
     }
 
     .input-group input:focus {
       border-color: var(--neon-blue);
-      box-shadow: 0 0 15px rgba(0, 153, 255, 0.4);
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
     }
 
     .btn-submit {
       width: 100%;
-      padding: 14px;
+      padding: 12px;
       background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
       color: #ffffff;
       border: none;
-      border-radius: 14px;
-      font-weight: 700;
-      font-size: 1rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
       cursor: pointer;
-      box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4);
+      box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
       transition: all 0.3s ease;
-      letter-spacing: 0.5px;
+      font-family: inherit;
     }
 
     .btn-submit:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(0, 255, 204, 0.5);
+      box-shadow: 0 6px 25px rgba(16, 185, 129, 0.4);
     }
 
     /* Dashboard Section */
@@ -213,10 +211,10 @@
       justify-content: space-between;
       align-items: center;
       background: var(--card-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       padding: 16px 24px;
-      border-radius: 20px;
+      border-radius: 16px;
       border: 1px solid var(--card-border);
       box-shadow: var(--shadow-neon);
       margin-bottom: 25px;
@@ -231,58 +229,61 @@
     }
 
     .class-badge h2 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       color: #fff;
+      font-weight: 700;
     }
 
     .btn-change {
       background: rgba(255, 255, 255, 0.05);
       color: var(--neon-green);
       border: 1px solid var(--neon-green);
-      padding: 8px 16px;
+      padding: 6px 14px;
       border-radius: 20px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
+      font-family: inherit;
     }
 
     .btn-change:hover {
       background: var(--neon-green);
-      color: #05060a;
-      box-shadow: 0 0 15px var(--neon-green);
+      color: #0b0f19;
+      box-shadow: 0 0 12px var(--neon-green);
     }
 
     .search-box {
       position: relative;
       flex: 1;
-      max-width: 350px;
+      max-width: 320px;
     }
 
     .search-box i {
       position: absolute;
-      left: 16px;
+      left: 14px;
       top: 50%;
       transform: translateY(-50%);
       color: var(--neon-blue);
+      font-size: 0.9rem;
     }
 
     .search-box input {
       width: 100%;
-      padding: 10px 16px 10px 42px;
+      padding: 9px 14px 9px 38px;
       border: 1px solid var(--card-border);
-      border-radius: 30px;
+      border-radius: 25px;
       outline: none;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       background: rgba(15, 23, 42, 0.8);
       color: var(--text-main);
       transition: all 0.3s ease;
+      font-family: inherit;
     }
 
     .search-box input:focus {
       border-color: var(--neon-blue);
-      box-shadow: 0 0 12px rgba(0, 153, 255, 0.4);
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
     }
 
     /* Loading Spinner */
@@ -294,13 +295,12 @@
 
     .spinner {
       display: inline-block;
-      width: 45px;
-      height: 45px;
-      border: 3px solid rgba(0, 255, 204, 0.1);
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(16, 185, 129, 0.1);
       border-radius: 50%;
       border-top-color: var(--neon-green);
       animation: spin 1s infinite linear;
-      box-shadow: 0 0 15px var(--neon-green);
     }
 
     @keyframes spin {
@@ -308,135 +308,119 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Card Grid Layout */
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 25px;
-    }
-
-    .card {
+    /* Table Horizontal Layout (Menyamping) */
+    .table-container {
       background: var(--card-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-radius: 20px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 16px;
       border: 1px solid var(--card-border);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-      padding: 24px;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      overflow-x: auto;
     }
 
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
+    .student-table {
       width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, var(--neon-green), var(--neon-blue), var(--neon-purple));
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
     }
 
-    .card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(168, 85, 247, 0.4);
-      box-shadow: var(--shadow-hover);
+    .student-table th {
+      background: rgba(15, 23, 42, 0.8);
+      padding: 14px 18px;
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--card-border);
+      white-space: nowrap;
     }
 
-    .card-header {
+    .student-table th.col-no { width: 80px; text-align: center; }
+    .student-table th.col-nama { width: 30%; }
+    .student-table th.col-capaian { width: 32%; }
+
+    .student-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      vertical-align: middle;
+      transition: background 0.2s ease;
+    }
+
+    .student-table tbody tr:hover td {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .student-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .td-no {
+      text-align: center;
+    }
+
+    .no-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--neon-blue);
+      background: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      padding: 2px 8px;
+      border-radius: 8px;
+    }
+
+    .student-name {
+      font-weight: 600;
+      color: #ffffff;
       display: flex;
       align-items: center;
-      gap: 15px;
-      margin-bottom: 18px;
-      padding-bottom: 15px;
-      border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+      gap: 12px;
     }
 
     .avatar {
-      width: 48px;
-      height: 48px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
-      background: rgba(0, 255, 204, 0.1);
+      background: rgba(16, 185, 129, 0.12);
       color: var(--neon-green);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Orbitron', sans-serif;
       font-weight: 700;
-      font-size: 1.2rem;
-      border: 1px solid rgba(0, 255, 204, 0.3);
+      font-size: 0.85rem;
+      border: 1px solid rgba(16, 185, 129, 0.25);
       flex-shrink: 0;
-      box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
     }
 
-    .student-info h3 {
-      font-size: 1.05rem;
-      color: #fff;
-      font-weight: 600;
-    }
-
-    .student-info .no-badge {
-      font-size: 0.75rem;
-      color: var(--neon-blue);
-      background: rgba(0, 153, 255, 0.12);
-      border: 1px solid rgba(0, 153, 255, 0.3);
-      padding: 2px 10px;
-      border-radius: 12px;
-      display: inline-block;
-      margin-top: 4px;
-      font-weight: 600;
-    }
-
-    .capaian-group {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .capaian-item {
-      background: rgba(15, 23, 42, 0.5);
-      padding: 12px 16px;
-      border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .capaian-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-      display: flex;
+    .capaian-tag {
+      display: inline-flex;
       align-items: center;
-      gap: 6px;
-      font-weight: 600;
-    }
-
-    .capaian-label i.fa-bookmark {
-      color: var(--neon-blue);
-    }
-
-    .capaian-label i.fa-star {
-      color: var(--neon-purple);
-    }
-
-    .capaian-value {
-      font-size: 0.95rem;
-      font-weight: 600;
+      gap: 8px;
+      font-size: 0.88rem;
       color: var(--text-main);
     }
 
+    .capaian-tag i {
+      font-size: 0.8rem;
+    }
+
+    .capaian-tag i.fa-bookmark { color: var(--neon-blue); }
+    .capaian-tag i.fa-star { color: var(--neon-purple); }
+
     .no-results {
-      grid-column: 1 / -1;
       text-align: center;
       padding: 50px 20px;
       color: var(--text-muted);
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       .top-bar { flex-direction: column; align-items: stretch; }
       .search-box { max-width: 100%; }
+      .student-table th, .student-table td { padding: 12px 10px; font-size: 0.85rem; }
     }
   </style>
 </head>
@@ -495,11 +479,25 @@
       <!-- Loading State -->
       <div id="loading" class="loading">
         <div class="spinner"></div>
-        <p style="margin-top: 15px; color: var(--text-muted); font-size: 0.9rem;">Mengambil data kelas...</p>
+        <p style="margin-top: 15px; color: var(--text-muted); font-size: 0.88rem;">Mengambil data kelas...</p>
       </div>
 
-      <!-- Cards Container -->
-      <div id="gridContainer" class="grid-container"></div>
+      <!-- Table Container -->
+      <div id="tableContainer" class="table-container">
+        <table class="student-table">
+          <thead>
+            <tr>
+              <th class="col-no">No</th>
+              <th class="col-nama">Nama Siswa</th>
+              <th class="col-capaian">Capaian Awal</th>
+              <th class="col-capaian">Capaian Akhir</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- Data baris siswa akan dimasukkan melalui JS -->
+          </tbody>
+        </table>
+      </div>
     </div>
 
   </div>
@@ -526,14 +524,14 @@
     function resetClassSelection() {
       document.getElementById('dashboardSection').style.display = 'none';
       document.getElementById('loginSection').style.display = 'block';
-      document.getElementById('gridContainer').innerHTML = '';
+      document.getElementById('tableBody').innerHTML = '';
       document.getElementById('searchInput').value = '';
       allData = [];
     }
 
     function fetchClassDataJSONP(namaKelas) {
       document.getElementById('loading').style.display = 'block';
-      document.getElementById('gridContainer').style.display = 'none';
+      document.getElementById('tableContainer').style.display = 'none';
 
       const callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
       
@@ -546,7 +544,7 @@
         if (response && response.error) {
           showError(response.error);
         } else {
-          renderCards(response.data || []);
+          renderTable(response.data || []);
         }
       };
 
@@ -564,57 +562,59 @@
       document.body.appendChild(script);
     }
 
-    function renderCards(data) {
+    function renderTable(data) {
       allData = data;
       document.getElementById('loading').style.display = 'none';
-      const container = document.getElementById('gridContainer');
-      container.style.display = 'grid';
+      document.getElementById('tableContainer').style.display = 'block';
       
       displayFilteredData(allData);
     }
 
     function displayFilteredData(data) {
-      const container = document.getElementById('gridContainer');
-      container.innerHTML = '';
+      const tableBody = document.getElementById('tableBody');
+      tableBody.innerHTML = '';
 
       if (!data || data.length === 0) {
-        container.innerHTML = `
-          <div class="no-results">
-            <i class="fa-regular fa-folder-open" style="font-size: 2.2rem; margin-bottom: 12px; color: var(--neon-green);"></i>
-            <p>Tidak ada data siswa untuk kelas ini.</p>
-          </div>`;
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="4">
+              <div class="no-results">
+                <i class="fa-regular fa-folder-open" style="font-size: 2rem; margin-bottom: 10px; color: var(--neon-green);"></i>
+                <p>Tidak ada data siswa untuk kelas ini.</p>
+              </div>
+            </td>
+          </tr>`;
         return;
       }
 
       data.forEach(item => {
         const initial = item.nama ? item.nama.charAt(0).toUpperCase() : '?';
 
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-          <div class="card-header">
-            <div class="avatar">${initial}</div>
-            <div class="student-info">
-              <h3>${item.nama || '-'}</h3>
-              <span class="no-badge">No. Urut: ${item.no || '-'}</span>
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td class="td-no">
+            <span class="no-badge">${item.no || '-'}</span>
+          </td>
+          <td>
+            <div class="student-name">
+              <div class="avatar">${initial}</div>
+              <span>${item.nama || '-'}</span>
             </div>
-          </div>
-          <div class="capaian-group">
-            <div class="capaian-item">
-              <div class="capaian-label">
-                <i class="fa-solid fa-bookmark"></i> Capaian Awal
-              </div>
-              <div class="capaian-value">${item.capaianAwal || '-'}</div>
+          </td>
+          <td>
+            <div class="capaian-tag">
+              <i class="fa-solid fa-bookmark"></i>
+              <span>${item.capaianAwal || '-'}</span>
             </div>
-            <div class="capaian-item">
-              <div class="capaian-label">
-                <i class="fa-solid fa-star"></i> Capaian Akhir
-              </div>
-              <div class="capaian-value">${item.capaianAkhir || '-'}</div>
+          </td>
+          <td>
+            <div class="capaian-tag">
+              <i class="fa-solid fa-star"></i>
+              <span>${item.capaianAkhir || '-'}</span>
             </div>
-          </div>
+          </td>
         `;
-        container.appendChild(card);
+        tableBody.appendChild(row);
       });
     }
 
@@ -628,13 +628,17 @@
 
     function showError(message) {
       document.getElementById('loading').style.display = 'none';
-      const container = document.getElementById('gridContainer');
-      container.style.display = 'block';
-      container.innerHTML = `
-        <div style="text-align: center; color: #ff5555; background: rgba(255, 85, 85, 0.1); border: 1px solid rgba(255, 85, 85, 0.3); padding: 20px; border-radius: 16px; margin-top: 20px;">
-          <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.5rem; margin-bottom: 8px;"></i>
-          <p style="font-weight: 600;">${message}</p>
-        </div>
+      document.getElementById('tableContainer').style.display = 'block';
+      const tableBody = document.getElementById('tableBody');
+      tableBody.innerHTML = `
+        <tr>
+          <td colspan="4">
+            <div style="text-align: center; color: #f87171; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); padding: 18px; border-radius: 12px; margin: 20px;">
+              <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.2rem; margin-bottom: 6px;"></i>
+              <p style="font-weight: 600; font-size: 0.9rem;">${message}</p>
+            </div>
+          </td>
+        </tr>
       `;
     }
   </script>
