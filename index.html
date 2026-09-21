@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kelas XII</title>
+  <title>Kelas L XII</title>
   
   <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -627,7 +627,7 @@
       `;
     }
 
-    /* Fungsi Unduh Gambar Murni (Chrome HP & Laptop Kompatibel) */
+    /* Fungsi Unduh Gambar PNG Langsung Tersimpan (Satu Klik di Laptop & HP) */
     async function downloadImage(e) {
       const exportArea = document.getElementById('exportArea');
       const btn = e.currentTarget;
@@ -648,42 +648,25 @@
         });
 
         const fileName = `Laporan_Hafalan_${currentClass.replace(/\s+/g, '_')}.png`;
-        const dataUrl = canvas.toDataURL('image/png');
-        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-        if (isMobile) {
-          // Solusi Chrome HP: Buka di Tab Baru agar siswa bisa Tekan Lama -> Simpan Gambar
-          const newWindow = window.open();
-          if (newWindow) {
-            newWindow.document.write(`
-              <html lang="id">
-                <head>
-                  <title>Laporan Hafalan ${currentClass}</title>
-                  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                  <style>
-                    body { background: #0b0f19; color: #fff; font-family: sans-serif; text-align: center; padding: 20px; margin: 0; }
-                    img { max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); margin-top: 15px; }
-                    p { font-size: 0.85rem; color: #10b981; margin-bottom: 10px; line-height: 1.4; }
-                  </style>
-                </head>
-                <body>
-                  <p>📌 <b>Tekan lama gambar di bawah</b> lalu pilih <b>"Simpan Gambar"</b> (Download Image).</p>
-                  <img src="${dataUrl}" alt="Laporan Hafalan" />
-                </body>
-              </html>
-            `);
-          } else {
-            alert('Izinkan Pop-up di Chrome Anda untuk melihat & mengunduh gambar.');
+        // Ubah canvas menjadi Blob PNG agar langsung disimpan oleh OS HP tanpa buka tab baru
+        canvas.toBlob(function(blob) {
+          if (!blob) {
+            alert('Gagal memproses gambar PNG.');
+            return;
           }
-        } else {
-          // Direct Download untuk Laptop / PC
+
+          const blobUrl = URL.createObjectURL(blob);
           const link = document.createElement('a');
-          link.href = dataUrl;
+          link.href = blobUrl;
           link.download = fileName;
+          
           document.body.appendChild(link);
           link.click();
+          
           document.body.removeChild(link);
-        }
+          setTimeout(() => URL.revokeObjectURL(blobUrl), 200);
+        }, 'image/png');
 
       } catch (err) {
         alert('Gagal mengambil gambar: ' + err.message);
