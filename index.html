@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kelas XII</title>
+  <title>Hafalan Kelas XII</title>
   
   <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -288,7 +288,7 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Table Layout - Font Diperkecil Agar Lebih Presisi & Profesional */
+    /* Table Layout - Font Lebih Kecil & Kompak */
     .table-container {
       background: var(--card-bg);
       border-radius: 14px;
@@ -301,14 +301,14 @@
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      font-size: 0.82rem; /* Font diperkecil */
+      font-size: 0.75rem; /* Diperkecil dari 0.82rem */
     }
 
     .student-table th {
       background: rgba(15, 23, 42, 0.95);
-      padding: 10px 14px;
+      padding: 8px 12px;
       font-weight: 600;
-      font-size: 0.72rem; /* Header tabel diperkecil */
+      font-size: 0.68rem; /* Diperkecil dari 0.72rem */
       text-transform: uppercase;
       letter-spacing: 0.8px;
       color: var(--text-muted);
@@ -316,12 +316,12 @@
       white-space: nowrap;
     }
 
-    .student-table th.col-no { width: 60px; text-align: center; }
+    .student-table th.col-no { width: 50px; text-align: center; }
     .student-table th.col-nama { width: 45%; }
     .student-table th.col-capaian { width: 45%; }
 
     .student-table td {
-      padding: 9px 14px; /* Padding baris lebih rapat */
+      padding: 7px 12px; /* Padding lebih ringkas */
       border-bottom: 1px solid rgba(255, 255, 255, 0.04);
       color: var(--text-main);
       vertical-align: middle;
@@ -331,27 +331,27 @@
 
     .no-badge {
       display: inline-block;
-      font-size: 0.73rem;
+      font-size: 0.68rem; /* Diperkecil */
       font-weight: 600;
       color: var(--neon-blue);
       background: rgba(59, 130, 246, 0.12);
       border: 1px solid rgba(59, 130, 246, 0.25);
-      padding: 1px 6px;
-      border-radius: 6px;
+      padding: 1px 5px;
+      border-radius: 5px;
     }
 
     .student-name {
       font-weight: 600;
-      font-size: 0.83rem; /* Font nama diperkecil */
+      font-size: 0.76rem; /* Diperkecil dari 0.83rem */
       color: #ffffff;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
     .avatar {
-      width: 26px; /* Avatar diperkecil */
-      height: 26px;
+      width: 22px; /* Diperkecil dari 26px */
+      height: 22px;
       border-radius: 50%;
       background: rgba(16, 185, 129, 0.12);
       color: var(--neon-green);
@@ -359,7 +359,7 @@
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      font-size: 0.75rem;
+      font-size: 0.68rem; /* Diperkecil */
       border: 1px solid rgba(16, 185, 129, 0.25);
       flex-shrink: 0;
     }
@@ -367,28 +367,28 @@
     .capaian-tag {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      font-size: 0.81rem; /* Font capaian akhir diperkecil */
+      gap: 5px;
+      font-size: 0.75rem; /* Diperkecil dari 0.81rem */
       color: var(--text-main);
     }
 
     .capaian-tag i.fa-star { 
       color: var(--neon-purple); 
-      font-size: 0.75rem;
+      font-size: 0.68rem;
     }
 
     .no-results {
       text-align: center;
-      padding: 40px 20px;
+      padding: 35px 15px;
       color: var(--text-muted);
-      font-size: 0.82rem;
+      font-size: 0.78rem;
     }
 
     @media (max-width: 600px) {
       .class-grid { grid-template-columns: repeat(2, 1fr); }
       .top-bar { flex-direction: column; align-items: stretch; }
       .search-box { max-width: 100%; }
-      .student-table th, .student-table td { padding: 8px 10px; font-size: 0.78rem; }
+      .student-table th, .student-table td { padding: 6px 8px; font-size: 0.72rem; }
     }
   </style>
 </head>
@@ -479,7 +479,7 @@
       <!-- Loading State -->
       <div id="loading" class="loading">
         <div class="spinner"></div>
-        <p style="margin-top: 12px; color: var(--text-muted); font-size: 0.8rem;">Mengambil data kelas...</p>
+        <p style="margin-top: 12px; color: var(--text-muted); font-size: 0.78rem;">Mengambil data kelas...</p>
       </div>
 
       <!-- Table Container -->
@@ -570,7 +570,7 @@
           <tr>
             <td colspan="3">
               <div class="no-results">
-                <i class="fa-regular fa-folder-open" style="font-size: 1.8rem; margin-bottom: 8px; color: var(--neon-green);"></i>
+                <i class="fa-regular fa-folder-open" style="font-size: 1.6rem; margin-bottom: 6px; color: var(--neon-green);"></i>
                 <p>Tidak ada data siswa untuk kelas ini.</p>
               </div>
             </td>
@@ -618,9 +618,9 @@
       tableBody.innerHTML = `
         <tr>
           <td colspan="3">
-            <div style="text-align: center; color: #f87171; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); padding: 14px; border-radius: 10px; margin: 15px;">
-              <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.1rem; margin-bottom: 4px;"></i>
-              <p style="font-weight: 600; font-size: 0.82rem;">${message}</p>
+            <div style="text-align: center; color: #f87171; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); padding: 12px; border-radius: 8px; margin: 12px;">
+              <i class="fa-solid fa-triangle-exclamation" style="font-size: 1rem; margin-bottom: 4px;"></i>
+              <p style="font-weight: 600; font-size: 0.78rem;">${message}</p>
             </div>
           </td>
         </tr>
