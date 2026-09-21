@@ -8,21 +8,25 @@
   <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     :root {
-      --bg-gradient: linear-gradient(135deg, #fff5f7 0%, #fbebf0 50%, #f7f3f6 100%);
-      --primary: #d47a8f;       /* Soft Rose / Dusty Pink */
-      --primary-dark: #b85b72;  /* Soft Crimson */
-      --accent: #f8ecee;        /* Soft Blush Pink */
-      --text-main: #3a3335;     /* Soft Charcoal */
-      --text-muted: #7d7376;
-      --card-bg: rgba(255, 255, 255, 0.85);
-      --border-color: #f1e2e5;
-      --shadow-soft: 0 10px 30px rgba(212, 122, 143, 0.08);
-      --shadow-hover: 0 15px 35px rgba(212, 122, 143, 0.18);
+      /* Palette Dark Glassmorphism Neon */
+      --bg-gradient: radial-gradient(circle at 10% 20%, #0d0f18 0%, #05060a 90%);
+      --neon-green: #00ffcc;
+      --neon-blue: #0099ff;
+      --neon-purple: #a855f7;
+      
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      
+      --card-bg: rgba(15, 23, 42, 0.65);
+      --card-border: rgba(255, 255, 255, 0.12);
+      
+      --shadow-neon: 0 0 25px rgba(0, 255, 204, 0.15);
+      --shadow-hover: 0 10px 30px rgba(168, 85, 247, 0.3);
     }
 
     * {
@@ -40,6 +44,34 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Ambient Glowing Background Orbs */
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      z-index: -1;
+      opacity: 0.35;
+    }
+
+    body::before {
+      width: 320px;
+      height: 320px;
+      background: var(--neon-purple);
+      top: 5%;
+      left: 10%;
+    }
+
+    body::after {
+      width: 380px;
+      height: 380px;
+      background: var(--neon-blue);
+      bottom: 10%;
+      right: 10%;
     }
 
     .container {
@@ -57,52 +89,60 @@
     .header .subtitle {
       font-size: 0.85rem;
       text-transform: uppercase;
-      letter-spacing: 3px;
-      color: var(--primary-dark);
-      font-weight: 600;
+      letter-spacing: 4px;
+      color: var(--neon-green);
+      font-weight: 700;
       margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
     }
 
     .header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      color: var(--text-main);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.2rem;
+      background: linear-gradient(135deg, #ffffff 0%, var(--neon-blue) 50%, var(--neon-purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       margin-bottom: 12px;
-      font-weight: 700;
+      font-weight: 800;
+      letter-spacing: 1px;
     }
 
     .header-divider {
-      width: 60px;
+      width: 80px;
       height: 3px;
-      background: var(--primary);
+      background: linear-gradient(90deg, var(--neon-green), var(--neon-blue), var(--neon-purple));
       margin: 0 auto;
       border-radius: 2px;
+      box-shadow: 0 0 12px var(--neon-blue);
     }
 
-    /* Portal Class Input (Layar Masuk Kelas) */
+    /* Portal Class Input Box */
     .login-box {
       max-width: 450px;
       margin: 0 auto;
       background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       padding: 35px 30px;
       border-radius: 24px;
-      border: 1px solid rgba(255, 255, 255, 0.9);
-      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--card-border);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), var(--shadow-neon);
       text-align: center;
     }
 
     .login-box i.icon-header {
-      font-size: 2.5rem;
-      color: var(--primary);
+      font-size: 2.8rem;
+      background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       margin-bottom: 15px;
     }
 
     .login-box h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
       margin-bottom: 8px;
+      color: #fff;
     }
 
     .login-box p {
@@ -119,50 +159,51 @@
     .input-group label {
       display: block;
       font-size: 0.8rem;
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--primary-dark);
+      letter-spacing: 1.5px;
+      color: var(--neon-green);
       margin-bottom: 8px;
     }
 
     .input-group input {
       width: 100%;
       padding: 14px 18px;
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--card-border);
       border-radius: 14px;
       font-size: 1rem;
       outline: none;
-      background: #ffffff;
+      background: rgba(15, 23, 42, 0.8);
       color: var(--text-main);
       transition: all 0.3s ease;
     }
 
     .input-group input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(212, 122, 143, 0.15);
+      border-color: var(--neon-blue);
+      box-shadow: 0 0 15px rgba(0, 153, 255, 0.4);
     }
 
     .btn-submit {
       width: 100%;
       padding: 14px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
       color: #ffffff;
       border: none;
       border-radius: 14px;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 1rem;
       cursor: pointer;
-      box-shadow: 0 8px 20px rgba(212, 122, 143, 0.3);
+      box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4);
       transition: all 0.3s ease;
+      letter-spacing: 0.5px;
     }
 
     .btn-submit:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 25px rgba(212, 122, 143, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 255, 204, 0.5);
     }
 
-    /* Dashboard Section (Muncul setelah masuk kelas) */
+    /* Dashboard Section */
     .dashboard {
       display: none;
     }
@@ -172,12 +213,12 @@
       justify-content: space-between;
       align-items: center;
       background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       padding: 16px 24px;
       border-radius: 20px;
-      border: 1px solid var(--border-color);
-      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow-neon);
       margin-bottom: 25px;
       flex-wrap: wrap;
       gap: 15px;
@@ -186,19 +227,19 @@
     .class-badge {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
     .class-badge h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      color: var(--text-main);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.3rem;
+      color: #fff;
     }
 
     .btn-change {
-      background: var(--accent);
-      color: var(--primary-dark);
-      border: 1px solid var(--border-color);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--neon-green);
+      border: 1px solid var(--neon-green);
       padding: 8px 16px;
       border-radius: 20px;
       font-size: 0.85rem;
@@ -208,8 +249,9 @@
     }
 
     .btn-change:hover {
-      background: var(--primary);
-      color: #ffffff;
+      background: var(--neon-green);
+      color: #05060a;
+      box-shadow: 0 0 15px var(--neon-green);
     }
 
     .search-box {
@@ -223,22 +265,24 @@
       left: 16px;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--primary);
+      color: var(--neon-blue);
     }
 
     .search-box input {
       width: 100%;
       padding: 10px 16px 10px 42px;
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--card-border);
       border-radius: 30px;
       outline: none;
       font-size: 0.9rem;
-      background: #ffffff;
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--text-main);
+      transition: all 0.3s ease;
     }
 
     .search-box input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(212, 122, 143, 0.15);
+      border-color: var(--neon-blue);
+      box-shadow: 0 0 12px rgba(0, 153, 255, 0.4);
     }
 
     /* Loading Spinner */
@@ -252,10 +296,11 @@
       display: inline-block;
       width: 45px;
       height: 45px;
-      border: 3px solid rgba(212, 122, 143, 0.2);
+      border: 3px solid rgba(0, 255, 204, 0.1);
       border-radius: 50%;
-      border-top-color: var(--primary);
+      border-top-color: var(--neon-green);
       animation: spin 1s infinite linear;
+      box-shadow: 0 0 15px var(--neon-green);
     }
 
     @keyframes spin {
@@ -263,7 +308,7 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Card Grid */
+    /* Card Grid Layout */
     .grid-container {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -272,11 +317,11 @@
 
     .card {
       background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--card-border);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
       padding: 24px;
       transition: all 0.3s ease;
       position: relative;
@@ -289,12 +334,13 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 5px;
-      background: linear-gradient(90deg, var(--accent), var(--primary));
+      height: 3px;
+      background: linear-gradient(90deg, var(--neon-green), var(--neon-blue), var(--neon-purple));
     }
 
     .card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-6px);
+      border-color: rgba(168, 85, 247, 0.4);
       box-shadow: var(--shadow-hover);
     }
 
@@ -304,35 +350,37 @@
       gap: 15px;
       margin-bottom: 18px;
       padding-bottom: 15px;
-      border-bottom: 1px dashed var(--border-color);
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
     }
 
     .avatar {
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      background: var(--accent);
-      color: var(--primary-dark);
+      background: rgba(0, 255, 204, 0.1);
+      color: var(--neon-green);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Orbitron', sans-serif;
       font-weight: 700;
-      font-size: 1.25rem;
-      border: 1px solid var(--border-color);
+      font-size: 1.2rem;
+      border: 1px solid rgba(0, 255, 204, 0.3);
       flex-shrink: 0;
+      box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
     }
 
     .student-info h3 {
       font-size: 1.05rem;
-      color: var(--text-main);
+      color: #fff;
       font-weight: 600;
     }
 
     .student-info .no-badge {
       font-size: 0.75rem;
-      color: var(--primary-dark);
-      background: var(--accent);
+      color: var(--neon-blue);
+      background: rgba(0, 153, 255, 0.12);
+      border: 1px solid rgba(0, 153, 255, 0.3);
       padding: 2px 10px;
       border-radius: 12px;
       display: inline-block;
@@ -343,14 +391,14 @@
     .capaian-group {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
 
     .capaian-item {
-      background: rgba(255, 255, 255, 0.65);
+      background: rgba(15, 23, 42, 0.5);
       padding: 12px 16px;
       border-radius: 14px;
-      border: 1px solid #fceef1;
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .capaian-label {
@@ -365,8 +413,12 @@
       font-weight: 600;
     }
 
-    .capaian-label i {
-      color: var(--primary);
+    .capaian-label i.fa-bookmark {
+      color: var(--neon-blue);
+    }
+
+    .capaian-label i.fa-star {
+      color: var(--neon-purple);
     }
 
     .capaian-value {
@@ -403,7 +455,7 @@
       <div class="login-box">
         <i class="fa-solid fa-graduation-cap icon-header"></i>
         <h2>Masukan Kelas</h2>
-        <p>Ketikkan nama kelas untuk melihat laporan hafalan (contoh: <b>XII A</b>, <b>XII E</b>)</p>
+        <p>Ketikkan nama kelas untuk melihat laporan (contoh: <b>XII A</b>, <b>XII E</b>)</p>
         
         <form onsubmit="handleClassSubmit(event)">
           <div class="input-group">
@@ -420,7 +472,7 @@
     <!-- 2. Section Dashboard Data -->
     <div id="dashboardSection" class="dashboard">
       <header class="header">
-        <div class="subtitle">Laporan Akademik & Hafalan</div>
+        <div class="subtitle">Laporan Hafalan & Akademik</div>
         <h1>CAPAIAN HAFALAN</h1>
         <div class="header-divider"></div>
       </header>
@@ -528,7 +580,7 @@
       if (!data || data.length === 0) {
         container.innerHTML = `
           <div class="no-results">
-            <i class="fa-regular fa-folder-open" style="font-size: 2.2rem; margin-bottom: 12px; color: var(--primary);"></i>
+            <i class="fa-regular fa-folder-open" style="font-size: 2.2rem; margin-bottom: 12px; color: var(--neon-green);"></i>
             <p>Tidak ada data siswa untuk kelas ini.</p>
           </div>`;
         return;
@@ -579,7 +631,7 @@
       const container = document.getElementById('gridContainer');
       container.style.display = 'block';
       container.innerHTML = `
-        <div style="text-align: center; color: #d9534f; background: rgba(217, 83, 79, 0.1); padding: 20px; border-radius: 16px; margin-top: 20px;">
+        <div style="text-align: center; color: #ff5555; background: rgba(255, 85, 85, 0.1); border: 1px solid rgba(255, 85, 85, 0.3); padding: 20px; border-radius: 16px; margin-top: 20px;">
           <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.5rem; margin-bottom: 8px;"></i>
           <p style="font-weight: 600;">${message}</p>
         </div>
