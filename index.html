@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kelas XII</title>
+  <title>Hafalan Kelas XII</title>
   
   <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -124,7 +124,7 @@
       margin-bottom: 20px;
     }
 
-    /* Pemisahan Kelompok Tombol Kelas (Kelas Putra & Kelas Putri) */
+    /* Pemisahan Kelompok Tombol Kelas */
     .class-group {
       margin-bottom: 14px;
     }
@@ -466,7 +466,7 @@
           <button class="btn-change" onclick="resetClassSelection()" data-html2canvas-ignore="true">
             <i class="fa-solid fa-rotate-left"></i> PILIH KELAS
           </button>
-          <button class="btn-screenshot" onclick="shareToWhatsApp(event)" data-html2canvas-ignore="true">
+          <button class="btn-screenshot" onclick="openDirectWhatsApp(event)" data-html2canvas-ignore="true">
             <i class="fa-brands fa-whatsapp"></i> KIRIM WA
           </button>
         </div>
@@ -504,6 +504,10 @@
 
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyITqk9x-1tGV0rHApjIAun-ZujrNCJ7V2rQyBGuSzfT_7o0yzUXjvi0nqDYu7TLdhABA/exec";
+    
+    // MASUKKAN NOMOR WHATSAPP TUJUAN DI SINI (Gunakan kode negara 62)
+    // Kosongkan "" jika ingin pengguna bebas memilih kontak di WhatsApp
+    const NOMOR_WA_TUJUAN = ""; 
 
     let currentClass = "";
     let allData = [];
@@ -628,16 +632,17 @@
       `;
     }
 
-    /* Fungsi Menangkap Gambar dan Langsung Buka Kirim WhatsApp */
-    async function shareToWhatsApp(e) {
+    /* Fungsi Langsung Membuka Kontak WhatsApp */
+    async function openDirectWhatsApp(e) {
       const exportArea = document.getElementById('exportArea');
       const btn = e.currentTarget;
       const originalText = btn.innerHTML;
       
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Memproses...';
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Menyiapkan...';
       btn.disabled = true;
 
       try {
+        // Tangkap Gambar dan Masukkan ke Clipboard (Salin Gambar) jika HP Mendukung
         const canvas = await html2canvas(exportArea, {
           backgroundColor: '#0b0f19',
           scale: 2,
@@ -645,52 +650,46 @@
           logging: false
         });
 
-        const fileName = `Laporan_Hafalan_${currentClass.replace(/\s+/g, '_')}.png`;
-
         canvas.toBlob(async (blob) => {
-          if (!blob) {
-            alert("Gagal memproses gambar.");
-            btn.innerHTML = originalText;
-            btn.disabled = false;
-            return;
-          }
-
-          const file = new File([blob], fileName, { type: 'image/png' });
-
-          // Cek jika browser HP mendukung fitur Berbagi File (Web Share API)
-          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          if (blob && navigator.clipboard && window.ClipboardItem) {
             try {
-              await navigator.share({
-                files: [file],
-                title: `Laporan Hafalan ${currentClass}`,
-                text: `Laporan Capaian Hafalan Al Quran ${currentClass}`
-              });
-            } catch (shareErr) {
-              // Pengguna membatalkan dialog kirim
+              await navigator.clipboard.write([
+                new ClipboardItem({ 'image/png': blob })
+              ]);
+            } catch (clipErr) {
+              // Jika izin clipboard gagal, diabaikan dan lanjut buka WA
             }
-          } else {
-            // Jika buka di Komputer / Browser lama yang tidak mendukung Web Share API,
-            // Maka gambar akan otomatis diunduh dan membuka WhatsApp Web
-            const blobUrl = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = blobUrl;
-            link.download = fileName;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-
-            setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
-
-            // Buka WhatsApp Web
-            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent('Berikut Laporan Capaian Hafalan ' + currentClass)}`, '_blank');
           }
+
+          // Buat Teks Ringkasan Laporan
+          let textMessage = `*LAPORAN CAPAIAN HAFALAN KELAS ${currentClass}*\n\n`;
+          if (allData && allData.length > 0) {
+            allData.slice(0, 15).forEach(item => {
+              textMessage += `${item.no}. ${item.nama} : ${item.capaianAkhir || '-'}\n`;
+            });
+            if (allData.length > 15) {
+              textMessage += `... dan ${allData.length - 15} siswa lainnya.\n`;
+            }
+          }
+          textMessage += `\n_(Gambar laporan sudah tersalin di papan klip HP, Anda tinggal menekan 'Tempel/Paste' pada kolom percakapan WA)_`;
+
+          // Format URL WhatsApp Redirect
+          let waUrl = "";
+          if (NOMOR_WA_TUJUAN !== "") {
+            waUrl = `https://wa.me/${NOMOR_WA_TUJUAN}?text=${encodeURIComponent(textMessage)}`;
+          } else {
+            waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(textMessage)}`;
+          }
+
+          // Buka Aplikasi WhatsApp secara langsung
+          window.location.href = waUrl;
 
           btn.innerHTML = originalText;
           btn.disabled = false;
         }, 'image/png');
 
       } catch (err) {
-        alert('Gagal mengambil laporan: ' + err.message);
+        alert('Gagal membuka WhatsApp: ' + err.message);
         btn.innerHTML = originalText;
         btn.disabled = false;
       }
