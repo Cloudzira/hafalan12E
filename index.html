@@ -148,7 +148,19 @@
       margin-bottom: 20px;
     }
 
-    /* Grid Tombol Pilihan Kelas */
+    /* Pemisahan Kelompok Tombol Kelas (ABCD & EFGH) */
+    .class-groups-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .class-group-divider {
+      border-top: 1px dashed var(--card-border);
+      position: relative;
+      margin: 4px 0;
+    }
+
     .class-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -313,14 +325,14 @@
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      font-size: 0.82rem; /* Ukuran font tabel diperkecil */
+      font-size: 0.82rem;
     }
 
     .student-table th {
       background: rgba(15, 23, 42, 0.85);
       padding: 10px 14px;
       font-weight: 600;
-      font-size: 0.7rem; /* Font header lebih padat & profesional */
+      font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.8px;
       color: var(--text-muted);
@@ -333,7 +345,7 @@
     .student-table th.col-capaian { width: 45%; }
 
     .student-table td {
-      padding: 9px 14px; /* Menipiskan baris agar tabel tidak terlalu lebar */
+      padding: 9px 14px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.03);
       color: var(--text-main);
       vertical-align: middle;
@@ -371,7 +383,6 @@
       gap: 9px;
     }
 
-    /* Ukuran Avatar Dibuat Lebih Proporsional */
     .avatar {
       width: 25px;
       height: 25px;
@@ -433,31 +444,41 @@
         <h2>PILIH KELAS</h2>
         <p>Klik kelas Anda untuk melihat laporan capaian hafalan</p>
         
-        <div class="class-grid">
-          <button type="button" class="btn-class-option" onclick="selectClass('XII A')">
-            <i class="fa-solid fa-users"></i> XII A
-          </button>
-          <button type="button" class="btn-class-option" onclick="selectClass('XII B')">
-            <i class="fa-solid fa-users"></i> XII B
-          </button>
-          <button type="button" class="btn-class-option" onclick="selectClass('XII C')">
-            <i class="fa-solid fa-users"></i> XII C
-          </button>
-          <button type="button" class="btn-class-option" onclick="selectClass('XII D')">
-            <i class="fa-solid fa-users"></i> XII D
-          </button>
-          <button type="button" class="btn-class-option" onclick="selectClass('XII E')">
-            <i class="fa-solid fa-users"></i> XII E
-          </button>
-          <button type="button" class="btn-class-option" onclick="selectClass('XII F')">
-            <i class="fa-solid fa-users"></i> XII F
-          </button>
-          <button type="button" class="btn-class-option" onclick="selectClass('XII G')">
-            <i class="fa-solid fa-users"></i> XII G
-          </button>
-          <button type="button" class="btn-class-option" onclick="selectClass('XII H')">
-            <i class="fa-solid fa-users"></i> XII H
-          </button>
+        <div class="class-groups-wrapper">
+          <!-- Kelompok 1: XII A - XII D -->
+          <div class="class-grid">
+            <button type="button" class="btn-class-option" onclick="selectClass('XII A')">
+              <i class="fa-solid fa-users"></i> XII A
+            </button>
+            <button type="button" class="btn-class-option" onclick="selectClass('XII B')">
+              <i class="fa-solid fa-users"></i> XII B
+            </button>
+            <button type="button" class="btn-class-option" onclick="selectClass('XII C')">
+              <i class="fa-solid fa-users"></i> XII C
+            </button>
+            <button type="button" class="btn-class-option" onclick="selectClass('XII D')">
+              <i class="fa-solid fa-users"></i> XII D
+            </button>
+          </div>
+
+          <!-- Pemisah Kelompok Tombol -->
+          <div class="class-group-divider"></div>
+
+          <!-- Kelompok 2: XII E - XII H -->
+          <div class="class-grid">
+            <button type="button" class="btn-class-option" onclick="selectClass('XII E')">
+              <i class="fa-solid fa-users"></i> XII E
+            </button>
+            <button type="button" class="btn-class-option" onclick="selectClass('XII F')">
+              <i class="fa-solid fa-users"></i> XII F
+            </button>
+            <button type="button" class="btn-class-option" onclick="selectClass('XII G')">
+              <i class="fa-solid fa-users"></i> XII G
+            </button>
+            <button type="button" class="btn-class-option" onclick="selectClass('XII H')">
+              <i class="fa-solid fa-users"></i> XII H
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -555,7 +576,14 @@
         if (result.error) {
           showError(result.error);
         } else {
-          renderTable(result.data || []);
+          // Hanya tampilkan siswa yang memiliki Nama dan No yang valid (menyaring baris kosong/tambahan)
+          const validStudents = (result.data || []).filter(item => {
+            const hasNama = item.nama && item.nama.toString().trim() !== '';
+            const hasNo = item.no && item.no.toString().trim() !== '' && item.no.toString().trim() !== '-';
+            return hasNama && hasNo;
+          });
+
+          renderTable(validStudents);
         }
       } catch (err) {
         showError("Gagal mengambil data. Pastikan koneksi internet stabil dan coba lagi.");
