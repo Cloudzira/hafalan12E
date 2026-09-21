@@ -3,13 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hafalan XII</title>
+  <title>Hafalan Kelas XII</title>
   
   <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Library html2canvas untuk Screenshot -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <style>
     :root {
@@ -255,10 +258,40 @@
       box-shadow: 0 0 10px var(--neon-green);
     }
 
+    .controls-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-screenshot {
+      background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+      color: #fff;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+
+    .btn-screenshot:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
+    }
+
     .search-box {
       position: relative;
       flex: 1;
-      max-width: 280px;
+      max-width: 220px;
     }
 
     .search-box i {
@@ -422,6 +455,7 @@
     @media (max-width: 600px) {
       .class-grid { grid-template-columns: repeat(2, 1fr); }
       .top-bar { flex-direction: column; align-items: stretch; }
+      .controls-right { flex-direction: column; align-items: stretch; }
       .search-box { max-width: 100%; }
       .student-table th, .student-table td { padding: 8px 10px; font-size: 0.78rem; }
     }
@@ -485,24 +519,49 @@
 
     <!-- 2. Dashboard Section -->
     <div id="dashboardSection" class="dashboard">
-      <header class="header">
-        <div class="subtitle">Laporan Capaian Hafalan Kelas XII</div>
-        <h1>PROGRES HAFALAN</h1>
-        <div class="header-divider"></div>
-      </header>
+      <!-- Area yang akan di-screenshot -->
+      <div id="exportArea">
+        <header class="header">
+          <div class="subtitle">Laporan Capaian Hafalan Kelas XII</div>
+          <h1>PROGRES HAFALAN</h1>
+          <div class="header-divider"></div>
+        </header>
 
-      <!-- Top Bar / Controls -->
-      <div class="top-bar">
-        <div class="class-badge">
-          <h2 id="displayClassName">Kelas ...</h2>
-          <button class="btn-change" onclick="resetClassSelection()">
-            <i class="fa-solid fa-rotate-left"></i> PILIH KELAS
-          </button>
+        <!-- Top Bar / Controls -->
+        <div class="top-bar">
+          <div class="class-badge">
+            <h2 id="displayClassName">Kelas ...</h2>
+            <button class="btn-change" id="btnChangeClass" onclick="resetClassSelection()">
+              <i class="fa-solid fa-rotate-left"></i> PILIH KELAS
+            </button>
+          </div>
+
+          <div class="controls-right">
+            <button class="btn-screenshot" id="btnScreenshot" onclick="takeFullScreenshot()">
+              <i class="fa-solid fa-camera"></i> <span>Download Gambar</span>
+            </button>
+
+            <div class="search-box" id="searchBoxContainer">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="searchInput" placeholder="Cari nama..." onkeyup="filterData()">
+            </div>
+          </div>
         </div>
 
-        <div class="search-box">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" id="searchInput" placeholder="Cari nama..." onkeyup="filterData()">
+        <!-- Table Container -->
+        <div id="tableContainer" class="table-container">
+          <table class="student-table">
+            <thead>
+              <tr>
+                <th class="col-no">No</th>
+                <th class="col-nama">Nama Siswa</th>
+                <th class="col-capaian">Capaian Akhir</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <!-- Data dimasukkan via JS -->
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -510,22 +569,6 @@
       <div id="loading" class="loading">
         <div class="spinner"></div>
         <p style="margin-top: 12px; color: var(--text-muted); font-size: 0.8rem;">Mengambil data kelas...</p>
-      </div>
-
-      <!-- Table Container -->
-      <div id="tableContainer" class="table-container">
-        <table class="student-table">
-          <thead>
-            <tr>
-              <th class="col-no">No</th>
-              <th class="col-nama">Nama Siswa</th>
-              <th class="col-capaian">Capaian Akhir</th>
-            </tr>
-          </thead>
-          <tbody id="tableBody">
-            <!-- Data dimasukkan via JS -->
-          </tbody>
-        </table>
       </div>
     </div>
 
@@ -576,7 +619,7 @@
         if (result.error) {
           showError(result.error);
         } else {
-          // Hanya tampilkan siswa yang memiliki Nama dan No yang valid (menyaring baris kosong/tambahan)
+          // Menyaring baris kosong / tidak valid
           const validStudents = (result.data || []).filter(item => {
             const hasNama = item.nama && item.nama.toString().trim() !== '';
             const hasNo = item.no && item.no.toString().trim() !== '' && item.no.toString().trim() !== '-';
@@ -646,6 +689,63 @@
         item.nama && item.nama.toString().toLowerCase().includes(query)
       );
       displayFilteredData(filtered);
+    }
+
+    /* Fungsi untuk mengambil screenshot seluruh data dalam 1 kelas */
+    async function takeFullScreenshot() {
+      const exportArea = document.getElementById('exportArea');
+      const btnScreenshot = document.getElementById('btnScreenshot');
+      const btnChangeClass = document.getElementById('btnChangeClass');
+      const searchBoxContainer = document.getElementById('searchBoxContainer');
+
+      // Ubah status tombol screenshot saat proses berlangsung
+      const originalBtnText = btnScreenshot.innerHTML;
+      btnScreenshot.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Processing...`;
+      btnScreenshot.style.pointerEvents = "none";
+
+      // Sembunyikan elemen yang tidak perlu ditangkap dalam gambar (tombol & search bar)
+      btnChangeClass.style.visibility = 'hidden';
+      btnScreenshot.style.visibility = 'hidden';
+      searchBoxContainer.style.visibility = 'hidden';
+
+      // Pastikan kata pencarian dikosongkan agar menampilkan seluruh siswa saat screenshot
+      const currentSearch = document.getElementById('searchInput').value;
+      if (currentSearch) {
+        displayFilteredData(allData);
+      }
+
+      try {
+        // Ambil screenshot area tabel menggunakan html2canvas
+        const canvas = await html2canvas(exportArea, {
+          backgroundColor: '#0b0f19', // Background yang sama dengan tema gelap
+          scale: 2,                   // Kualitas gambar tajam (HD)
+          useCORS: true,              // Mendukung pemuatan font eksternal
+          logging: false
+        });
+
+        // Buat file unduhan berupa PNG
+        const image = canvas.toDataURL("image/png");
+        const link = document.createElement('a');
+        link.download = `Progres_Hafalan_${currentClass.replace(/\s+/g, '_')}.png`;
+        link.href = image;
+        link.click();
+
+      } catch (err) {
+        alert("Gagal mengambil screenshot. Silakan coba lagi.");
+        console.error(err);
+      } finally {
+        // Kembalikan tombol & search bar ke tampilan semula
+        btnChangeClass.style.visibility = 'visible';
+        btnScreenshot.style.visibility = 'visible';
+        searchBoxContainer.style.visibility = 'visible';
+        btnScreenshot.innerHTML = originalBtnText;
+        btnScreenshot.style.pointerEvents = "auto";
+
+        // Kembalikan hasil filter jika sebelumnya pengguna melakukan pencarian
+        if (currentSearch) {
+          filterData();
+        }
+      }
     }
 
     function showError(message) {
