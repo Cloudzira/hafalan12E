@@ -34,7 +34,7 @@
       --input-bg: rgba(255, 255, 255, 0.85);
       
       --table-header-bg: rgba(241, 245, 249, 0.9);
-      --table-row-border: rgba(226, 232, 240, 0.8);
+      --table-row-border: rgba(203, 213, 225, 0.6); /* Garis pembatas tipis antar nama */
       --badge-bg: rgba(37, 99, 235, 0.1);
       --badge-border: rgba(37, 99, 235, 0.25);
       --badge-color: #2563eb;
@@ -60,7 +60,7 @@
       --input-bg: rgba(255, 255, 255, 0.85);
       
       --table-header-bg: rgba(253, 242, 248, 0.9);
-      --table-row-border: rgba(24bc, 207, 232, 0.5);
+      --table-row-border: rgba(244, 114, 182, 0.35); /* Garis pembatas tipis tema putri */
       --badge-bg: rgba(219, 39, 119, 0.1);
       --badge-border: rgba(219, 39, 119, 0.25);
       --badge-color: #db2777;
@@ -392,13 +392,13 @@
 
     .student-table th {
       background: var(--table-header-bg);
-      padding: 8px 10px;
+      padding: 10px 12px;
       font-weight: 700;
       font-size: 0.62rem;
       text-transform: uppercase;
       letter-spacing: 0.8px;
       color: var(--text-muted);
-      border-bottom: 1px solid var(--card-border);
+      border-bottom: 2px solid var(--table-row-border);
       white-space: nowrap;
     }
 
@@ -406,9 +406,22 @@
     .student-table th.col-nama { width: 45%; }
     .student-table th.col-capaian { width: 45%; }
 
-    .student-table td {
-      padding: 7px 10px;
+    /* Garis Pembatas Tipis antar Baris / Nama */
+    .student-table tr {
       border-bottom: 1px solid var(--table-row-border);
+      transition: background-color 0.2s ease;
+    }
+
+    .student-table tbody tr:last-child {
+      border-bottom: none; /* Menghilangkan garis pada baris terakhir agar rapi */
+    }
+
+    .student-table tbody tr:hover {
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .student-table td {
+      padding: 9px 12px;
       color: var(--text-main);
       vertical-align: middle;
     }
@@ -428,22 +441,22 @@
 
     .student-name {
       font-weight: 600;
-      font-size: 0.72rem;
+      font-size: 0.73rem;
       color: var(--text-title);
     }
 
     .capaian-tag {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      font-size: 0.7rem;
+      gap: 6px;
+      font-size: 0.72rem;
       font-weight: 500;
       color: var(--text-main);
     }
 
     .capaian-tag i.fa-star { 
       color: var(--neon-purple); 
-      font-size: 0.62rem;
+      font-size: 0.65rem;
     }
 
     .no-results {
@@ -467,7 +480,7 @@
       .class-grid { grid-template-columns: repeat(2, 1fr); }
       .panel-controls { flex-direction: column; align-items: stretch; }
       .search-box { max-width: 100%; }
-      .student-table th, .student-table td { padding: 6px 7px; font-size: 0.68rem; }
+      .student-table th, .student-table td { padding: 8px 8px; font-size: 0.68rem; }
     }
   </style>
 </head>
@@ -602,7 +615,7 @@
     let currentClass = "";
     let allData = [];
 
-    /* Fungsi Mementukan Format Hari & Tanggal dalam Bahasa Indonesia */
+    /* Fungsi Menentukan Format Hari & Tanggal dalam Bahasa Indonesia */
     function getFormattedDate() {
       const now = new Date();
       const options = { 
