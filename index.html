@@ -34,7 +34,7 @@
       --input-bg: rgba(255, 255, 255, 0.85);
       
       --table-header-bg: rgba(241, 245, 249, 0.9);
-      --table-row-border: rgba(203, 213, 225, 0.6); /* Garis pembatas tipis antar nama */
+      --table-row-border: rgba(203, 213, 225, 0.6);
       --badge-bg: rgba(37, 99, 235, 0.1);
       --badge-border: rgba(37, 99, 235, 0.25);
       --badge-color: #2563eb;
@@ -60,7 +60,7 @@
       --input-bg: rgba(255, 255, 255, 0.85);
       
       --table-header-bg: rgba(253, 242, 248, 0.9);
-      --table-row-border: rgba(244, 114, 182, 0.35); /* Garis pembatas tipis tema putri */
+      --table-row-border: rgba(244, 114, 182, 0.35);
       --badge-bg: rgba(219, 39, 119, 0.1);
       --badge-border: rgba(219, 39, 119, 0.25);
       --badge-color: #db2777;
@@ -92,7 +92,7 @@
       transition: background 0.4s ease, color 0.4s ease;
     }
 
-    /* Container Fleksibel agar Footer Selalu di Bawah */
+    /* Container Fleksibel */
     .container {
       max-width: 850px;
       margin: 0 auto;
@@ -137,14 +137,18 @@
       border-radius: 4px;
     }
 
-    /* Section Wrapper untuk Menjaga Fleksibilitas Tinggi */
-    #loginSection {
+    /* Section Wrapper */
+    #authSection, #loginSection {
       display: flex;
       flex-direction: column;
       flex: 1 0 auto;
     }
 
-    /* Portal Class Selection Box */
+    #loginSection {
+      display: none; /* Sembunyikan default, muncul setelah login angka */
+    }
+
+    /* Login Box & Auth Box */
     .login-box {
       max-width: 520px;
       margin: 0 auto 20px auto;
@@ -157,6 +161,7 @@
       border: 1px solid var(--card-border);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
       text-align: center;
+      transition: transform 0.2s ease;
     }
 
     .login-box i.icon-header {
@@ -176,6 +181,91 @@
       font-size: 0.82rem;
       color: var(--text-muted);
       margin-bottom: 20px;
+    }
+
+    /* Form Login PIN/Angka */
+    .pin-input-group {
+      position: relative;
+      max-width: 300px;
+      margin: 0 auto 12px auto;
+    }
+
+    .pin-input-group input {
+      width: 100%;
+      padding: 12px 40px 12px 16px;
+      border: 1.5px solid var(--card-border);
+      border-radius: 12px;
+      outline: none;
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      text-align: center;
+      background: var(--input-bg);
+      color: var(--text-title);
+      font-weight: 700;
+      transition: all 0.25s ease;
+      font-family: inherit;
+    }
+
+    .pin-input-group input:focus {
+      border-color: var(--neon-blue);
+      box-shadow: 0 0 10px rgba(37, 99, 235, 0.2);
+      background: #ffffff;
+    }
+
+    .pin-toggle-btn {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .btn-login-submit {
+      width: 100%;
+      max-width: 300px;
+      background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+      color: #ffffff;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-family: inherit;
+      box-shadow: var(--shadow-neon);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-login-submit:hover {
+      opacity: 0.92;
+      transform: translateY(-2px);
+    }
+
+    .error-msg {
+      color: #ef4444;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-top: 8px;
+      display: none;
+    }
+
+    /* Animasi Shake untuk kesalahan Login */
+    .shake {
+      animation: shake 0.4s ease-in-out;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
     }
 
     /* Pemisahan Kelompok Tombol Kelas */
@@ -422,7 +512,6 @@
     .student-table th.col-nama { width: 45%; }
     .student-table th.col-capaian { width: 45%; }
 
-    /* Garis Pembatas Tipis antar Baris / Nama */
     .student-table tr {
       border-bottom: 1px solid var(--table-row-border);
       transition: background-color 0.2s ease;
@@ -482,7 +571,7 @@
       font-size: 0.72rem;
     }
 
-    /* Footer Styling - Menjamin Posisi Selalu di Paling Bawah Halaman */
+    /* Footer Styling */
     .app-footer {
       flex-shrink: 0;
       text-align: center;
@@ -506,6 +595,36 @@
 
   <div class="container" id="exportArea">
     
+    <!-- 0. Halaman Login Angka (PIN Protection) -->
+    <div id="authSection">
+      <header class="header">
+        <div class="subtitle">Laporan Al Quran Kelas XII</div>
+        <h1 style="letter-spacing: 1px;">AKSES SISTEM</h1>
+        <div class="header-divider"></div>
+      </header>
+
+      <div class="login-box" id="authCard">
+        <i class="fa-solid fa-user-lock icon-header"></i>
+        <h2>MASUKKAN PASSCODE</h2>
+        <p>Masukkan angka akses untuk membuka laporan</p>
+        
+        <div class="pin-input-group">
+          <input type="password" id="pinInput" inputmode="numeric" placeholder="***" maxlength="10" onkeydown="handlePinKeyPress(event)">
+          <button type="button" class="pin-toggle-btn" onclick="togglePinVisibility()">
+            <i class="fa-regular fa-eye" id="toggleIcon"></i>
+          </button>
+        </div>
+        
+        <button type="button" class="btn-login-submit" onclick="checkAccessKey()">
+          <i class="fa-solid fa-right-to-bracket"></i> MASUK
+        </button>
+
+        <div id="authErrorMsg" class="error-msg">
+          <i class="fa-solid fa-circle-exclamation"></i> Angka akses salah! Silakan coba lagi.
+        </div>
+      </div>
+    </div>
+
     <!-- 1. Form Pilih Kelas -->
     <div id="loginSection">
       <header class="header">
@@ -538,7 +657,7 @@
           </div>
         </div>
 
-        <!-- Kelompok 2: Kelas Putri (Pink-Purple Light Glass Theme) -->
+        <!-- Kelompok 2: Kelas Putri -->
         <div class="class-group">
           <div class="class-group-label"><i class="fa-solid fa-angle-right"></i> Kelas Putri</div>
           <div class="class-grid">
@@ -570,7 +689,6 @@
 
       <!-- Panel Kelas dengan Susunan Sejajar -->
       <div class="top-bar">
-        <!-- Baris 1: Kelas dan Tanggal Sejajar (Kiri & Kanan) -->
         <div class="panel-header">
           <h2 id="displayClassName">Kelas ...</h2>
           <div class="download-date-tag">
@@ -579,7 +697,6 @@
           </div>
         </div>
 
-        <!-- Baris 2: Tombol Aksi dan Pencarian -->
         <div class="panel-controls">
           <div class="action-buttons">
             <button class="btn-change" onclick="resetClassSelection()" data-html2canvas-ignore="true">
@@ -633,6 +750,48 @@
     let currentClass = "";
     let allData = [];
 
+    /* Fungsi Login Sederhana dengan Passcode 100 */
+    function checkAccessKey() {
+      const pinInput = document.getElementById('pinInput');
+      const authErrorMsg = document.getElementById('authErrorMsg');
+      const authCard = document.getElementById('authCard');
+
+      if (pinInput.value === "100") {
+        authErrorMsg.style.display = 'none';
+        document.getElementById('authSection').style.display = 'none';
+        document.getElementById('loginSection').style.display = 'flex';
+      } else {
+        authErrorMsg.style.display = 'block';
+        authCard.classList.remove('shake');
+        // Trigger reflow untuk mengulangi animasi shake jika ditekan ulang
+        void authCard.offsetWidth; 
+        authCard.classList.add('shake');
+        pinInput.value = '';
+        pinInput.focus();
+      }
+    }
+
+    function handlePinKeyPress(e) {
+      if (e.key === 'Enter') {
+        checkAccessKey();
+      }
+    }
+
+    function togglePinVisibility() {
+      const pinInput = document.getElementById('pinInput');
+      const toggleIcon = document.getElementById('toggleIcon');
+      
+      if (pinInput.type === 'password') {
+        pinInput.type = 'text';
+        toggleIcon.classList.remove('fa-eye');
+        toggleIcon.classList.add('fa-eye-slash');
+      } else {
+        pinInput.type = 'password';
+        toggleIcon.classList.remove('fa-eye-slash');
+        toggleIcon.classList.add('fa-eye');
+      }
+    }
+
     /* Fungsi Menentukan Format Hari & Tanggal dalam Bahasa Indonesia */
     function getFormattedDate() {
       const now = new Date();
@@ -648,7 +807,6 @@
     function selectClass(namaKelas) {
       currentClass = namaKelas;
 
-      // Cek apakah kelas putri (XII E, F, G, H) untuk mengganti tema secara dinamis
       const isPutri = ['XII E', 'XII F', 'XII G', 'XII H'].includes(namaKelas);
       if (isPutri) {
         document.body.classList.add('theme-putri');
@@ -771,7 +929,7 @@
       `;
     }
 
-    /* Fungsi Unduh Gambar PNG Langsung Tersimpan */
+    /* Fungsi Unduh Gambar PNG */
     async function downloadImage(e) {
       const exportArea = document.getElementById('exportArea');
       const btn = e.currentTarget;
@@ -780,7 +938,6 @@
       btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Mengunduh...';
       btn.disabled = true;
 
-      // Pilih warna background export berdasarkan tema kelas yang sedang aktif
       const isPutriTheme = document.body.classList.contains('theme-putri');
       const exportBg = isPutriTheme ? '#fce7f3' : '#f1f5f9';
 
