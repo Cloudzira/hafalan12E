@@ -74,25 +74,32 @@
       padding: 0;
     }
 
+    html, body {
+      height: 100%;
+    }
+
     body {
       font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
       background-color: var(--bg-main);
       background-image: var(--bg-image);
       min-height: 100vh;
       color: var(--text-main);
-      padding: 25px 15px;
+      padding: 25px 15px 15px 15px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
       position: relative;
       overflow-x: hidden;
       transition: background 0.4s ease, color 0.4s ease;
     }
 
+    /* Container Fleksibel agar Footer Selalu di Bawah */
     .container {
       max-width: 850px;
       margin: 0 auto;
       width: 100%;
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
     }
 
     /* Header Styling */
@@ -130,10 +137,18 @@
       border-radius: 4px;
     }
 
+    /* Section Wrapper untuk Menjaga Fleksibilitas Tinggi */
+    #loginSection {
+      display: flex;
+      flex-direction: column;
+      flex: 1 0 auto;
+    }
+
     /* Portal Class Selection Box */
     .login-box {
       max-width: 520px;
-      margin: 0 auto;
+      margin: 0 auto 20px auto;
+      width: 100%;
       background: var(--card-bg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
@@ -381,6 +396,7 @@
       border: 1px solid var(--card-border);
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04);
       overflow-x: auto;
+      margin-bottom: 20px;
     }
 
     .student-table {
@@ -413,7 +429,7 @@
     }
 
     .student-table tbody tr:last-child {
-      border-bottom: none; /* Menghilangkan garis pada baris terakhir agar rapi */
+      border-bottom: none;
     }
 
     .student-table tbody tr:hover {
@@ -466,14 +482,16 @@
       font-size: 0.72rem;
     }
 
-    /* Footer Styling */
+    /* Footer Styling - Menjamin Posisi Selalu di Paling Bawah Halaman */
     .app-footer {
+      flex-shrink: 0;
       text-align: center;
-      padding: 16px 0 8px 0;
+      padding: 15px 0 5px 0;
       color: var(--text-muted);
       font-size: 0.7rem;
       font-weight: 500;
       letter-spacing: 0.5px;
+      margin-top: auto;
     }
 
     @media (max-width: 600px) {
@@ -649,7 +667,7 @@
     function resetClassSelection() {
       document.body.classList.remove('theme-putri');
       document.getElementById('dashboardSection').style.display = 'none';
-      document.getElementById('loginSection').style.display = 'block';
+      document.getElementById('loginSection').style.display = 'flex';
       document.getElementById('tableBody').innerHTML = '';
       document.getElementById('searchInput').value = '';
       allData = [];
