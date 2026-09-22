@@ -17,28 +17,43 @@
 
   <style>
     :root {
-      /* Palette Default (Kelas Putra / Umum) */
-      --bg-gradient: #0b0f19;
+      /* Palette Default (Dark Glassmorphism Modern & Soft) */
+      --bg-color: #0b0f19;
+      --bg-radial: radial-gradient(circle at 50% 0%, #111827 0%, #0b0f19 100%);
+      
       --neon-green: #10b981;  /* Soft Emerald Green */
       --neon-blue: #3b82f6;   /* Soft Royal Blue */
       --neon-purple: #8b5cf6; /* Soft Violet Purple */
+      
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
+      
       --card-bg: #111827;
       --card-border: rgba(255, 255, 255, 0.08);
+      --btn-option-bg: rgba(15, 23, 42, 0.9);
+      --th-bg: rgba(15, 23, 42, 0.95);
+      
       --shadow-neon: 0 10px 30px -10px rgba(59, 130, 246, 0.2);
     }
 
-    /* Palette Khusus Kelas Putri (Light Dark Glassmorphism Pink Ungu) */
-    body.girls-theme {
-      background-color: #120914;
-      background-image: radial-gradient(circle at 50% 0%, #24112e 0%, #120914 100%);
-      --neon-green: #f472b6; /* Soft Pink Accent */
-      --neon-blue: #d946ef;  /* Magenta Pink */
-      --neon-purple: #c084fc;/* Soft Purple */
-      --card-bg: #1a0e23;
-      --card-border: rgba(244, 114, 182, 0.15);
-      --shadow-neon: 0 10px 30px -10px rgba(244, 114, 182, 0.3);
+    /* Theme Khusus Halaman / Kelas Putri (Light-Dark Morphism Pink Ungu) */
+    body.theme-putri {
+      --bg-color: #1a0b1e;
+      --bg-radial: radial-gradient(circle at 50% 0%, #2a0e35 0%, #130718 100%);
+
+      --neon-green: #f472b6;  /* Soft Pink */
+      --neon-blue: #e879f9;   /* Soft Magenta/Pink Glow */
+      --neon-purple: #c084fc; /* Soft Violet/Purple */
+
+      --text-main: #fdf2f8;
+      --text-muted: #f472b6;
+
+      --card-bg: rgba(35, 15, 45, 0.85);
+      --card-border: rgba(244, 114, 182, 0.2);
+      --btn-option-bg: rgba(45, 18, 55, 0.85);
+      --th-bg: rgba(40, 16, 50, 0.95);
+
+      --shadow-neon: 0 10px 30px -10px rgba(232, 121, 249, 0.3);
     }
 
     * {
@@ -49,8 +64,8 @@
 
     body {
       font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
-      background-color: #0b0f19;
-      background-image: radial-gradient(circle at 50% 0%, #111827 0%, #0b0f19 100%);
+      background-color: var(--bg-color);
+      background-image: var(--bg-radial);
       min-height: 100vh;
       color: var(--text-main);
       padding: 25px 15px;
@@ -59,7 +74,7 @@
       justify-content: flex-start;
       position: relative;
       overflow-x: hidden;
-      transition: background 0.4s ease;
+      transition: background 0.4s ease, color 0.4s ease;
     }
 
     .container {
@@ -115,6 +130,7 @@
       border: 1px solid var(--card-border);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
       text-align: center;
+      backdrop-filter: blur(12px);
       transition: all 0.3s ease;
     }
 
@@ -122,6 +138,7 @@
       font-size: 2.2rem;
       color: var(--neon-green);
       margin-bottom: 12px;
+      transition: color 0.3s ease;
     }
 
     .login-box h2 {
@@ -153,6 +170,10 @@
       padding-left: 4px;
     }
 
+    .class-group-label.putri-label {
+      color: #f472b6;
+    }
+
     .class-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -160,7 +181,7 @@
     }
 
     .btn-class-option {
-      background: rgba(15, 23, 42, 0.9);
+      background: var(--btn-option-bg);
       border: 1px solid var(--card-border);
       color: var(--text-main);
       padding: 10px 8px;
@@ -179,22 +200,14 @@
     .btn-class-option i {
       font-size: 0.9rem;
       color: var(--neon-blue);
+      transition: color 0.3s ease;
     }
 
     .btn-class-option:hover {
-      background: rgba(59, 130, 246, 0.2);
+      background: rgba(232, 121, 249, 0.2);
       border-color: var(--neon-green);
       color: #ffffff;
       transform: translateY(-2px);
-    }
-
-    /* Spesifik Tombol Kelas Putri di Home */
-    .btn-girls-option i {
-      color: #d946ef;
-    }
-    .btn-girls-option:hover {
-      background: rgba(244, 114, 182, 0.2) !important;
-      border-color: #f472b6 !important;
     }
 
     /* Dashboard Section */
@@ -212,6 +225,7 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+      backdrop-filter: blur(12px);
       transition: all 0.3s ease;
     }
 
@@ -265,7 +279,7 @@
       font-weight: 600;
       cursor: pointer;
       font-family: inherit;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
     }
 
     .btn-screenshot {
@@ -302,7 +316,6 @@
       transform: translateY(-50%);
       color: var(--neon-blue);
       font-size: 0.75rem;
-      transition: color 0.3s ease;
     }
 
     .search-box input {
@@ -312,14 +325,9 @@
       border-radius: 16px;
       outline: none;
       font-size: 0.75rem;
-      background: rgba(15, 23, 42, 0.9);
+      background: var(--btn-option-bg);
       color: var(--text-main);
       font-family: inherit;
-      transition: all 0.3s ease;
-    }
-    
-    body.girls-theme .search-box input {
-      background: rgba(26, 14, 35, 0.9);
     }
 
     /* Loading Spinner */
@@ -333,7 +341,7 @@
       display: inline-block;
       width: 28px;
       height: 28px;
-      border: 3px solid rgba(16, 185, 129, 0.1);
+      border: 3px solid rgba(244, 114, 182, 0.15);
       border-radius: 50%;
       border-top-color: var(--neon-green);
       animation: spin 1s infinite linear;
@@ -351,6 +359,7 @@
       border: 1px solid var(--card-border);
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
       overflow-x: auto;
+      backdrop-filter: blur(12px);
       transition: all 0.3s ease;
     }
 
@@ -362,7 +371,7 @@
     }
 
     .student-table th {
-      background: rgba(15, 23, 42, 0.95);
+      background: var(--th-bg);
       padding: 7px 10px;
       font-weight: 600;
       font-size: 0.62rem;
@@ -371,11 +380,6 @@
       color: var(--text-muted);
       border-bottom: 1px solid var(--card-border);
       white-space: nowrap;
-      transition: background 0.3s ease;
-    }
-
-    body.girls-theme .student-table th {
-      background: rgba(26, 14, 35, 0.95);
     }
 
     .student-table th.col-no { width: 45px; text-align: center; }
@@ -396,17 +400,10 @@
       font-size: 0.62rem;
       font-weight: 600;
       color: var(--neon-blue);
-      background: rgba(59, 130, 246, 0.12);
-      border: 1px solid rgba(59, 130, 246, 0.25);
+      background: rgba(232, 121, 249, 0.12);
+      border: 1px solid rgba(232, 121, 249, 0.25);
       padding: 1px 5px;
       border-radius: 4px;
-      transition: all 0.3s ease;
-    }
-    
-    body.girls-theme .no-badge {
-      color: #d946ef;
-      background: rgba(217, 70, 239, 0.12);
-      border-color: rgba(217, 70, 239, 0.25);
     }
 
     .student-name {
@@ -426,7 +423,6 @@
     .capaian-tag i.fa-star { 
       color: var(--neon-purple); 
       font-size: 0.62rem;
-      transition: color 0.3s ease;
     }
 
     .no-results {
@@ -492,18 +488,18 @@
 
         <!-- Kelompok 2: Kelas Putri -->
         <div class="class-group">
-          <div class="class-group-label"><i class="fa-solid fa-angle-right"></i> Kelas Putri</div>
+          <div class="class-group-label putri-label"><i class="fa-solid fa-angle-right"></i> Kelas Putri</div>
           <div class="class-grid">
-            <button type="button" class="btn-class-option btn-girls-option" onclick="selectClass('XII E')">
+            <button type="button" class="btn-class-option" onclick="selectClass('XII E')">
               <i class="fa-solid fa-users"></i> XII E
             </button>
-            <button type="button" class="btn-class-option btn-girls-option" onclick="selectClass('XII F')">
+            <button type="button" class="btn-class-option" onclick="selectClass('XII F')">
               <i class="fa-solid fa-users"></i> XII F
             </button>
-            <button type="button" class="btn-class-option btn-girls-option" onclick="selectClass('XII G')">
+            <button type="button" class="btn-class-option" onclick="selectClass('XII G')">
               <i class="fa-solid fa-users"></i> XII G
             </button>
-            <button type="button" class="btn-class-option btn-girls-option" onclick="selectClass('XII H')">
+            <button type="button" class="btn-class-option" onclick="selectClass('XII H')">
               <i class="fa-solid fa-users"></i> XII H
             </button>
           </div>
@@ -585,6 +581,8 @@
     let currentClass = "";
     let allData = [];
 
+    const KELAS_PUTRI = ['XII E', 'XII F', 'XII G', 'XII H'];
+
     /* Fungsi Mementukan Format Hari & Tanggal dalam Bahasa Indonesia */
     function getFormattedDate() {
       const now = new Date();
@@ -599,28 +597,28 @@
 
     function selectClass(namaKelas) {
       currentClass = namaKelas;
+
+      // Cek apakah kelas yang dipilih adalah kelas putri (E, F, G, H)
+      if (KELAS_PUTRI.includes(namaKelas.toUpperCase())) {
+        document.body.classList.add('theme-putri');
+      } else {
+        document.body.classList.remove('theme-putri');
+      }
+
       document.getElementById('loginSection').style.display = 'none';
       document.getElementById('dashboardSection').style.display = 'block';
       document.getElementById('displayClassName').innerText = "Kelas " + currentClass;
       document.getElementById('displayDate').innerText = getFormattedDate();
 
-      // Deteksi kelas putri (XII E, XII F, XII G, XII H) untuk mengaktifkan tema Pink Ungu Glassmorphism
-      const isGirlsClass = ['XII E', 'XII F', 'XII G', 'XII H'].includes(namaKelas);
-      if (isGirlsClass) {
-        document.body.classList.add('girls-theme');
-      } else {
-        document.body.classList.remove('girls-theme');
-      }
-
       fetchClassData(currentClass);
     }
 
     function resetClassSelection() {
+      document.body.classList.remove('theme-putri');
       document.getElementById('dashboardSection').style.display = 'none';
       document.getElementById('loginSection').style.display = 'block';
       document.getElementById('tableBody').innerHTML = '';
       document.getElementById('searchInput').value = '';
-      document.body.classList.remove('girls-theme');
       allData = [];
     }
 
@@ -731,13 +729,13 @@
       btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Mengunduh...';
       btn.disabled = true;
 
-      // Menyesuaikan background color screenshot dengan tema yang sedang aktif
-      const isGirls = document.body.classList.contains('girls-theme');
-      const bgCanvas = isGirls ? '#120914' : '#0b0f19';
+      // Sesuaikan warna background screenshot sesuai tema aktif
+      const isPutriTheme = document.body.classList.contains('theme-putri');
+      const screenshotBg = isPutriTheme ? '#1a0b1e' : '#0b0f19';
 
       try {
         const canvas = await html2canvas(exportArea, {
-          backgroundColor: bgCanvas,
+          backgroundColor: screenshotBg,
           scale: 2,
           useCORS: true,
           logging: false,
