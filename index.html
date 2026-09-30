@@ -74,7 +74,7 @@
       padding: 0;
     }
 
-    html, body {
+    html {
       height: 100%;
     }
 
@@ -84,7 +84,7 @@
       background-image: var(--bg-image);
       min-height: 100vh;
       color: var(--text-main);
-      padding: 25px 15px 15px 15px;
+      padding: 25px 15px 30px 15px;
       display: flex;
       flex-direction: column;
       position: relative;
@@ -100,6 +100,7 @@
       flex: 1 0 auto;
       display: flex;
       flex-direction: column;
+      padding-bottom: 20px;
     }
 
     /* Header Styling */
@@ -145,7 +146,7 @@
     }
 
     #loginSection {
-      display: none; /* Sembunyikan default, muncul setelah login angka */
+      display: none; 
     }
 
     /* Login Box & Auth Box */
@@ -257,7 +258,6 @@
       display: none;
     }
 
-    /* Animasi Shake untuk kesalahan Login */
     .shake {
       animation: shake 0.4s ease-in-out;
     }
@@ -268,7 +268,6 @@
       40%, 80% { transform: translateX(8px); }
     }
 
-    /* Pemisahan Kelompok Tombol Kelas */
     .class-group {
       margin-bottom: 14px;
     }
@@ -329,12 +328,10 @@
       border-color: #db2777;
     }
 
-    /* Dashboard Section */
     .dashboard {
       display: none;
     }
 
-    /* Panel Top Bar */
     .top-bar {
       background: var(--card-bg);
       backdrop-filter: blur(12px);
@@ -455,7 +452,6 @@
       font-family: inherit;
     }
 
-    /* Loading Spinner */
     .loading {
       text-align: center;
       padding: 30px 0;
@@ -477,7 +473,6 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Table Layout */
     .table-container {
       background: var(--card-bg);
       backdrop-filter: blur(12px);
@@ -571,38 +566,33 @@
       font-size: 0.72rem;
     }
 
-    /* Footer Styling */
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<!-- CSS Mandiri (Aman, tidak merusak styling bawaan web app Anda) -->
-<style>
+    /* Footer & Social Media Styling Tambahan */
     .glass-panel {
-        background: rgba(15, 23, 42, 0.65);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(0, 0, 255, 0.5);
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 0, 255, 0.5);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     }
     
-    /* Efek warna neon khusus saat kursor diarahkan (hover) */
     .kurnia-icon {
-        width: 2rem;
-        height: 2rem;
-        border-radius: 9999px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #003A6B;
-        font-size: 0.75rem;
-        transition: all 0.3s ease;
-        text-decoration: none;
-        border: 1px solid rgba(0, 0, 255, 0.4); 
+      width: 2rem;
+      height: 2rem;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #003A6B;
+      font-size: 0.75rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      border: 1px solid rgba(0, 0, 255, 0.4); 
     }
     .kurnia-icon.ig:hover { color: #00f2fe; border-color: rgba(0, 242, 254, 0.6); }
     .kurnia-icon.tt:hover { color: #bd00ff; border-color: rgba(189, 0, 255, 0.6); }
     .kurnia-icon.yt:hover { color: #ff007f; border-color: rgba(255, 0, 127, 0.6); }
     .kurnia-icon.wa:hover { color: #00ff87; border-color: rgba(0, 255, 135, 0.6); }
-</style>
+  </style>
 </head>
 <body>
 
@@ -750,32 +740,31 @@
       </div>
     </div>
 
-    <!-- 3. Footer Kurniapedia -->
-    <!-- Bagian Bawah Halaman (Social Media & Footer) -->
-<div style="width: 100%; padding: 24px 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;">
-    
-    <!-- Social Media Icon Bar -->
-    <div id="socialMediaRow" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-        <a href="https://instagram.com/kurniapedia" target="_blank" class="glass-panel kurnia-icon ig">
-            <i class="fa-brands fa-instagram"></i>
-        </a>
-        <a href="https://tiktok.com/@kurniapedia" target="_blank" class="glass-panel kurnia-icon tt">
-            <i class="fa-brands fa-tiktok"></i>
-        </a>
-        <a href="https://www.youtube.com/@kurniapedia" target="_blank" class="glass-panel kurnia-icon yt">
-            <i class="fa-brands fa-youtube"></i>
-        </a>
-        <a href="https://wa.me/+6285870906050" target="_blank" class="glass-panel kurnia-icon wa">
-            <i class="fa-brands fa-whatsapp"></i>
-        </a>
+    <!-- 3. Footer Kurniapedia (Di dalam container exportArea agar ikut terekam screenshot) -->
+    <div style="width: 100%; padding: 20px 0 10px 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; margin-top: auto;">
+        
+        <!-- Social Media Icon Bar -->
+        <div id="socialMediaRow" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+            <a href="https://instagram.com/kurniapedia" target="_blank" class="glass-panel kurnia-icon ig">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://tiktok.com/@kurniapedia" target="_blank" class="glass-panel kurnia-icon tt">
+                <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="https://www.youtube.com/@kurniapedia" target="_blank" class="glass-panel kurnia-icon yt">
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+            <a href="https://wa.me/+6285870906050" target="_blank" class="glass-panel kurnia-icon wa">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <footer style="text-align: center; font-size: 11px; color: #64748b; font-family: sans-serif;">
+            <p>Powered by <span style="color: #003A6B; font-weight: 600;">Kurniapedia</span> &copy; 2026</p>
+        </footer>
+
     </div>
-
-    <!-- Footer -->
-    <footer style="text-align: center; font-size: 11px; color: #64748b; font-family: sans-serif;">
-        <p>Powered by <span style="color: #003A6B; font-weight: 600;">Kurniapedia</span> &copy; 2026</p>
-    </footer>
-
-</div>
 
   </div>
 
@@ -785,7 +774,6 @@
     let currentClass = "";
     let allData = [];
 
-    /* Fungsi Login Sederhana dengan Passcode 100 */
     function checkAccessKey() {
       const pinInput = document.getElementById('pinInput');
       const authErrorMsg = document.getElementById('authErrorMsg');
@@ -798,7 +786,6 @@
       } else {
         authErrorMsg.style.display = 'block';
         authCard.classList.remove('shake');
-        // Trigger reflow untuk mengulangi animasi shake jika ditekan ulang
         void authCard.offsetWidth; 
         authCard.classList.add('shake');
         pinInput.value = '';
@@ -827,7 +814,6 @@
       }
     }
 
-    /* Fungsi Menentukan Format Hari & Tanggal dalam Bahasa Indonesia */
     function getFormattedDate() {
       const now = new Date();
       const options = { 
@@ -964,7 +950,7 @@
       `;
     }
 
-    /* Fungsi Unduh Gambar PNG */
+    /* Fungsi Unduh Gambar PNG dengan Tinggi Total Konten (ScrollHeight) */
     async function downloadImage(e) {
       const exportArea = document.getElementById('exportArea');
       const btn = e.currentTarget;
@@ -984,7 +970,8 @@
           logging: false,
           allowTaint: true,
           windowWidth: exportArea.scrollWidth,
-          windowHeight: exportArea.scrollHeight
+          // Menggunakan scrollHeight agar seluruh tinggi tabel dan footer ikut terambil dengan aman
+          windowHeight: exportArea.scrollHeight + 50 
         });
 
         const fileName = `Laporan_Hafalan_${currentClass.replace(/\s+/g, '_')}.png`;
