@@ -93,7 +93,7 @@
       transition: background 0.4s ease, color 0.4s ease;
     }
 
-    /* Container dengan padding simetris kanan-kiri */
+    /* Container dengan padding kanan-kiri yang aman untuk hasil gambar/screenshot di HP */
     .container {
       max-width: 850px;
       margin: 0 auto;
@@ -101,7 +101,7 @@
       flex: 1 0 auto;
       display: flex;
       flex-direction: column;
-      padding: 0 4px 20px 4px;
+      padding: 0 12px 20px 12px;
     }
 
     /* Header Styling */
@@ -956,7 +956,7 @@
       `;
     }
 
-    /* Fungsi Unduh Gambar PNG dengan Lebar Penuh Tanpa Terpotong & Ukuran Font Akurat */
+    /* Fungsi Unduh Gambar PNG dengan Padding Kanan-Kiri Aman & Ukuran Font Akurat */
     async function downloadImage(e) {
       const exportArea = document.getElementById('exportArea');
       const btn = e.currentTarget;
