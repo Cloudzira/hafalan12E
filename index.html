@@ -493,7 +493,7 @@
 
     .student-table th {
       background: var(--table-header-bg);
-      padding: 8px 12px; /* Disesuaikan sedikit lebih rapat */
+      padding: 8px 12px;
       font-weight: 700;
       font-size: 0.62rem;
       text-transform: uppercase;
@@ -520,9 +520,8 @@
       background-color: rgba(255, 255, 255, 0.5);
     }
 
-    /* MODIFIKASI: Mengurangi padding vertikal agar spasi baris/nama lebih rapat & rapi */
     .student-table td {
-      padding: 5px 12px; /* Sebelumnya 9px 12px */
+      padding: 5px 12px;
       color: var(--text-main);
       vertical-align: middle;
       line-height: 1.25;
@@ -952,7 +951,7 @@
       `;
     }
 
-    /* Fungsi Unduh Gambar PNG dengan Tinggi Total Konten (ScrollHeight) */
+    /* Fungsi Unduh Gambar PNG dengan Ukuran & Skala Font yang Disamakan Persis */
     async function downloadImage(e) {
       const exportArea = document.getElementById('exportArea');
       const btn = e.currentTarget;
@@ -967,13 +966,12 @@
       try {
         const canvas = await html2canvas(exportArea, {
           backgroundColor: exportBg,
-          scale: 2,
+          scale: window.devicePixelRatio || 1, // Menyesuaikan skala resolusi layar agar ukuran font & tabel sama persis
           useCORS: true,
           logging: false,
           allowTaint: true,
-          windowWidth: exportArea.scrollWidth,
-          // Menggunakan scrollHeight agar seluruh tinggi tabel dan footer ikut terambil dengan aman
-          windowHeight: exportArea.scrollHeight + 50 
+          windowWidth: exportArea.clientWidth,
+          windowHeight: exportArea.scrollHeight
         });
 
         const fileName = `Laporan_Hafalan_${currentClass.replace(/\s+/g, '_')}.png`;
