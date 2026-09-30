@@ -84,15 +84,16 @@
       background-image: var(--bg-image);
       min-height: 100vh;
       color: var(--text-main);
-      padding: 25px 15px 30px 15px;
+      padding: 20px 12px 30px 12px;
       display: flex;
       flex-direction: column;
+      align-items: center; /* Memastikan body menengahkan isi secara horizontal */
       position: relative;
       overflow-x: hidden;
       transition: background 0.4s ease, color 0.4s ease;
     }
 
-    /* Container Fleksibel dengan padding aman agar sisi kanan-kiri tidak terpotong */
+    /* Container Fleksibel dengan padding seimbang kanan-kiri */
     .container {
       max-width: 850px;
       margin: 0 auto;
@@ -100,7 +101,7 @@
       flex: 1 0 auto;
       display: flex;
       flex-direction: column;
-      padding: 0 10px 20px 10px;
+      padding: 0 12px 20px 12px;
     }
 
     /* Header Styling */
@@ -143,6 +144,7 @@
       display: flex;
       flex-direction: column;
       flex: 1 0 auto;
+      width: 100%;
     }
 
     #loginSection {
@@ -157,7 +159,7 @@
       background: var(--card-bg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      padding: 28px 24px;
+      padding: 28px 20px;
       border-radius: 18px;
       border: 1px solid var(--card-border);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
@@ -286,16 +288,16 @@
     .class-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
+      gap: 8px;
     }
 
     .btn-class-option {
       background: var(--input-bg);
       border: 1px solid var(--card-border);
       color: var(--text-main);
-      padding: 10px 8px;
+      padding: 10px 6px;
       border-radius: 10px;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 700;
       cursor: pointer;
       transition: all 0.25s ease;
@@ -330,13 +332,14 @@
 
     .dashboard {
       display: none;
+      width: 100%;
     }
 
     .top-bar {
       background: var(--card-bg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      padding: 12px 16px;
+      padding: 12px 14px;
       border-radius: 12px;
       border: 1px solid var(--card-border);
       margin-bottom: 16px;
@@ -360,10 +363,10 @@
     }
 
     .download-date-tag {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       color: var(--text-muted);
       font-weight: 500;
-      padding: 4px 10px;
+      padding: 4px 8px;
       background: rgba(255, 255, 255, 0.6);
       border-radius: 6px;
       border: 1px solid var(--card-border);
@@ -376,23 +379,23 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
     }
 
     .action-buttons {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     .btn-change {
       background: rgba(255, 255, 255, 0.7);
       color: var(--neon-green);
       border: 1px solid var(--neon-green);
-      padding: 5px 12px;
+      padding: 5px 10px;
       border-radius: 16px;
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 600;
       cursor: pointer;
       font-family: inherit;
@@ -408,9 +411,9 @@
       background: rgba(37, 99, 235, 0.1);
       color: var(--neon-blue);
       border: 1px solid var(--neon-blue);
-      padding: 5px 12px;
+      padding: 5px 10px;
       border-radius: 16px;
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 600;
       cursor: pointer;
       font-family: inherit;
@@ -428,7 +431,7 @@
     .search-box {
       position: relative;
       flex: 1;
-      max-width: 240px;
+      max-width: 220px;
     }
 
     .search-box i {
@@ -442,11 +445,11 @@
 
     .search-box input {
       width: 100%;
-      padding: 6px 10px 6px 30px;
+      padding: 6px 10px 6px 28px;
       border: 1px solid var(--card-border);
       border-radius: 16px;
       outline: none;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       background: var(--input-bg);
       color: var(--text-main);
       font-family: inherit;
@@ -482,6 +485,7 @@
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04);
       overflow-x: auto;
       margin-bottom: 20px;
+      width: 100%;
     }
 
     .student-table {
@@ -970,7 +974,7 @@
           useCORS: true,
           logging: false,
           allowTaint: true,
-          windowWidth: exportArea.scrollWidth + 40, // Ruang ekstra agar sisi kanan dan kiri aman dari potongan
+          windowWidth: exportArea.scrollWidth + 40, 
           width: exportArea.scrollWidth
         });
 
