@@ -92,7 +92,7 @@
       transition: background 0.4s ease, color 0.4s ease;
     }
 
-    /* Container Fleksibel */
+    /* Container Fleksibel dengan padding aman agar sisi kanan-kiri tidak terpotong */
     .container {
       max-width: 850px;
       margin: 0 auto;
@@ -100,7 +100,7 @@
       flex: 1 0 auto;
       display: flex;
       flex-direction: column;
-      padding-bottom: 20px;
+      padding: 0 10px 20px 10px;
     }
 
     /* Header Styling */
@@ -951,7 +951,7 @@
       `;
     }
 
-    /* Fungsi Unduh Gambar PNG dengan Ukuran & Skala Font yang Disamakan Persis */
+    /* Fungsi Unduh Gambar PNG dengan Lebar Penuh Tanpa Terpotong & Ukuran Font Akurat */
     async function downloadImage(e) {
       const exportArea = document.getElementById('exportArea');
       const btn = e.currentTarget;
@@ -966,12 +966,12 @@
       try {
         const canvas = await html2canvas(exportArea, {
           backgroundColor: exportBg,
-          scale: window.devicePixelRatio || 1, // Menyesuaikan skala resolusi layar agar ukuran font & tabel sama persis
+          scale: window.devicePixelRatio || 1, 
           useCORS: true,
           logging: false,
           allowTaint: true,
-          windowWidth: exportArea.clientWidth,
-          windowHeight: exportArea.scrollHeight
+          windowWidth: exportArea.scrollWidth + 40, // Ruang ekstra agar sisi kanan dan kiri aman dari potongan
+          width: exportArea.scrollWidth
         });
 
         const fileName = `Laporan_Hafalan_${currentClass.replace(/\s+/g, '_')}.png`;
