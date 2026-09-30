@@ -572,24 +572,36 @@
     }
 
     /* Footer Styling */
-    .app-footer {
-      flex-shrink: 0;
-      text-align: center;
-      padding: 15px 0 5px 0;
-      color: var(--text-muted);
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-      margin-top: auto;
-    }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    @media (max-width: 600px) {
-      .class-grid { grid-template-columns: repeat(2, 1fr); }
-      .panel-controls { flex-direction: column; align-items: stretch; }
-      .search-box { max-width: 100%; }
-      .student-table th, .student-table td { padding: 8px 8px; font-size: 0.68rem; }
+<!-- CSS Mandiri (Aman, tidak merusak styling bawaan web app Anda) -->
+<style>
+    .glass-panel {
+        background: rgba(15, 23, 42, 0.65);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     }
-  </style>
+    
+    /* Efek warna neon khusus saat kursor diarahkan (hover) */
+    .kurnia-icon {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #cbd5e1;
+        font-size: 0.75rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+    .kurnia-icon.ig:hover { color: #00f2fe; border-color: rgba(0, 242, 254, 0.6); }
+    .kurnia-icon.tt:hover { color: #bd00ff; border-color: rgba(189, 0, 255, 0.6); }
+    .kurnia-icon.yt:hover { color: #ff007f; border-color: rgba(255, 0, 127, 0.6); }
+    .kurnia-icon.wa:hover { color: #00ff87; border-color: rgba(0, 255, 135, 0.6); }
+</style>
 </head>
 <body>
 
