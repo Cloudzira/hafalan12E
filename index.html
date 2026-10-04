@@ -84,8 +84,9 @@
       padding: 0;
     }
 
-    html {
+    html, body {
       height: 100%;
+      width: 100%;
     }
 
     body {
@@ -94,20 +95,29 @@
       background-image: var(--bg-image);
       background-attachment: fixed;
       background-size: cover;
-      min-height: 100vh;
       color: var(--text-main);
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      padding: 20px 16px;
+      padding: 16px;
       transition: background 0.6s ease, color 0.4s ease;
       -webkit-font-smoothing: antialiased;
     }
 
-    .container {
-      max-width: 520px;
+    /* Wrapper utama agar halaman login/menu posisinya center sempurna di tengah layar */
+    .page-wrapper {
       width: 100%;
-      margin: 0 auto;
+      max-width: 520px;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+    }
+
+    .container {
+      width: 100%;
       display: flex;
       flex-direction: column;
       gap: 16px;
@@ -148,6 +158,7 @@
       display: flex;
       flex-direction: column;
       width: 100%;
+      gap: 16px;
     }
 
     #loginSection {
@@ -339,6 +350,8 @@
     .dashboard {
       display: none;
       width: 100%;
+      flex-direction: column;
+      gap: 16px;
     }
 
     .top-bar {
@@ -348,7 +361,6 @@
       padding: 14px;
       border-radius: 16px;
       border: 1px solid var(--card-border);
-      margin-bottom: 12px;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -467,7 +479,7 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Tabel Full Terbuka Tanpa Scroll Internal agar Hasil Unduhan Sempurna */
+    /* Tabel Full Terbuka Tanpa Scroll & Bersih dari Sisa List Abu-abu */
     .table-container {
       background: var(--card-bg);
       backdrop-filter: blur(20px);
@@ -475,7 +487,7 @@
       border-radius: 16px;
       border: 1px solid var(--card-border);
       box-shadow: var(--shadow-glass);
-      overflow: visible; /* Diubah dari auto ke visible agar tidak terpotong saat dirender canvas */
+      overflow: visible;
       width: 100%;
     }
 
@@ -582,168 +594,170 @@
 </head>
 <body>
 
-  <div class="container" id="exportArea">
-    
-    <!-- 0. Halaman Login Angka (PIN Protection) -->
-    <div id="authSection">
-      <header class="header">
-        <div class="subtitle">Laporan Al Quran Kelas XII</div>
-        <h1>AKSES SISTEM</h1>
-        <div class="header-divider"></div>
-      </header>
+  <div class="page-wrapper" id="exportArea">
+    <div class="container">
+      
+      <!-- 0. Halaman Login Angka (PIN Protection) -->
+      <div id="authSection">
+        <header class="header">
+          <div class="subtitle">Laporan Al Quran Kelas XII</div>
+          <h1>AKSES SISTEM</h1>
+          <div class="header-divider"></div>
+        </header>
 
-      <div class="login-box" id="authCard">
-        <i class="fa-solid fa-shield-halved icon-header"></i>
-        <h2>VERIFIKASI PASSCODE</h2>
-        <p>Masukkan kode akses rahasia untuk membuka laporan progres.</p>
-        
-        <div class="pin-input-group">
-          <input type="password" id="pinInput" inputmode="numeric" placeholder="••••" maxlength="10" onkeydown="handlePinKeyPress(event)">
-          <button type="button" class="pin-toggle-btn" onclick="togglePinVisibility()">
-            <i class="fa-regular fa-eye" id="toggleIcon"></i>
+        <div class="login-box" id="authCard">
+          <i class="fa-solid fa-shield-halved icon-header"></i>
+          <h2>VERIFIKASI PASSCODE</h2>
+          <p>Masukkan kode akses rahasia untuk membuka laporan progres.</p>
+          
+          <div class="pin-input-group">
+            <input type="password" id="pinInput" inputmode="numeric" placeholder="••••" maxlength="10" onkeydown="handlePinKeyPress(event)">
+            <button type="button" class="pin-toggle-btn" onclick="togglePinVisibility()">
+              <i class="fa-regular fa-eye" id="toggleIcon"></i>
+            </button>
+          </div>
+          
+          <button type="button" class="btn-login-submit" onclick="checkAccessKey()">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i> LANJUTKAN MASUK
           </button>
-        </div>
-        
-        <button type="button" class="btn-login-submit" onclick="checkAccessKey()">
-          <i class="fa-solid fa-arrow-right-to-bracket"></i> LANJUTKAN MASUK
-        </button>
 
-        <div id="authErrorMsg" class="error-msg">
-          <i class="fa-solid fa-triangle-exclamation"></i> Kode akses salah.
+          <div id="authErrorMsg" class="error-msg">
+            <i class="fa-solid fa-triangle-exclamation"></i> Kode akses salah.
+          </div>
         </div>
       </div>
+
+      <!-- 1. Form Pilih Kelas -->
+      <div id="loginSection">
+        <header class="header">
+          <div class="subtitle">Laporan Al Quran Kelas XII</div>
+          <h1>PILIH KELAS TUJUAN</h1>
+          <div class="header-divider"></div>
+        </header>
+
+        <div class="login-box">
+          <i class="fa-solid fa-graduation-cap icon-header"></i>
+          <h2>DAFTAR KELAS</h2>
+          <p>Pilih kelas yang ingin ditinjau rekam jejak progres hafalannya.</p>
+          
+          <!-- Kelompok 1: Kelas Putra -->
+          <div class="class-group">
+            <div class="class-group-label"><i class="fa-solid fa-circle-chevron-right"></i> Kelas Putra</div>
+            <div class="class-grid">
+              <button type="button" class="btn-class-option" onclick="selectClass('XII A')">
+                <i class="fa-solid fa-user-graduate"></i> XII A
+              </button>
+              <button type="button" class="btn-class-option" onclick="selectClass('XII B')">
+                <i class="fa-solid fa-user-graduate"></i> XII B
+              </button>
+              <button type="button" class="btn-class-option" onclick="selectClass('XII C')">
+                <i class="fa-solid fa-user-graduate"></i> XII C
+              </button>
+              <button type="button" class="btn-class-option" onclick="selectClass('XII D')">
+                <i class="fa-solid fa-user-graduate"></i> XII D
+              </button>
+            </div>
+          </div>
+
+          <!-- Kelompok 2: Kelas Putri -->
+          <div class="class-group">
+            <div class="class-group-label"><i class="fa-solid fa-circle-chevron-right"></i> Kelas Putri</div>
+            <div class="class-grid">
+              <button type="button" class="btn-class-option putri-option" onclick="selectClass('XII E')">
+                <i class="fa-solid fa-user-graduate"></i> XII E
+              </button>
+              <button type="button" class="btn-class-option putri-option" onclick="selectClass('XII F')">
+                <i class="fa-solid fa-user-graduate"></i> XII F
+              </button>
+              <button type="button" class="btn-class-option putri-option" onclick="selectClass('XII G')">
+                <i class="fa-solid fa-user-graduate"></i> XII G
+              </button>
+              <button type="button" class="btn-class-option putri-option" onclick="selectClass('XII H')">
+                <i class="fa-solid fa-user-graduate"></i> XII H
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 2. Dashboard Section -->
+      <div id="dashboardSection" class="dashboard">
+        <header class="header">
+          <div class="subtitle">Laporan Al Quran Kelas XII</div>
+          <h1>PROGRES SERTIFIKASI</h1>
+          <div class="header-divider"></div>
+        </header>
+
+        <div class="top-bar">
+          <div class="panel-header">
+            <h2 id="displayClassName">Kelas ...</h2>
+            <div class="download-date-tag">
+              <i class="fa-regular fa-calendar-days" style="color: var(--accent-blue);"></i>
+              <span id="displayDate">-- --- ----</span>
+            </div>
+          </div>
+
+          <div class="panel-controls">
+            <div class="action-buttons">
+              <button class="btn-change" onclick="resetClassSelection()" data-html2canvas-ignore="true">
+                GANTI KELAS
+              </button>
+              <button class="btn-screenshot" onclick="downloadImage(event)" data-html2canvas-ignore="true">
+                <i class="fa-solid fa-download"></i> UNDUH
+              </button>
+            </div>
+
+            <div class="search-box" data-html2canvas-ignore="true">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="searchInput" placeholder="Cari nama..." onkeyup="filterData()">
+            </div>
+          </div>
+        </div>
+
+        <div id="loading" class="loading">
+          <div class="spinner"></div>
+          <p style="margin-top: 8px; color: var(--text-muted); font-size: 0.68rem;">Memuat data siswa...</p>
+        </div>
+
+        <div id="tableContainer" class="table-container">
+          <table class="student-table">
+            <thead>
+              <tr>
+                <th class="col-no">No</th>
+                <th class="col-nama">Nama Siswa</th>
+                <th class="col-capaian">Capaian Akhir</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <!-- Data dimasukkan via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 3. Footer Kurniapedia -->
+      <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding-top: 4px;">
+          <div id="socialMediaRow" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+              <a href="https://instagram.com/kurniapedia" target="_blank" class="glass-panel kurnia-icon ig">
+                  <i class="fa-brands fa-instagram"></i>
+              </a>
+              <a href="https://tiktok.com/@kurniapedia" target="_blank" class="glass-panel kurnia-icon tt">
+                  <i class="fa-brands fa-tiktok"></i>
+              </a>
+              <a href="https://www.youtube.com/@kurniapedia" target="_blank" class="glass-panel kurnia-icon yt">
+                  <i class="fa-brands fa-youtube"></i>
+              </a>
+              <a href="https://wa.me/+6285870906050" target="_blank" class="glass-panel kurnia-icon wa">
+                  <i class="fa-brands fa-whatsapp"></i>
+              </a>
+          </div>
+          <footer style="text-align: center; font-size: 10px; color: var(--text-muted);">
+              <p>Crafted with ♥ by <span style="font-weight: 500; color: var(--text-main);">Kurniapedia</span> 2026</p>
+          </footer>
+      </div>
+
     </div>
-
-    <!-- 1. Form Pilih Kelas -->
-    <div id="loginSection">
-      <header class="header">
-        <div class="subtitle">Laporan Al Quran Kelas XII</div>
-        <h1>PILIH KELAS TUJUAN</h1>
-        <div class="header-divider"></div>
-      </header>
-
-      <div class="login-box">
-        <i class="fa-solid fa-graduation-cap icon-header"></i>
-        <h2>DAFTAR KELAS</h2>
-        <p>Pilih kelas yang ingin ditinjau rekam jejak progres hafalannya.</p>
-        
-        <!-- Kelompok 1: Kelas Putra -->
-        <div class="class-group">
-          <div class="class-group-label"><i class="fa-solid fa-circle-chevron-right"></i> Kelas Putra</div>
-          <div class="class-grid">
-            <button type="button" class="btn-class-option" onclick="selectClass('XII A')">
-              <i class="fa-solid fa-user-graduate"></i> XII A
-            </button>
-            <button type="button" class="btn-class-option" onclick="selectClass('XII B')">
-              <i class="fa-solid fa-user-graduate"></i> XII B
-            </button>
-            <button type="button" class="btn-class-option" onclick="selectClass('XII C')">
-              <i class="fa-solid fa-user-graduate"></i> XII C
-            </button>
-            <button type="button" class="btn-class-option" onclick="selectClass('XII D')">
-              <i class="fa-solid fa-user-graduate"></i> XII D
-            </button>
-          </div>
-        </div>
-
-        <!-- Kelompok 2: Kelas Putri -->
-        <div class="class-group">
-          <div class="class-group-label"><i class="fa-solid fa-circle-chevron-right"></i> Kelas Putri</div>
-          <div class="class-grid">
-            <button type="button" class="btn-class-option putri-option" onclick="selectClass('XII E')">
-              <i class="fa-solid fa-user-graduate"></i> XII E
-            </button>
-            <button type="button" class="btn-class-option putri-option" onclick="selectClass('XII F')">
-              <i class="fa-solid fa-user-graduate"></i> XII F
-            </button>
-            <button type="button" class="btn-class-option putri-option" onclick="selectClass('XII G')">
-              <i class="fa-solid fa-user-graduate"></i> XII G
-            </button>
-            <button type="button" class="btn-class-option putri-option" onclick="selectClass('XII H')">
-              <i class="fa-solid fa-user-graduate"></i> XII H
-            </button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- 2. Dashboard Section -->
-    <div id="dashboardSection" class="dashboard">
-      <header class="header">
-        <div class="subtitle">Laporan Al Quran Kelas XII</div>
-        <h1>PROGRES SERTIFIKASI</h1>
-        <div class="header-divider"></div>
-      </header>
-
-      <div class="top-bar">
-        <div class="panel-header">
-          <h2 id="displayClassName">Kelas ...</h2>
-          <div class="download-date-tag">
-            <i class="fa-regular fa-calendar-days" style="color: var(--accent-blue);"></i>
-            <span id="displayDate">-- --- ----</span>
-          </div>
-        </div>
-
-        <div class="panel-controls">
-          <div class="action-buttons">
-            <button class="btn-change" onclick="resetClassSelection()" data-html2canvas-ignore="true">
-              GANTI KELAS
-            </button>
-            <button class="btn-screenshot" onclick="downloadImage(event)" data-html2canvas-ignore="true">
-              <i class="fa-solid fa-download"></i> UNDUH
-            </button>
-          </div>
-
-          <div class="search-box" data-html2canvas-ignore="true">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="searchInput" placeholder="Cari nama..." onkeyup="filterData()">
-          </div>
-        </div>
-      </div>
-
-      <div id="loading" class="loading">
-        <div class="spinner"></div>
-        <p style="margin-top: 8px; color: var(--text-muted); font-size: 0.68rem;">Memuat data siswa...</p>
-      </div>
-
-      <div id="tableContainer" class="table-container">
-        <table class="student-table">
-          <thead>
-            <tr>
-              <th class="col-no">No</th>
-              <th class="col-nama">Nama Siswa</th>
-              <th class="col-capaian">Capaian Akhir</th>
-            </tr>
-          </thead>
-          <tbody id="tableBody">
-            <!-- Data dimasukkan via JS -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- 3. Footer Kurniapedia -->
-    <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding-top: 4px;">
-        <div id="socialMediaRow" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-            <a href="https://instagram.com/kurniapedia" target="_blank" class="glass-panel kurnia-icon ig">
-                <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://tiktok.com/@kurniapedia" target="_blank" class="glass-panel kurnia-icon tt">
-                <i class="fa-brands fa-tiktok"></i>
-            </a>
-            <a href="https://www.youtube.com/@kurniapedia" target="_blank" class="glass-panel kurnia-icon yt">
-                <i class="fa-brands fa-youtube"></i>
-            </a>
-            <a href="https://wa.me/+6285870906050" target="_blank" class="glass-panel kurnia-icon wa">
-                <i class="fa-brands fa-whatsapp"></i>
-            </a>
-        </div>
-        <footer style="text-align: center; font-size: 10px; color: var(--text-muted);">
-            <p>Crafted with ♥ by <span style="font-weight: 500; color: var(--text-main);">Kurniapedia</span> 2026</p>
-        </footer>
-    </div>
-
   </div>
 
   <script>
@@ -809,7 +823,7 @@
       }
 
       document.getElementById('loginSection').style.display = 'none';
-      document.getElementById('dashboardSection').style.display = 'block';
+      document.getElementById('dashboardSection').style.display = 'flex';
       document.getElementById('displayClassName').innerText = "Kelas " + currentClass;
       document.getElementById('displayDate').innerText = getFormattedDate();
 
