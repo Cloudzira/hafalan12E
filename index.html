@@ -84,9 +84,8 @@
       padding: 0;
     }
 
-    html, body {
+    html {
       height: 100%;
-      overflow-x: hidden;
     }
 
     body {
@@ -95,18 +94,18 @@
       background-image: var(--bg-image);
       background-attachment: fixed;
       background-size: cover;
+      min-height: 100vh;
       color: var(--text-main);
       display: flex;
       flex-direction: column;
-      justify-content: center; /* Mengunci elemen agar simetris di tengah layar secara vertikal */
       align-items: center;
-      padding: 16px;
+      padding: 20px 16px;
       transition: background 0.6s ease, color 0.4s ease;
       -webkit-font-smoothing: antialiased;
     }
 
     .container {
-      max-width: 480px;
+      max-width: 520px;
       width: 100%;
       margin: 0 auto;
       display: flex;
@@ -114,7 +113,6 @@
       gap: 16px;
     }
 
-    /* Header Styling yang Lebih Compact & Profesional */
     .header {
       text-align: center;
     }
@@ -156,7 +154,6 @@
       display: none; 
     }
 
-    /* Glassmorphism Card Style yang Efisien */
     .login-box {
       width: 100%;
       background: var(--card-bg);
@@ -224,12 +221,6 @@
       font-weight: 600;
       font-family: inherit;
       box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-      transition: all 0.25s ease;
-    }
-
-    .pin-input-group input:focus {
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     .pin-toggle-btn {
@@ -261,11 +252,6 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      transition: transform 0.2s ease;
-    }
-
-    .btn-login-submit:hover {
-      transform: translateY(-1px);
     }
 
     .error-msg {
@@ -290,7 +276,6 @@
       40%, 80% { transform: translateX(5px); }
     }
 
-    /* Class Selection Menu Styling yang Lebih Rapat & Efisien */
     .class-group {
       margin-bottom: 12px;
       text-align: left;
@@ -313,11 +298,6 @@
       gap: 5px;
     }
 
-    .class-group-label i {
-      font-size: 0.6rem;
-      color: var(--accent-blue);
-    }
-
     .class-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -333,12 +313,12 @@
       font-size: 0.8rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       font-family: inherit;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 4px;
+      transition: all 0.2s ease;
     }
 
     .btn-class-option i {
@@ -487,6 +467,7 @@
       100% { transform: rotate(360deg); }
     }
 
+    /* Tabel Full Terbuka Tanpa Scroll Internal agar Hasil Unduhan Sempurna */
     .table-container {
       background: var(--card-bg);
       backdrop-filter: blur(20px);
@@ -494,8 +475,8 @@
       border-radius: 16px;
       border: 1px solid var(--card-border);
       box-shadow: var(--shadow-glass);
-      overflow-x: auto;
-      max-height: 380px;
+      overflow: visible; /* Diubah dari auto ke visible agar tidak terpotong saat dirender canvas */
+      width: 100%;
     }
 
     .student-table {
@@ -514,9 +495,6 @@
       letter-spacing: 0.5px;
       color: var(--text-muted);
       border-bottom: 1.5px solid var(--table-row-border);
-      position: sticky;
-      top: 0;
-      z-index: 10;
     }
 
     .student-table th.col-no { width: 45px; text-align: center; }
@@ -576,7 +554,6 @@
       font-size: 0.7rem;
     }
 
-    /* Footer & Social Media Icons yang Kompak */
     .glass-panel {
       background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(10px);
@@ -747,7 +724,7 @@
     </div>
 
     <!-- 3. Footer Kurniapedia -->
-    <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;">
+    <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding-top: 4px;">
         <div id="socialMediaRow" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
             <a href="https://instagram.com/kurniapedia" target="_blank" class="glass-panel kurnia-icon ig">
                 <i class="fa-brands fa-instagram"></i>
