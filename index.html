@@ -338,17 +338,15 @@
       gap: 16px;
     }
 
+    /* Top bar dibuat transparan/tanpa background kotak abu-abu */
     .top-bar {
-      background: var(--card-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      padding: 14px;
-      border-radius: 16px;
-      border: 1px solid var(--card-border);
+      background: transparent;
+      padding: 4px 2px;
       display: flex;
       flex-direction: column;
       gap: 10px;
-      box-shadow: var(--shadow-glass);
+      box-shadow: none;
+      border: none;
     }
 
     .panel-header {
@@ -463,14 +461,13 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Kontainer tabel dibersihkan dari border luar ganda agar menyatu rapi */
     .table-container {
       background: var(--card-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-radius: 16px;
-      border: none; /* Dihilangkan untuk mencegah dobel border */
-      box-shadow: none; /* Dihilangkan agar tidak ada sisa bayangan abu-abu tebal */
+      border: none;
+      box-shadow: none;
       overflow: hidden;
       width: 100%;
     }
