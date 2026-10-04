@@ -17,7 +17,6 @@
 
   <style>
     :root {
-      /* Tema Utama / Putra: Deep Slate & Sophisticated Midnight Indigo dengan Glassmorphism */
       --bg-main: #0b0f19;
       --bg-image: 
         radial-gradient(circle at 15% 15%, rgba(79, 70, 229, 0.15) 0%, transparent 45%),
@@ -35,7 +34,6 @@
       
       --card-bg: rgba(15, 23, 42, 0.75);
       --card-border: rgba(255, 255, 255, 0.08);
-      --card-border-glow: rgba(99, 102, 241, 0.3);
       --input-bg: rgba(30, 41, 59, 0.6);
       
       --table-header-bg: rgba(30, 41, 59, 0.85);
@@ -44,11 +42,9 @@
       --badge-border: rgba(99, 102, 241, 0.3);
       --badge-color: #818cf8;
       
-      --shadow-glass: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
-      --shadow-subtle: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+      --shadow-glass: 0 20px 40px -10px rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
     }
 
-    /* Tema Khusus Putri (Kelas XII E, F, G, H): Deep Amethyst & Rose Quartz Glass */
     body.theme-putri {
       --bg-main: #0f0711;
       --bg-image: 
@@ -67,7 +63,6 @@
       
       --card-bg: rgba(35, 15, 38, 0.75);
       --card-border: rgba(255, 255, 255, 0.08);
-      --card-border-glow: rgba(219, 39, 119, 0.3);
       --input-bg: rgba(54, 23, 58, 0.6);
       
       --table-header-bg: rgba(54, 23, 58, 0.85);
@@ -75,9 +70,6 @@
       --badge-bg: rgba(190, 24, 93, 0.15);
       --badge-border: rgba(244, 63, 94, 0.3);
       --badge-color: #f472b6;
-      
-      --shadow-glass: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
-      --shadow-subtle: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
     }
 
     * {
@@ -86,7 +78,7 @@
       padding: 0;
     }
 
-    html {
+    html, body {
       height: 100%;
     }
 
@@ -96,181 +88,144 @@
       background-image: var(--bg-image);
       background-attachment: fixed;
       background-size: cover;
-      min-height: 100vh;
       color: var(--text-main);
-      padding: 32px 16px;
+      padding: 16px 12px;
       display: flex;
       flex-direction: column;
-      position: relative;
+      justify-content: space-between; /* Menjaga distribusi vertikal optimal */
+      align-items: center;
       overflow-x: hidden;
       transition: background 0.6s ease, color 0.4s ease;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Efek Ambient Glow Background */
-    body::before {
-      content: '';
-      position: absolute;
-      top: -100px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 600px;
-      height: 300px;
-      background: var(--accent-primary);
-      opacity: 0.15;
-      filter: blur(120px);
-      z-index: -1;
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
     .container {
-      max-width: 820px;
-      margin: 0 auto;
+      max-width: 780px;
       width: 100%;
-      flex: 1 0 auto;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
-      padding-bottom: 16px;
+      justify-content: space-between;
+      flex: 1;
     }
 
-    /* Header Styling */
+    /* Header Styling yang Lebih Compact */
     .header {
       text-align: center;
-      margin-bottom: 28px;
-      padding-top: 8px;
+      margin-bottom: 14px;
     }
 
     .header .subtitle {
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       text-transform: uppercase;
-      letter-spacing: 3px;
+      letter-spacing: 2.5px;
       color: var(--accent-blue);
       font-weight: 600;
-      margin-bottom: 6px;
-      opacity: 0.9;
+      margin-bottom: 4px;
     }
 
     .header h1 {
-      font-size: 1.55rem;
+      font-size: 1.35rem;
       color: var(--text-title);
-      margin-bottom: 10px;
+      margin-bottom: 6px;
       font-weight: 700;
-      letter-spacing: -0.4px;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      letter-spacing: -0.3px;
     }
 
     .header-divider {
-      width: 48px;
-      height: 3px;
+      width: 36px;
+      height: 2.5px;
       background: var(--accent-gradient);
       margin: 0 auto;
-      border-radius: 6px;
-      box-shadow: 0 0 12px var(--accent-blue);
+      border-radius: 4px;
+      box-shadow: 0 0 10px var(--accent-blue);
     }
 
     #authSection, #loginSection {
       display: flex;
       flex-direction: column;
-      flex: 1 0 auto;
+      justify-content: center;
+      flex: 1;
     }
 
     #loginSection {
       display: none; 
     }
 
-    /* Glassmorphism Card Style */
+    /* Glassmorphism Card Style yang Proporsional & Efisien */
     .login-box {
-      max-width: 460px;
-      margin: 0 auto 20px auto;
+      max-width: 440px;
+      margin: 0 auto;
       width: 100%;
       background: var(--card-bg);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      padding: 36px 30px;
-      border-radius: 24px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 24px 22px;
+      border-radius: 20px;
       border: 1px solid var(--card-border);
       box-shadow: var(--shadow-glass);
       text-align: center;
       position: relative;
-      overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .login-box::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
     }
 
     .login-box i.icon-header {
-      font-size: 2.2rem;
+      font-size: 1.8rem;
       background: var(--accent-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 16px;
-      filter: drop-shadow(0 4px 12px rgba(79, 70, 229, 0.3));
+      margin-bottom: 10px;
     }
 
     .login-box h2 {
-      font-size: 1.25rem;
-      margin-bottom: 6px;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
       color: var(--text-title);
       font-weight: 700;
-      letter-spacing: -0.2px;
     }
 
     .login-box p {
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       color: var(--text-main);
-      margin-bottom: 24px;
-      line-height: 1.5;
+      margin-bottom: 16px;
+      line-height: 1.4;
     }
 
     .pin-input-group {
       position: relative;
-      max-width: 260px;
-      margin: 0 auto 16px auto;
+      max-width: 240px;
+      margin: 0 auto 12px auto;
     }
 
     .pin-input-group input {
       width: 100%;
-      padding: 12px 42px 12px 16px;
+      padding: 10px 38px 10px 14px;
       border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 14px;
+      border-radius: 12px;
       outline: none;
-      font-size: 1.15rem;
-      letter-spacing: 6px;
+      font-size: 1.05rem;
+      letter-spacing: 5px;
       text-align: center;
       background: var(--input-bg);
       color: var(--text-title);
       font-weight: 600;
       font-family: inherit;
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-      transition: all 0.25s ease;
     }
 
     .pin-input-group input:focus {
       border-color: var(--accent-blue);
-      box-shadow: 0 0 0 4px rgba(129, 140, 248, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.2);
-      background: rgba(30, 41, 59, 0.9);
+      box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.15);
     }
 
     .pin-toggle-btn {
       position: absolute;
-      right: 14px;
+      right: 12px;
       top: 50%;
       transform: translateY(-50%);
       background: none;
       border: none;
       color: var(--text-muted);
       cursor: pointer;
-      font-size: 0.9rem;
-      transition: color 0.2s ease;
+      font-size: 0.85rem;
     }
     
     .pin-toggle-btn:hover {
@@ -279,39 +234,37 @@
 
     .btn-login-submit {
       width: 100%;
-      max-width: 260px;
+      max-width: 240px;
       background: var(--accent-gradient);
       color: #ffffff;
       border: none;
-      padding: 12px 16px;
-      border-radius: 14px;
-      font-size: 0.85rem;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.8rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       font-family: inherit;
-      box-shadow: 0 8px 20px -4px rgba(79, 70, 229, 0.4);
+      box-shadow: 0 6px 16px -3px rgba(79, 70, 229, 0.4);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
+      transition: transform 0.2s ease;
     }
 
     .btn-login-submit:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 25px -4px rgba(79, 70, 229, 0.6);
-      filter: brightness(1.08);
+      transform: translateY(-1px);
     }
 
     .error-msg {
       color: #f43f5e;
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       font-weight: 500;
-      margin-top: 10px;
+      margin-top: 8px;
       display: none;
       background: rgba(244, 63, 94, 0.1);
-      padding: 6px 12px;
-      border-radius: 8px;
+      padding: 5px 10px;
+      border-radius: 6px;
       border: 1px solid rgba(244, 63, 94, 0.2);
     }
 
@@ -321,62 +274,64 @@
 
     @keyframes shake {
       0%, 100% { transform: translateX(0); }
-      20%, 60% { transform: translateX(-6px); }
-      40%, 80% { transform: translateX(6px); }
+      20%, 60% { transform: translateX(-5px); }
+      40%, 80% { transform: translateX(5px); }
     }
 
-    /* Class Selection Menu Styling */
+    /* Class Selection Menu Styling yang Lebih Padat */
     .class-group {
-      margin-bottom: 18px;
+      margin-bottom: 12px;
       text-align: left;
     }
 
+    .class-group:last-child {
+      margin-bottom: 0;
+    }
+
     .class-group-label {
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       font-weight: 600;
       color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 8px;
-      padding-left: 4px;
+      letter-spacing: 1.2px;
+      margin-bottom: 6px;
+      padding-left: 2px;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
     }
 
     .class-group-label i {
-      font-size: 0.65rem;
+      font-size: 0.6rem;
       color: var(--accent-blue);
     }
 
     .class-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
+      gap: 8px;
     }
 
     .btn-class-option {
       background: var(--input-bg);
       border: 1px solid rgba(255, 255, 255, 0.08);
       color: var(--text-title);
-      padding: 14px 6px;
-      border-radius: 14px;
-      font-size: 0.85rem;
+      padding: 10px 4px;
+      border-radius: 12px;
+      font-size: 0.78rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.2s ease;
       font-family: inherit;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      gap: 4px;
     }
 
     .btn-class-option i {
-      font-size: 1.05rem;
+      font-size: 0.95rem;
       color: var(--accent-blue);
-      transition: transform 0.25s ease;
     }
 
     .btn-class-option.putri-option i {
@@ -386,29 +341,26 @@
     .btn-class-option:hover {
       background: rgba(255, 255, 255, 0.1);
       border-color: var(--accent-blue);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-    }
-
-    .btn-class-option:hover i {
-      transform: scale(1.1);
+      transform: translateY(-2px);
     }
 
     .dashboard {
       display: none;
+      flex: 1;
+      width: 100%;
     }
 
     .top-bar {
       background: var(--card-bg);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      padding: 16px;
-      border-radius: 18px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 12px 14px;
+      border-radius: 16px;
       border: 1px solid var(--card-border);
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       box-shadow: var(--shadow-glass);
     }
 
@@ -420,74 +372,60 @@
     }
 
     .panel-header h2 {
-      font-size: 1.05rem;
+      font-size: 0.95rem;
       color: var(--text-title);
       font-weight: 700;
     }
 
     .download-date-tag {
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       color: var(--text-main);
       font-weight: 500;
-      padding: 4px 10px;
+      padding: 3px 8px;
       background: rgba(255, 255, 255, 0.05);
-      border-radius: 8px;
+      border-radius: 6px;
       border: 1px solid rgba(255, 255, 255, 0.08);
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
     }
 
     .panel-controls {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
     .action-buttons {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
-    .btn-change {
+    .btn-change, .btn-screenshot {
       background: rgba(255, 255, 255, 0.05);
       color: var(--accent-blue);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 0.72rem;
+      padding: 5px 10px;
+      border-radius: 16px;
+      font-size: 0.68rem;
       font-weight: 600;
       cursor: pointer;
       font-family: inherit;
       transition: all 0.2s ease;
-    }
-
-    .btn-change:hover {
-      background: var(--accent-blue);
-      color: #ffffff;
-      border-color: var(--accent-blue);
     }
 
     .btn-screenshot {
       background: rgba(79, 70, 229, 0.15);
-      color: var(--accent-blue);
-      border: 1px solid rgba(129, 140, 248, 0.3);
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 0.72rem;
-      font-weight: 600;
-      cursor: pointer;
-      font-family: inherit;
+      border-color: rgba(129, 140, 248, 0.3);
       display: flex;
       align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
+      gap: 5px;
     }
 
-    .btn-screenshot:hover {
+    .btn-change:hover, .btn-screenshot:hover {
       background: var(--accent-primary);
       color: #ffffff;
       border-color: var(--accent-primary);
@@ -496,48 +434,46 @@
     .search-box {
       position: relative;
       flex: 1;
-      max-width: 240px;
+      max-width: 220px;
     }
 
     .search-box i {
       position: absolute;
-      left: 12px;
+      left: 10px;
       top: 50%;
       transform: translateY(-50%);
       color: var(--text-muted);
-      font-size: 0.75rem;
+      font-size: 0.7rem;
     }
 
     .search-box input {
       width: 100%;
-      padding: 7px 12px 7px 32px;
+      padding: 5px 10px 5px 28px;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 20px;
+      border-radius: 16px;
       outline: none;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       background: var(--input-bg);
       color: var(--text-title);
       font-family: inherit;
-      transition: all 0.2s ease;
     }
 
     .search-box input:focus {
-      background: rgba(30, 41, 59, 0.9);
       border-color: var(--accent-blue);
       box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.15);
     }
 
     .loading {
       text-align: center;
-      padding: 35px 0;
+      padding: 25px 0;
       display: none;
     }
 
     .spinner {
       display: inline-block;
-      width: 28px;
-      height: 28px;
-      border: 2.5px solid rgba(255, 255, 255, 0.1);
+      width: 24px;
+      height: 24px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
       border-radius: 50%;
       border-top-color: var(--accent-blue);
       animation: spin 0.7s infinite linear;
@@ -548,60 +484,57 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* === TABEL DATA SISWA (PADAT & ELEGAN) === */
     .table-container {
       background: var(--card-bg);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border-radius: 18px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 16px;
       border: 1px solid var(--card-border);
       box-shadow: var(--shadow-glass);
       overflow-x: auto;
-      margin-bottom: 18px;
+      margin-bottom: 12px;
+      max-height: 55vh;
     }
 
     .student-table {
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       table-layout: fixed;
     }
 
     .student-table th {
       background: var(--table-header-bg);
-      padding: 9px 12px;
+      padding: 8px 10px;
       font-weight: 600;
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
+      letter-spacing: 0.5px;
       color: var(--text-muted);
       border-bottom: 1.5px solid var(--table-row-border);
       white-space: nowrap;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
-    .student-table th.col-no { width: 50px; text-align: center; }
-    .student-table th.col-nama { width: 50%; }
-    .student-table th.col-capaian { width: 45%; }
+    .student-table th.col-no { width: 45px; text-align: center; }
+    .student-table th.col-nama { width: 52%; }
+    .student-table th.col-capaian { width: 43%; }
 
     .student-table tr {
       border-bottom: 1px solid var(--table-row-border);
-      transition: background-color 0.15s ease;
-    }
-
-    .student-table tbody tr:last-child {
-      border-bottom: none;
     }
 
     .student-table tbody tr:hover {
-      background-color: rgba(255, 255, 255, 0.04);
+      background-color: rgba(255, 255, 255, 0.03);
     }
 
     .student-table td {
-      padding: 7px 12px;
+      padding: 6px 10px;
       color: var(--text-main);
       vertical-align: middle;
-      line-height: 1.3;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -611,241 +544,236 @@
 
     .no-badge {
       display: inline-block;
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       font-weight: 600;
       color: var(--badge-color);
       background: var(--badge-bg);
       border: 1px solid var(--badge-border);
-      padding: 2px 7px;
-      border-radius: 6px;
+      padding: 1px 6px;
+      border-radius: 4px;
     }
 
     .student-name {
       font-weight: 500;
-      font-size: 0.76rem;
+      font-size: 0.74rem;
       color: var(--text-title);
     }
 
     .capaian-tag {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      font-size: 0.74rem;
-      font-weight: 400;
+      gap: 5px;
+      font-size: 0.72rem;
       color: var(--text-title);
     }
 
     .capaian-tag i.fa-star { 
       color: var(--accent-green); 
-      font-size: 0.65rem;
-      filter: drop-shadow(0 0 6px rgba(45, 212, 191, 0.4));
+      font-size: 0.6rem;
     }
 
     .no-results {
       text-align: center;
-      padding: 35px 15px;
+      padding: 25px 10px;
       color: var(--text-muted);
-      font-size: 0.72rem;
+      font-size: 0.7rem;
     }
 
-    /* Footer & Social Media Icons */
+    /* Footer & Social Media */
     .glass-panel {
       background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.2);
     }
     
     .kurnia-icon {
-      width: 2.2rem;
-      height: 2.2rem;
+      width: 1.9rem;
+      height: 1.9rem;
       border-radius: 9999px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--text-muted);
-      font-size: 0.8rem;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      font-size: 0.75rem;
+      transition: all 0.2s ease;
       text-decoration: none;
     }
     
-    .kurnia-icon.ig:hover { color: #00f2fe; border-color: rgba(0, 242, 254, 0.5); background: rgba(0, 242, 254, 0.05); transform: translateY(-2px); }
-    .kurnia-icon.tt:hover { color: #bd00ff; border-color: rgba(189, 0, 255, 0.5); background: rgba(189, 0, 255, 0.05); transform: translateY(-2px); }
-    .kurnia-icon.yt:hover { color: #ff007f; border-color: rgba(255, 0, 127, 0.5); background: rgba(255, 0, 127, 0.05); transform: translateY(-2px); }
-    .kurnia-icon.wa:hover { color: #00ff87; border-color: rgba(0, 255, 135, 0.5); background: rgba(0, 255, 135, 0.05); transform: translateY(-2px); }
+    .kurnia-icon.ig:hover { color: #00f2fe; border-color: rgba(0, 242, 254, 0.5); background: rgba(0, 242, 254, 0.05); }
+    .kurnia-icon.tt:hover { color: #bd00ff; border-color: rgba(189, 0, 255, 0.5); background: rgba(189, 0, 255, 0.05); }
+    .kurnia-icon.yt:hover { color: #ff007f; border-color: rgba(255, 0, 127, 0.5); background: rgba(255, 0, 127, 0.05); }
+    .kurnia-icon.wa:hover { color: #00ff87; border-color: rgba(0, 255, 135, 0.5); background: rgba(0, 255, 135, 0.05); }
+
+    .footer-section {
+      width: 100%;
+      padding-top: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
   </style>
 </head>
 <body>
 
   <div class="container" id="exportArea">
     
-    <!-- 0. Halaman Login Angka (PIN Protection) -->
-    <div id="authSection">
-      <header class="header">
-        <div class="subtitle">Laporan Al Quran Kelas XII</div>
-        <h1 style="letter-spacing: 0.5px;">AKSES SISTEM</h1>
-        <div class="header-divider"></div>
-      </header>
+    <!-- Bagian Atas: Pembungkus Dinamis (Auth / Pilih Kelas / Dashboard) -->
+    <div style="display: flex; flex-direction: column; width: 100%;">
 
-      <div class="login-box" id="authCard">
-        <i class="fa-solid fa-shield-halved icon-header"></i>
-        <h2>VERIFIKASI PASSCODE</h2>
-        <p>Masukkan kode akses rahasia untuk membuka seluruh laporan progres siswa.</p>
-        
-        <div class="pin-input-group">
-          <input type="password" id="pinInput" inputmode="numeric" placeholder="••••" maxlength="10" onkeydown="handlePinKeyPress(event)">
-          <button type="button" class="pin-toggle-btn" onclick="togglePinVisibility()">
-            <i class="fa-regular fa-eye" id="toggleIcon"></i>
+      <!-- 0. Halaman Login Angka (PIN Protection) -->
+      <div id="authSection">
+        <header class="header">
+          <div class="subtitle">Laporan Al Quran Kelas XII</div>
+          <h1>AKSES SISTEM</h1>
+          <div class="header-divider"></div>
+        </header>
+
+        <div class="login-box" id="authCard">
+          <i class="fa-solid fa-shield-halved icon-header"></i>
+          <h2>VERIFIKASI PASSCODE</h2>
+          <p>Masukkan kode akses rahasia untuk membuka seluruh laporan progres siswa.</p>
+          
+          <div class="pin-input-group">
+            <input type="password" id="pinInput" inputmode="numeric" placeholder="••••" maxlength="10" onkeydown="handlePinKeyPress(event)">
+            <button type="button" class="pin-toggle-btn" onclick="togglePinVisibility()">
+              <i class="fa-regular fa-eye" id="toggleIcon"></i>
+            </button>
+          </div>
+          
+          <button type="button" class="btn-login-submit" onclick="checkAccessKey()">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i> LANJUTKAN MASUK
           </button>
-        </div>
-        
-        <button type="button" class="btn-login-submit" onclick="checkAccessKey()">
-          <i class="fa-solid fa-arrow-right-to-bracket"></i> LANJUTKAN MASUK
-        </button>
 
-        <div id="authErrorMsg" class="error-msg">
-          <i class="fa-solid fa-triangle-exclamation"></i> Kode akses salah. Periksa kembali passcode Anda.
-        </div>
-      </div>
-    </div>
-
-    <!-- 1. Form Pilih Kelas -->
-    <div id="loginSection">
-      <header class="header">
-        <div class="subtitle">Laporan Al Quran Kelas XII</div>
-        <h1>PILIH KELAS TUJUAN</h1>
-        <div class="header-divider"></div>
-      </header>
-
-      <div class="login-box">
-        <i class="fa-solid fa-graduation-cap icon-header"></i>
-        <h2>DAFTAR KELAS</h2>
-        <p>Silakan tentukan kelas yang ingin Anda tinjau rekam jejak progres hafalan Al-Qurannya.</p>
-        
-        <!-- Kelompok 1: Kelas Putra -->
-        <div class="class-group">
-          <div class="class-group-label"><i class="fa-solid fa-circle-chevron-right"></i> Kelas Putra</div>
-          <div class="class-grid">
-            <button type="button" class="btn-class-option" onclick="selectClass('XII A')">
-              <i class="fa-solid fa-user-graduate"></i> XII A
-            </button>
-            <button type="button" class="btn-class-option" onclick="selectClass('XII B')">
-              <i class="fa-solid fa-user-graduate"></i> XII B
-            </button>
-            <button type="button" class="btn-class-option" onclick="selectClass('XII C')">
-              <i class="fa-solid fa-user-graduate"></i> XII C
-            </button>
-            <button type="button" class="btn-class-option" onclick="selectClass('XII D')">
-              <i class="fa-solid fa-user-graduate"></i> XII D
-            </button>
-          </div>
-        </div>
-
-        <!-- Kelompok 2: Kelas Putri -->
-        <div class="class-group">
-          <div class="class-group-label"><i class="fa-solid fa-circle-chevron-right"></i> Kelas Putri</div>
-          <div class="class-grid">
-            <button type="button" class="btn-class-option putri-option" onclick="selectClass('XII E')">
-              <i class="fa-solid fa-user-graduate"></i> XII E
-            </button>
-            <button type="button" class="btn-class-option putri-option" onclick="selectClass('XII F')">
-              <i class="fa-solid fa-user-graduate"></i> XII F
-            </button>
-            <button type="button" class="btn-class-option putri-option" onclick="selectClass('XII G')">
-              <i class="fa-solid fa-user-graduate"></i> XII G
-            </button>
-            <button type="button" class="btn-class-option putri-option" onclick="selectClass('XII H')">
-              <i class="fa-solid fa-user-graduate"></i> XII H
-            </button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- 2. Dashboard Section -->
-    <div id="dashboardSection" class="dashboard">
-      <header class="header">
-        <div class="subtitle">Laporan Al Quran Kelas XII</div>
-        <h1>PROGRES SERTIFIKASI</h1>
-        <div class="header-divider"></div>
-      </header>
-
-      <!-- Panel Kelas dengan Susunan Sejajar -->
-      <div class="top-bar">
-        <div class="panel-header">
-          <h2 id="displayClassName">Kelas ...</h2>
-          <div class="download-date-tag">
-            <i class="fa-regular fa-calendar-days" style="color: var(--accent-blue);"></i>
-            <span id="displayDate">-- --- ----</span>
-          </div>
-        </div>
-
-        <div class="panel-controls">
-          <div class="action-buttons">
-            <button class="btn-change" onclick="resetClassSelection()" data-html2canvas-ignore="true">
-              PILIH KELAS
-            </button>
-            <button class="btn-screenshot" onclick="downloadImage(event)" data-html2canvas-ignore="true">
-              <i class="fa-solid fa-download"></i> UNDUH GAMBAR
-            </button>
-          </div>
-
-          <div class="search-box" data-html2canvas-ignore="true">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="searchInput" placeholder="Cari nama..." onkeyup="filterData()">
+          <div id="authErrorMsg" class="error-msg">
+            <i class="fa-solid fa-triangle-exclamation"></i> Kode akses salah. Periksa kembali passcode Anda.
           </div>
         </div>
       </div>
 
-      <!-- Loading State -->
-      <div id="loading" class="loading">
-        <div class="spinner"></div>
-        <p style="margin-top: 10px; color: var(--text-muted); font-size: 0.72rem;">Memuat data siswa...</p>
+      <!-- 1. Form Pilih Kelas -->
+      <div id="loginSection">
+        <header class="header">
+          <div class="subtitle">Laporan Al Quran Kelas XII</div>
+          <h1>PILIH KELAS TUJUAN</h1>
+          <div class="header-divider"></div>
+        </header>
+
+        <div class="login-box">
+          <i class="fa-solid fa-graduation-cap icon-header"></i>
+          <h2>DAFTAR KELAS</h2>
+          <p>Silakan tentukan kelas yang ingin Anda tinjau rekam jejak progres hafalan Al-Qurannya.</p>
+          
+          <!-- Kelompok 1: Kelas Putra -->
+          <div class="class-group">
+            <div class="class-group-label"><i class="fa-solid fa-circle-chevron-right"></i> Kelas Putra</div>
+            <div class="class-grid">
+              <button type="button" class="btn-class-option" onclick="selectClass('XII A')">
+                <i class="fa-solid fa-user-graduate"></i> XII A
+              </button>
+              <button type="button" class="btn-class-option" onclick="selectClass('XII B')">
+                <i class="fa-solid fa-user-graduate"></i> XII B
+              </button>
+              <button type="button" class="btn-class-option" onclick="selectClass('XII C')">
+                <i class="fa-solid fa-user-graduate"></i> XII C
+              </button>
+              <button type="button" class="btn-class-option" onclick="selectClass('XII D')">
+                <i class="fa-solid fa-user-graduate"></i> XII D
+              </button>
+            </div>
+          </div>
+
+          <!-- Kelompok 2: Kelas Putri -->
+          <div class="class-group">
+            <div class="class-group-label"><i class="fa-solid fa-circle-chevron-right"></i> Kelas Putri</div>
+            <div class="class-grid">
+              <button type="button" class="btn-class-option putri-option" onclick="selectClass('XII E')">
+                <i class="fa-solid fa-user-graduate"></i> XII E
+              </button>
+              <button type="button" class="btn-class-option putri-option" onclick="selectClass('XII F')">
+                <i class="fa-solid fa-user-graduate"></i> XII F
+              </button>
+              <button type="button" class="btn-class-option putri-option" onclick="selectClass('XII G')">
+                <i class="fa-solid fa-user-graduate"></i> XII G
+              </button>
+              <button type="button" class="btn-class-option putri-option" onclick="selectClass('XII H')">
+                <i class="fa-solid fa-user-graduate"></i> XII H
+              </button>
+            </div>
+          </div>
+
+        </div>
       </div>
 
-      <!-- Table Container -->
-      <div id="tableContainer" class="table-container">
-        <table class="student-table">
-          <thead>
-            <tr>
-              <th class="col-no">No</th>
-              <th class="col-nama">Nama Siswa</th>
-              <th class="col-capaian">Capaian Akhir</th>
-            </tr>
-          </thead>
-          <tbody id="tableBody">
-            <!-- Data dimasukkan via JS -->
-          </tbody>
-        </table>
+      <!-- 2. Dashboard Section -->
+      <div id="dashboardSection" class="dashboard">
+        <header class="header">
+          <div class="subtitle">Laporan Al Quran Kelas XII</div>
+          <h1>PROGRES SERTIFIKASI</h1>
+          <div class="header-divider"></div>
+        </header>
+
+        <div class="top-bar">
+          <div class="panel-header">
+            <h2 id="displayClassName">Kelas ...</h2>
+            <div class="download-date-tag">
+              <i class="fa-regular fa-calendar-days" style="color: var(--accent-blue);"></i>
+              <span id="displayDate">-- --- ----</span>
+            </div>
+          </div>
+
+          <div class="panel-controls">
+            <div class="action-buttons">
+              <button class="btn-change" onclick="resetClassSelection()" data-html2canvas-ignore="true">
+                PILIH KELAS
+              </button>
+              <button class="btn-screenshot" onclick="downloadImage(event)" data-html2canvas-ignore="true">
+                <i class="fa-solid fa-download"></i> UNDUH GAMBAR
+              </button>
+            </div>
+
+            <div class="search-box" data-html2canvas-ignore="true">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="searchInput" placeholder="Cari nama..." onkeyup="filterData()">
+            </div>
+          </div>
+        </div>
+
+        <div id="loading" class="loading">
+          <div class="spinner"></div>
+          <p style="margin-top: 8px; color: var(--text-muted); font-size: 0.68rem;">Memuat data siswa...</p>
+        </div>
+
+        <div id="tableContainer" class="table-container">
+          <table class="student-table">
+            <thead>
+              <tr>
+                <th class="col-no">No</th>
+                <th class="col-nama">Nama Siswa</th>
+                <th class="col-capaian">Capaian Akhir</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <!-- Data dimasukkan via JS -->
+            </tbody>
+          </table>
+        </div>
       </div>
+
     </div>
 
     <!-- 3. Footer Kurniapedia -->
-    <div style="width: 100%; padding: 18px 0 6px 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; margin-top: auto;">
-        
-        <!-- Social Media Icon Bar -->
-        <div id="socialMediaRow" style="display: flex; align-items: center; justify-content: center; gap: 12px;">
-            <a href="https://instagram.com/kurniapedia" target="_blank" class="glass-panel kurnia-icon ig">
-                <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://tiktok.com/@kurniapedia" target="_blank" class="glass-panel kurnia-icon tt">
-                <i class="fa-brands fa-tiktok"></i>
-            </a>
-            <a href="https://www.youtube.com/@kurniapedia" target="_blank" class="glass-panel kurnia-icon yt">
-                <i class="fa-brands fa-youtube"></i>
-            </a>
-            <a href="https://wa.me/+6285870906050" target="_blank" class="glass-panel kurnia-icon wa">
-                <i class="fa-brands fa-whatsapp"></i>
-            </a>
-        </div>
-
-        <!-- Footer -->
-        <footer style="text-align: center; font-size: 11px; color: var(--text-muted); font-family: sans-serif;">
-            <p>Crafted with ♥ by <span style="font-weight: 500; color: var(--text-main);">Kurniapedia</span> 2026</p>
-        </footer>
-
+    <div class="footer-section">
+      <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+        <a href="https://instagram.com/kurniapedia" target="_blank" class="glass-panel kurnia-icon ig"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://tiktok.com/@kurniapedia" target="_blank" class="glass-panel kurnia-icon tt"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="https://www.youtube.com/@kurniapedia" target="_blank" class="glass-panel kurnia-icon yt"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://wa.me/+6285870906050" target="_blank" class="glass-panel kurnia-icon wa"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+      <footer style="text-align: center; font-size: 10.5px; color: var(--text-muted); font-family: sans-serif;">
+        <p>Crafted with ♥ by <span style="font-weight: 500; color: var(--text-main);">Kurniapedia</span> 2026</p>
+      </footer>
     </div>
 
   </div>
@@ -898,12 +826,7 @@
 
     function getFormattedDate() {
       const now = new Date();
-      const options = { 
-        weekday: 'long', 
-        day: 'numeric', 
-        month: 'long', 
-        year: 'numeric' 
-      };
+      const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
       return now.toLocaleDateString('id-ID', options);
     }
 
@@ -967,7 +890,6 @@
       allData = data;
       document.getElementById('loading').style.display = 'none';
       document.getElementById('tableContainer').style.display = 'block';
-      
       displayFilteredData(allData);
     }
 
@@ -980,7 +902,7 @@
           <tr>
             <td colspan="3">
               <div class="no-results">
-                <i class="fa-regular fa-folder-open" style="font-size: 1.4rem; margin-bottom: 8px; color: var(--accent-blue);"></i>
+                <i class="fa-regular fa-folder-open" style="font-size: 1.2rem; margin-bottom: 6px; color: var(--accent-blue);"></i>
                 <p>Tidak ada data siswa untuk kelas ini.</p>
               </div>
             </td>
@@ -991,12 +913,8 @@
       data.forEach(item => {
         const row = document.createElement('tr');
         row.innerHTML = `
-          <td class="td-no">
-            <span class="no-badge">${item.no || '-'}</span>
-          </td>
-          <td>
-            <span class="student-name">${item.nama || '-'}</span>
-          </td>
+          <td class="td-no"><span class="no-badge">${item.no || '-'}</span></td>
+          <td><span class="student-name">${item.nama || '-'}</span></td>
           <td>
             <div class="capaian-tag">
               <i class="fa-solid fa-star"></i>
@@ -1023,9 +941,9 @@
       tableBody.innerHTML = `
         <tr>
           <td colspan="3">
-            <div style="text-align: center; color: #f43f5e; background: rgba(244, 63, 94, 0.08); border: 1px solid rgba(244, 63, 94, 0.2); padding: 12px; border-radius: 10px; margin: 12px;">
-              <i class="fa-solid fa-triangle-exclamation" style="font-size: 1rem; margin-bottom: 4px;"></i>
-              <p style="font-weight: 500; font-size: 0.74rem;">${message}</p>
+            <div style="text-align: center; color: #f43f5e; background: rgba(244, 63, 94, 0.08); border: 1px solid rgba(244, 63, 94, 0.2); padding: 10px; border-radius: 8px; margin: 8px;">
+              <i class="fa-solid fa-triangle-exclamation" style="font-size: 0.9rem; margin-bottom: 2px;"></i>
+              <p style="font-weight: 500; font-size: 0.72rem;">${message}</p>
             </div>
           </td>
         </tr>
@@ -1050,8 +968,8 @@
           useCORS: true,
           logging: false,
           allowTaint: true,
-          windowWidth: exportArea.scrollWidth + 30,
-          windowHeight: exportArea.scrollHeight + 40 
+          windowWidth: exportArea.scrollWidth + 20,
+          windowHeight: exportArea.scrollHeight + 20 
         });
 
         const fileName = `Laporan_Hafalan_${currentClass.replace(/\s+/g, '_')}.png`;
