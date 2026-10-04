@@ -463,14 +463,14 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Tabel dibuat seragam tanpa sisa border ganda/garis abu */
+    /* Kontainer tabel dibersihkan dari border luar ganda agar menyatu rapi */
     .table-container {
       background: var(--card-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-radius: 16px;
-      border: 1px solid var(--card-border);
-      box-shadow: var(--shadow-glass);
+      border: none; /* Dihilangkan untuk mencegah dobel border */
+      box-shadow: none; /* Dihilangkan agar tidak ada sisa bayangan abu-abu tebal */
       overflow: hidden;
       width: 100%;
     }
@@ -481,6 +481,9 @@
       text-align: left;
       font-size: 0.72rem;
       background: transparent;
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      overflow: hidden;
     }
 
     .student-table th {
