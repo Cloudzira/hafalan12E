@@ -17,6 +17,7 @@
 
   <style>
     :root {
+      /* Tema Utama / Putra: Deep Slate & Sophisticated Midnight Indigo dengan Glassmorphism */
       --bg-main: #0b0f19;
       --bg-image: 
         radial-gradient(circle at 15% 15%, rgba(79, 70, 229, 0.15) 0%, transparent 45%),
@@ -34,6 +35,7 @@
       
       --card-bg: rgba(15, 23, 42, 0.75);
       --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-glow: rgba(99, 102, 241, 0.3);
       --input-bg: rgba(30, 41, 59, 0.6);
       
       --table-header-bg: rgba(30, 41, 59, 0.85);
@@ -42,9 +44,10 @@
       --badge-border: rgba(99, 102, 241, 0.3);
       --badge-color: #818cf8;
       
-      --shadow-glass: 0 20px 40px -10px rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
+      --shadow-glass: 0 20px 40px -12px rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
     }
 
+    /* Tema Khusus Putri (Kelas XII E, F, G, H): Deep Amethyst & Rose Quartz Glass */
     body.theme-putri {
       --bg-main: #0f0711;
       --bg-image: 
@@ -63,6 +66,7 @@
       
       --card-bg: rgba(35, 15, 38, 0.75);
       --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-glow: rgba(219, 39, 119, 0.3);
       --input-bg: rgba(54, 23, 58, 0.6);
       
       --table-header-bg: rgba(54, 23, 58, 0.85);
@@ -70,6 +74,8 @@
       --badge-bg: rgba(190, 24, 93, 0.15);
       --badge-border: rgba(244, 63, 94, 0.3);
       --badge-color: #f472b6;
+      
+      --shadow-glass: 0 20px 40px -12px rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
     }
 
     * {
@@ -80,6 +86,7 @@
 
     html, body {
       height: 100%;
+      overflow-x: hidden;
     }
 
     body {
@@ -89,30 +96,27 @@
       background-attachment: fixed;
       background-size: cover;
       color: var(--text-main);
-      padding: 16px 12px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between; /* Menjaga distribusi vertikal optimal */
+      justify-content: center; /* Mengunci elemen agar simetris di tengah layar secara vertikal */
       align-items: center;
-      overflow-x: hidden;
+      padding: 16px;
       transition: background 0.6s ease, color 0.4s ease;
       -webkit-font-smoothing: antialiased;
     }
 
     .container {
-      max-width: 780px;
+      max-width: 480px;
       width: 100%;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      flex: 1;
+      gap: 16px;
     }
 
-    /* Header Styling yang Lebih Compact */
+    /* Header Styling yang Lebih Compact & Profesional */
     .header {
       text-align: center;
-      margin-bottom: 14px;
     }
 
     .header .subtitle {
@@ -122,6 +126,7 @@
       color: var(--accent-blue);
       font-weight: 600;
       margin-bottom: 4px;
+      opacity: 0.9;
     }
 
     .header h1 {
@@ -144,28 +149,36 @@
     #authSection, #loginSection {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      flex: 1;
+      width: 100%;
     }
 
     #loginSection {
       display: none; 
     }
 
-    /* Glassmorphism Card Style yang Proporsional & Efisien */
+    /* Glassmorphism Card Style yang Efisien */
     .login-box {
-      max-width: 440px;
-      margin: 0 auto;
       width: 100%;
       background: var(--card-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      padding: 24px 22px;
+      padding: 24px 20px;
       border-radius: 20px;
       border: 1px solid var(--card-border);
       box-shadow: var(--shadow-glass);
       text-align: center;
       position: relative;
+      overflow: hidden;
+    }
+
+    .login-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
     }
 
     .login-box i.icon-header {
@@ -174,6 +187,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 10px;
+      filter: drop-shadow(0 4px 10px rgba(79, 70, 229, 0.3));
     }
 
     .login-box h2 {
@@ -186,14 +200,14 @@
     .login-box p {
       font-size: 0.78rem;
       color: var(--text-main);
-      margin-bottom: 16px;
+      margin-bottom: 18px;
       line-height: 1.4;
     }
 
     .pin-input-group {
       position: relative;
       max-width: 240px;
-      margin: 0 auto 12px auto;
+      margin: 0 auto 14px auto;
     }
 
     .pin-input-group input {
@@ -209,11 +223,13 @@
       color: var(--text-title);
       font-weight: 600;
       font-family: inherit;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: all 0.25s ease;
     }
 
     .pin-input-group input:focus {
       border-color: var(--accent-blue);
-      box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.15);
+      box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     .pin-toggle-btn {
@@ -226,10 +242,6 @@
       color: var(--text-muted);
       cursor: pointer;
       font-size: 0.85rem;
-    }
-    
-    .pin-toggle-btn:hover {
-      color: var(--text-title);
     }
 
     .btn-login-submit {
@@ -278,7 +290,7 @@
       40%, 80% { transform: translateX(5px); }
     }
 
-    /* Class Selection Menu Styling yang Lebih Padat */
+    /* Class Selection Menu Styling yang Lebih Rapat & Efisien */
     .class-group {
       margin-bottom: 12px;
       text-align: left;
@@ -318,10 +330,10 @@
       color: var(--text-title);
       padding: 10px 4px;
       border-radius: 12px;
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       font-family: inherit;
       display: flex;
       flex-direction: column;
@@ -346,7 +358,6 @@
 
     .dashboard {
       display: none;
-      flex: 1;
       width: 100%;
     }
 
@@ -354,7 +365,7 @@
       background: var(--card-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      padding: 12px 14px;
+      padding: 14px;
       border-radius: 16px;
       border: 1px solid var(--card-border);
       margin-bottom: 12px;
@@ -368,11 +379,10 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      width: 100%;
     }
 
     .panel-header h2 {
-      font-size: 0.95rem;
+      font-size: 0.98rem;
       color: var(--text-title);
       font-weight: 700;
     }
@@ -394,7 +404,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
     }
 
@@ -405,9 +415,6 @@
     }
 
     .btn-change, .btn-screenshot {
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--accent-blue);
-      border: 1px solid rgba(255, 255, 255, 0.1);
       padding: 5px 10px;
       border-radius: 16px;
       font-size: 0.68rem;
@@ -417,24 +424,25 @@
       transition: all 0.2s ease;
     }
 
-    .btn-screenshot {
-      background: rgba(79, 70, 229, 0.15);
-      border-color: rgba(129, 140, 248, 0.3);
-      display: flex;
-      align-items: center;
-      gap: 5px;
+    .btn-change {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--accent-blue);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .btn-change:hover, .btn-screenshot:hover {
-      background: var(--accent-primary);
-      color: #ffffff;
-      border-color: var(--accent-primary);
+    .btn-screenshot {
+      background: rgba(79, 70, 229, 0.15);
+      color: var(--accent-blue);
+      border: 1px solid rgba(129, 140, 248, 0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
     }
 
     .search-box {
       position: relative;
       flex: 1;
-      max-width: 220px;
+      max-width: 200px;
     }
 
     .search-box i {
@@ -448,7 +456,7 @@
 
     .search-box input {
       width: 100%;
-      padding: 5px 10px 5px 28px;
+      padding: 6px 10px 6px 28px;
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 16px;
       outline: none;
@@ -458,14 +466,9 @@
       font-family: inherit;
     }
 
-    .search-box input:focus {
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.15);
-    }
-
     .loading {
       text-align: center;
-      padding: 25px 0;
+      padding: 24px 0;
       display: none;
     }
 
@@ -492,8 +495,7 @@
       border: 1px solid var(--card-border);
       box-shadow: var(--shadow-glass);
       overflow-x: auto;
-      margin-bottom: 12px;
-      max-height: 55vh;
+      max-height: 380px;
     }
 
     .student-table {
@@ -501,7 +503,6 @@
       border-collapse: collapse;
       text-align: left;
       font-size: 0.72rem;
-      table-layout: fixed;
     }
 
     .student-table th {
@@ -513,31 +514,27 @@
       letter-spacing: 0.5px;
       color: var(--text-muted);
       border-bottom: 1.5px solid var(--table-row-border);
-      white-space: nowrap;
       position: sticky;
       top: 0;
       z-index: 10;
     }
 
     .student-table th.col-no { width: 45px; text-align: center; }
-    .student-table th.col-nama { width: 52%; }
-    .student-table th.col-capaian { width: 43%; }
+    .student-table th.col-nama { width: 55%; }
+    .student-table th.col-capaian { width: 40%; }
 
     .student-table tr {
       border-bottom: 1px solid var(--table-row-border);
     }
 
     .student-table tbody tr:hover {
-      background-color: rgba(255, 255, 255, 0.03);
+      background-color: rgba(255, 255, 255, 0.04);
     }
 
     .student-table td {
       padding: 6px 10px;
       color: var(--text-main);
       vertical-align: middle;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
     }
 
     .td-no { text-align: center; }
@@ -574,12 +571,12 @@
 
     .no-results {
       text-align: center;
-      padding: 25px 10px;
+      padding: 24px 10px;
       color: var(--text-muted);
       font-size: 0.7rem;
     }
 
-    /* Footer & Social Media */
+    /* Footer & Social Media Icons yang Kompak */
     .glass-panel {
       background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(10px);
@@ -590,190 +587,184 @@
     .kurnia-icon {
       width: 1.9rem;
       height: 1.9rem;
-      border-radius: 9999px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--text-muted);
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       transition: all 0.2s ease;
       text-decoration: none;
     }
     
-    .kurnia-icon.ig:hover { color: #00f2fe; border-color: rgba(0, 242, 254, 0.5); background: rgba(0, 242, 254, 0.05); }
-    .kurnia-icon.tt:hover { color: #bd00ff; border-color: rgba(189, 0, 255, 0.5); background: rgba(189, 0, 255, 0.05); }
-    .kurnia-icon.yt:hover { color: #ff007f; border-color: rgba(255, 0, 127, 0.5); background: rgba(255, 0, 127, 0.05); }
-    .kurnia-icon.wa:hover { color: #00ff87; border-color: rgba(0, 255, 135, 0.5); background: rgba(0, 255, 135, 0.05); }
-
-    .footer-section {
-      width: 100%;
-      padding-top: 8px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
+    .kurnia-icon.ig:hover { color: #00f2fe; border-color: rgba(0, 242, 254, 0.5); }
+    .kurnia-icon.tt:hover { color: #bd00ff; border-color: rgba(189, 0, 255, 0.5); }
+    .kurnia-icon.yt:hover { color: #ff007f; border-color: rgba(255, 0, 127, 0.5); }
+    .kurnia-icon.wa:hover { color: #00ff87; border-color: rgba(0, 255, 135, 0.5); }
   </style>
 </head>
 <body>
 
   <div class="container" id="exportArea">
     
-    <!-- Bagian Atas: Pembungkus Dinamis (Auth / Pilih Kelas / Dashboard) -->
-    <div style="display: flex; flex-direction: column; width: 100%;">
+    <!-- 0. Halaman Login Angka (PIN Protection) -->
+    <div id="authSection">
+      <header class="header">
+        <div class="subtitle">Laporan Al Quran Kelas XII</div>
+        <h1>AKSES SISTEM</h1>
+        <div class="header-divider"></div>
+      </header>
 
-      <!-- 0. Halaman Login Angka (PIN Protection) -->
-      <div id="authSection">
-        <header class="header">
-          <div class="subtitle">Laporan Al Quran Kelas XII</div>
-          <h1>AKSES SISTEM</h1>
-          <div class="header-divider"></div>
-        </header>
+      <div class="login-box" id="authCard">
+        <i class="fa-solid fa-shield-halved icon-header"></i>
+        <h2>VERIFIKASI PASSCODE</h2>
+        <p>Masukkan kode akses rahasia untuk membuka laporan progres.</p>
+        
+        <div class="pin-input-group">
+          <input type="password" id="pinInput" inputmode="numeric" placeholder="••••" maxlength="10" onkeydown="handlePinKeyPress(event)">
+          <button type="button" class="pin-toggle-btn" onclick="togglePinVisibility()">
+            <i class="fa-regular fa-eye" id="toggleIcon"></i>
+          </button>
+        </div>
+        
+        <button type="button" class="btn-login-submit" onclick="checkAccessKey()">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> LANJUTKAN MASUK
+        </button>
 
-        <div class="login-box" id="authCard">
-          <i class="fa-solid fa-shield-halved icon-header"></i>
-          <h2>VERIFIKASI PASSCODE</h2>
-          <p>Masukkan kode akses rahasia untuk membuka seluruh laporan progres siswa.</p>
-          
-          <div class="pin-input-group">
-            <input type="password" id="pinInput" inputmode="numeric" placeholder="••••" maxlength="10" onkeydown="handlePinKeyPress(event)">
-            <button type="button" class="pin-toggle-btn" onclick="togglePinVisibility()">
-              <i class="fa-regular fa-eye" id="toggleIcon"></i>
+        <div id="authErrorMsg" class="error-msg">
+          <i class="fa-solid fa-triangle-exclamation"></i> Kode akses salah.
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. Form Pilih Kelas -->
+    <div id="loginSection">
+      <header class="header">
+        <div class="subtitle">Laporan Al Quran Kelas XII</div>
+        <h1>PILIH KELAS TUJUAN</h1>
+        <div class="header-divider"></div>
+      </header>
+
+      <div class="login-box">
+        <i class="fa-solid fa-graduation-cap icon-header"></i>
+        <h2>DAFTAR KELAS</h2>
+        <p>Pilih kelas yang ingin ditinjau rekam jejak progres hafalannya.</p>
+        
+        <!-- Kelompok 1: Kelas Putra -->
+        <div class="class-group">
+          <div class="class-group-label"><i class="fa-solid fa-circle-chevron-right"></i> Kelas Putra</div>
+          <div class="class-grid">
+            <button type="button" class="btn-class-option" onclick="selectClass('XII A')">
+              <i class="fa-solid fa-user-graduate"></i> XII A
+            </button>
+            <button type="button" class="btn-class-option" onclick="selectClass('XII B')">
+              <i class="fa-solid fa-user-graduate"></i> XII B
+            </button>
+            <button type="button" class="btn-class-option" onclick="selectClass('XII C')">
+              <i class="fa-solid fa-user-graduate"></i> XII C
+            </button>
+            <button type="button" class="btn-class-option" onclick="selectClass('XII D')">
+              <i class="fa-solid fa-user-graduate"></i> XII D
             </button>
           </div>
-          
-          <button type="button" class="btn-login-submit" onclick="checkAccessKey()">
-            <i class="fa-solid fa-arrow-right-to-bracket"></i> LANJUTKAN MASUK
-          </button>
+        </div>
 
-          <div id="authErrorMsg" class="error-msg">
-            <i class="fa-solid fa-triangle-exclamation"></i> Kode akses salah. Periksa kembali passcode Anda.
+        <!-- Kelompok 2: Kelas Putri -->
+        <div class="class-group">
+          <div class="class-group-label"><i class="fa-solid fa-circle-chevron-right"></i> Kelas Putri</div>
+          <div class="class-grid">
+            <button type="button" class="btn-class-option putri-option" onclick="selectClass('XII E')">
+              <i class="fa-solid fa-user-graduate"></i> XII E
+            </button>
+            <button type="button" class="btn-class-option putri-option" onclick="selectClass('XII F')">
+              <i class="fa-solid fa-user-graduate"></i> XII F
+            </button>
+            <button type="button" class="btn-class-option putri-option" onclick="selectClass('XII G')">
+              <i class="fa-solid fa-user-graduate"></i> XII G
+            </button>
+            <button type="button" class="btn-class-option putri-option" onclick="selectClass('XII H')">
+              <i class="fa-solid fa-user-graduate"></i> XII H
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 2. Dashboard Section -->
+    <div id="dashboardSection" class="dashboard">
+      <header class="header">
+        <div class="subtitle">Laporan Al Quran Kelas XII</div>
+        <h1>PROGRES SERTIFIKASI</h1>
+        <div class="header-divider"></div>
+      </header>
+
+      <div class="top-bar">
+        <div class="panel-header">
+          <h2 id="displayClassName">Kelas ...</h2>
+          <div class="download-date-tag">
+            <i class="fa-regular fa-calendar-days" style="color: var(--accent-blue);"></i>
+            <span id="displayDate">-- --- ----</span>
+          </div>
+        </div>
+
+        <div class="panel-controls">
+          <div class="action-buttons">
+            <button class="btn-change" onclick="resetClassSelection()" data-html2canvas-ignore="true">
+              GANTI KELAS
+            </button>
+            <button class="btn-screenshot" onclick="downloadImage(event)" data-html2canvas-ignore="true">
+              <i class="fa-solid fa-download"></i> UNDUH
+            </button>
+          </div>
+
+          <div class="search-box" data-html2canvas-ignore="true">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Cari nama..." onkeyup="filterData()">
           </div>
         </div>
       </div>
 
-      <!-- 1. Form Pilih Kelas -->
-      <div id="loginSection">
-        <header class="header">
-          <div class="subtitle">Laporan Al Quran Kelas XII</div>
-          <h1>PILIH KELAS TUJUAN</h1>
-          <div class="header-divider"></div>
-        </header>
-
-        <div class="login-box">
-          <i class="fa-solid fa-graduation-cap icon-header"></i>
-          <h2>DAFTAR KELAS</h2>
-          <p>Silakan tentukan kelas yang ingin Anda tinjau rekam jejak progres hafalan Al-Qurannya.</p>
-          
-          <!-- Kelompok 1: Kelas Putra -->
-          <div class="class-group">
-            <div class="class-group-label"><i class="fa-solid fa-circle-chevron-right"></i> Kelas Putra</div>
-            <div class="class-grid">
-              <button type="button" class="btn-class-option" onclick="selectClass('XII A')">
-                <i class="fa-solid fa-user-graduate"></i> XII A
-              </button>
-              <button type="button" class="btn-class-option" onclick="selectClass('XII B')">
-                <i class="fa-solid fa-user-graduate"></i> XII B
-              </button>
-              <button type="button" class="btn-class-option" onclick="selectClass('XII C')">
-                <i class="fa-solid fa-user-graduate"></i> XII C
-              </button>
-              <button type="button" class="btn-class-option" onclick="selectClass('XII D')">
-                <i class="fa-solid fa-user-graduate"></i> XII D
-              </button>
-            </div>
-          </div>
-
-          <!-- Kelompok 2: Kelas Putri -->
-          <div class="class-group">
-            <div class="class-group-label"><i class="fa-solid fa-circle-chevron-right"></i> Kelas Putri</div>
-            <div class="class-grid">
-              <button type="button" class="btn-class-option putri-option" onclick="selectClass('XII E')">
-                <i class="fa-solid fa-user-graduate"></i> XII E
-              </button>
-              <button type="button" class="btn-class-option putri-option" onclick="selectClass('XII F')">
-                <i class="fa-solid fa-user-graduate"></i> XII F
-              </button>
-              <button type="button" class="btn-class-option putri-option" onclick="selectClass('XII G')">
-                <i class="fa-solid fa-user-graduate"></i> XII G
-              </button>
-              <button type="button" class="btn-class-option putri-option" onclick="selectClass('XII H')">
-                <i class="fa-solid fa-user-graduate"></i> XII H
-              </button>
-            </div>
-          </div>
-
-        </div>
+      <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p style="margin-top: 8px; color: var(--text-muted); font-size: 0.68rem;">Memuat data siswa...</p>
       </div>
 
-      <!-- 2. Dashboard Section -->
-      <div id="dashboardSection" class="dashboard">
-        <header class="header">
-          <div class="subtitle">Laporan Al Quran Kelas XII</div>
-          <h1>PROGRES SERTIFIKASI</h1>
-          <div class="header-divider"></div>
-        </header>
-
-        <div class="top-bar">
-          <div class="panel-header">
-            <h2 id="displayClassName">Kelas ...</h2>
-            <div class="download-date-tag">
-              <i class="fa-regular fa-calendar-days" style="color: var(--accent-blue);"></i>
-              <span id="displayDate">-- --- ----</span>
-            </div>
-          </div>
-
-          <div class="panel-controls">
-            <div class="action-buttons">
-              <button class="btn-change" onclick="resetClassSelection()" data-html2canvas-ignore="true">
-                PILIH KELAS
-              </button>
-              <button class="btn-screenshot" onclick="downloadImage(event)" data-html2canvas-ignore="true">
-                <i class="fa-solid fa-download"></i> UNDUH GAMBAR
-              </button>
-            </div>
-
-            <div class="search-box" data-html2canvas-ignore="true">
-              <i class="fa-solid fa-magnifying-glass"></i>
-              <input type="text" id="searchInput" placeholder="Cari nama..." onkeyup="filterData()">
-            </div>
-          </div>
-        </div>
-
-        <div id="loading" class="loading">
-          <div class="spinner"></div>
-          <p style="margin-top: 8px; color: var(--text-muted); font-size: 0.68rem;">Memuat data siswa...</p>
-        </div>
-
-        <div id="tableContainer" class="table-container">
-          <table class="student-table">
-            <thead>
-              <tr>
-                <th class="col-no">No</th>
-                <th class="col-nama">Nama Siswa</th>
-                <th class="col-capaian">Capaian Akhir</th>
-              </tr>
-            </thead>
-            <tbody id="tableBody">
-              <!-- Data dimasukkan via JS -->
-            </tbody>
-          </table>
-        </div>
+      <div id="tableContainer" class="table-container">
+        <table class="student-table">
+          <thead>
+            <tr>
+              <th class="col-no">No</th>
+              <th class="col-nama">Nama Siswa</th>
+              <th class="col-capaian">Capaian Akhir</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- Data dimasukkan via JS -->
+          </tbody>
+        </table>
       </div>
-
     </div>
 
     <!-- 3. Footer Kurniapedia -->
-    <div class="footer-section">
-      <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-        <a href="https://instagram.com/kurniapedia" target="_blank" class="glass-panel kurnia-icon ig"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://tiktok.com/@kurniapedia" target="_blank" class="glass-panel kurnia-icon tt"><i class="fa-brands fa-tiktok"></i></a>
-        <a href="https://www.youtube.com/@kurniapedia" target="_blank" class="glass-panel kurnia-icon yt"><i class="fa-brands fa-youtube"></i></a>
-        <a href="https://wa.me/+6285870906050" target="_blank" class="glass-panel kurnia-icon wa"><i class="fa-brands fa-whatsapp"></i></a>
-      </div>
-      <footer style="text-align: center; font-size: 10.5px; color: var(--text-muted); font-family: sans-serif;">
-        <p>Crafted with ♥ by <span style="font-weight: 500; color: var(--text-main);">Kurniapedia</span> 2026</p>
-      </footer>
+    <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;">
+        <div id="socialMediaRow" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+            <a href="https://instagram.com/kurniapedia" target="_blank" class="glass-panel kurnia-icon ig">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://tiktok.com/@kurniapedia" target="_blank" class="glass-panel kurnia-icon tt">
+                <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="https://www.youtube.com/@kurniapedia" target="_blank" class="glass-panel kurnia-icon yt">
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+            <a href="https://wa.me/+6285870906050" target="_blank" class="glass-panel kurnia-icon wa">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+        </div>
+        <footer style="text-align: center; font-size: 10px; color: var(--text-muted);">
+            <p>Crafted with ♥ by <span style="font-weight: 500; color: var(--text-main);">Kurniapedia</span> 2026</p>
+        </footer>
     </div>
 
   </div>
@@ -863,26 +854,18 @@
 
       try {
         const targetUrl = `${SCRIPT_URL}?kelas=${encodeURIComponent(namaKelas)}&_t=${new Date().getTime()}`;
-        
-        const response = await fetch(targetUrl, {
-          method: "GET",
-          redirect: "follow",
-          credentials: "omit"
-        });
+        const response = await fetch(targetUrl, { method: "GET", redirect: "follow", credentials: "omit" });
 
-        if (!response.ok) {
-          throw new Error("Gagal terhubung ke server.");
-        }
+        if (!response.ok) throw new Error("Gagal terhubung ke server.");
 
         const result = await response.json();
-
         if (result.error) {
           showError(result.error);
         } else {
           renderTable(result.data || []);
         }
       } catch (err) {
-        showError("Gagal mengambil data. Pastikan koneksi internet stabil dan coba lagi.");
+        showError("Gagal mengambil data. Periksa koneksi internet.");
       }
     }
 
@@ -898,15 +881,7 @@
       tableBody.innerHTML = '';
 
       if (!data || data.length === 0) {
-        tableBody.innerHTML = `
-          <tr>
-            <td colspan="3">
-              <div class="no-results">
-                <i class="fa-regular fa-folder-open" style="font-size: 1.2rem; margin-bottom: 6px; color: var(--accent-blue);"></i>
-                <p>Tidak ada data siswa untuk kelas ini.</p>
-              </div>
-            </td>
-          </tr>`;
+        tableBody.innerHTML = `<tr><td colspan="3"><div class="no-results"><i class="fa-regular fa-folder-open" style="font-size: 1.2rem; margin-bottom: 6px; color: var(--accent-blue);"></i><p>Tidak ada data siswa.</p></div></td></tr>`;
         return;
       }
 
@@ -915,12 +890,7 @@
         row.innerHTML = `
           <td class="td-no"><span class="no-badge">${item.no || '-'}</span></td>
           <td><span class="student-name">${item.nama || '-'}</span></td>
-          <td>
-            <div class="capaian-tag">
-              <i class="fa-solid fa-star"></i>
-              <span>${item.capaianAkhir || '-'}</span>
-            </div>
-          </td>
+          <td><div class="capaian-tag"><i class="fa-solid fa-star"></i><span>${item.capaianAkhir || '-'}</span></div></td>
         `;
         tableBody.appendChild(row);
       });
@@ -928,26 +898,14 @@
 
     function filterData() {
       const query = document.getElementById('searchInput').value.toLowerCase();
-      const filtered = allData.filter(item => 
-        item.nama && item.nama.toString().toLowerCase().includes(query)
-      );
+      const filtered = allData.filter(item => item.nama && item.nama.toString().toLowerCase().includes(query));
       displayFilteredData(filtered);
     }
 
     function showError(message) {
       document.getElementById('loading').style.display = 'none';
       document.getElementById('tableContainer').style.display = 'block';
-      const tableBody = document.getElementById('tableBody');
-      tableBody.innerHTML = `
-        <tr>
-          <td colspan="3">
-            <div style="text-align: center; color: #f43f5e; background: rgba(244, 63, 94, 0.08); border: 1px solid rgba(244, 63, 94, 0.2); padding: 10px; border-radius: 8px; margin: 8px;">
-              <i class="fa-solid fa-triangle-exclamation" style="font-size: 0.9rem; margin-bottom: 2px;"></i>
-              <p style="font-weight: 500; font-size: 0.72rem;">${message}</p>
-            </div>
-          </td>
-        </tr>
-      `;
+      document.getElementById('tableBody').innerHTML = `<tr><td colspan="3"><div style="text-align: center; color: #f43f5e; background: rgba(244, 63, 94, 0.08); padding: 10px; border-radius: 8px; margin: 8px; font-size: 0.7rem;"><p>${message}</p></div></td></tr>`;
     }
 
     async function downloadImage(e) {
@@ -955,7 +913,7 @@
       const btn = e.currentTarget;
       const originalText = btn.innerHTML;
       
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Mengunduh...';
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
       btn.disabled = true;
 
       const isPutriTheme = document.body.classList.contains('theme-putri');
@@ -967,33 +925,23 @@
           scale: 2,
           useCORS: true,
           logging: false,
-          allowTaint: true,
-          windowWidth: exportArea.scrollWidth + 20,
-          windowHeight: exportArea.scrollHeight + 20 
+          allowTaint: true
         });
 
         const fileName = `Laporan_Hafalan_${currentClass.replace(/\s+/g, '_')}.png`;
-
         canvas.toBlob(function(blob) {
-          if (!blob) {
-            alert('Gagal memproses gambar PNG.');
-            return;
-          }
-
+          if (!blob) return;
           const blobUrl = URL.createObjectURL(blob);
           const link = document.createElement('a');
           link.href = blobUrl;
           link.download = fileName;
-          
           document.body.appendChild(link);
           link.click();
-          
           document.body.removeChild(link);
           setTimeout(() => URL.revokeObjectURL(blobUrl), 200);
         }, 'image/png');
-
       } catch (err) {
-        alert('Gagal mengambil gambar: ' + err.message);
+        alert('Gagal mengambil gambar.');
       } finally {
         btn.innerHTML = originalText;
         btn.disabled = false;
