@@ -32,11 +32,11 @@
       --text-muted: #64748b;
       --text-title: #f8fafc;
       
-      --card-bg: rgba(15, 23, 42, 0.75);
+      --card-bg: rgba(15, 23, 42, 0.85);
       --card-border: rgba(255, 255, 255, 0.08);
       --input-bg: rgba(30, 41, 59, 0.6);
       
-      --table-header-bg: rgba(30, 41, 59, 0.85);
+      --table-header-bg: rgba(30, 41, 59, 0.95);
       --table-row-border: rgba(255, 255, 255, 0.05);
       --badge-bg: rgba(79, 70, 229, 0.15);
       --badge-border: rgba(99, 102, 241, 0.3);
@@ -61,11 +61,11 @@
       --text-muted: #9a7892;
       --text-title: #fdf2f8;
       
-      --card-bg: rgba(35, 15, 38, 0.75);
+      --card-bg: rgba(35, 15, 38, 0.85);
       --card-border: rgba(255, 255, 255, 0.08);
       --input-bg: rgba(54, 23, 58, 0.6);
       
-      --table-header-bg: rgba(54, 23, 58, 0.85);
+      --table-header-bg: rgba(54, 23, 58, 0.95);
       --table-row-border: rgba(255, 255, 255, 0.05);
       --badge-bg: rgba(190, 24, 93, 0.15);
       --badge-border: rgba(244, 63, 94, 0.3);
@@ -463,26 +463,24 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Tabel dan kontainer dibersihkan agar presisi tanpa sisa bayangan abu-abu */
+    /* Tabel dibuat seragam tanpa sisa border ganda/garis abu */
     .table-container {
-      background: transparent;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-radius: 16px;
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow-glass);
       overflow: hidden;
       width: 100%;
     }
 
     .student-table {
       width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
+      border-collapse: collapse;
       text-align: left;
       font-size: 0.72rem;
-      background: var(--card-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      box-shadow: var(--shadow-glass);
+      background: transparent;
     }
 
     .student-table th {
@@ -496,9 +494,6 @@
       border-bottom: 1.5px solid var(--table-row-border);
     }
 
-    .student-table th:first-child { border-top-left-radius: 16px; }
-    .student-table th:last-child { border-top-right-radius: 16px; }
-
     .student-table th.col-no { width: 45px; text-align: center; }
     .student-table th.col-nama { width: 55%; }
     .student-table th.col-capaian { width: 40%; }
@@ -510,9 +505,6 @@
     .student-table tbody tr:last-child {
       border-bottom: none;
     }
-
-    .student-table tbody tr:last-child td:first-child { border-bottom-left-radius: 16px; }
-    .student-table tbody tr:last-child td:last-child { border-bottom-right-radius: 16px; }
 
     .student-table tbody tr:hover {
       background-color: rgba(255, 255, 255, 0.04);
@@ -740,7 +732,7 @@
 
     </div>
 
-    <!-- 3. Footer Kurniapedia (Berada di luar area export/unduh agar bersih) -->
+    <!-- 3. Footer Kurniapedia (Di luar area export agar bersih) -->
     <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding-top: 16px;">
         <div id="socialMediaRow" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
             <a href="https://instagram.com/kurniapedia" target="_blank" class="glass-panel kurnia-icon ig">
