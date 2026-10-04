@@ -111,7 +111,6 @@
       margin: auto;
     }
 
-    /* Area yang akan di-export (mencakup seluruh konten sampai footer) */
     .export-area {
       width: 100%;
       display: flex;
@@ -471,7 +470,7 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Kontainer tabel sepenuhnya bersih tanpa sisa border luar ganda */
+    /* Tabel yang lebih efisien, padat, dan ringkas */
     .table-container {
       background: var(--card-bg);
       backdrop-filter: blur(20px);
@@ -487,25 +486,26 @@
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      font-size: 0.72rem;
+      font-size: 0.64rem; /* Font diperkecil */
       background: transparent;
       border: none;
     }
 
     .student-table th {
       background: var(--table-header-bg);
-      padding: 9px 10px;
+      padding: 6px 8px; /* Padding header diperkecil */
       font-weight: 600;
-      font-size: 0.65rem;
+      font-size: 0.6rem;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       color: var(--text-muted);
       border-bottom: 1.5px solid var(--table-row-border);
     }
 
-    .student-table th.col-no { width: 45px; text-align: center; }
-    .student-table th.col-nama { width: 55%; }
-    .student-table th.col-capaian { width: 40%; }
+    /* Kolom nomor diperkecil lebarnya */
+    .student-table th.col-no { width: 32px; text-align: center; }
+    .student-table th.col-nama { width: 58%; }
+    .student-table th.col-capaian { width: 38%; }
 
     .student-table tr {
       border-bottom: 1px solid var(--table-row-border);
@@ -520,7 +520,7 @@
     }
 
     .student-table td {
-      padding: 7px 10px;
+      padding: 4px 8px; /* Padding antar baris diperkecil agar lebih rapat/efisien */
       color: var(--text-main);
       vertical-align: middle;
       border-bottom: 1px solid var(--table-row-border);
@@ -534,32 +534,32 @@
 
     .no-badge {
       display: inline-block;
-      font-size: 0.65rem;
+      font-size: 0.58rem;
       font-weight: 600;
       color: var(--badge-color);
       background: var(--badge-bg);
       border: 1px solid var(--badge-border);
-      padding: 1px 6px;
-      border-radius: 4px;
+      padding: 1px 4px;
+      border-radius: 3px;
     }
 
     .student-name {
       font-weight: 500;
-      font-size: 0.74rem;
+      font-size: 0.66rem; /* Ukuran font nama siswa disesuaikan lebih efisien */
       color: var(--text-title);
     }
 
     .capaian-tag {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      font-size: 0.72rem;
+      gap: 4px;
+      font-size: 0.64rem; /* Ukuran font capaian diperkecil */
       color: var(--text-title);
     }
 
     .capaian-tag i.fa-star { 
       color: var(--accent-green); 
-      font-size: 0.6rem;
+      font-size: 0.52rem;
     }
 
     .no-results {
@@ -598,7 +598,6 @@
 <body>
 
   <div class="page-wrapper">
-    <!-- Area yang dibungkus agar ikut tersimpan dalam gambar unduhan -->
     <div class="export-area" id="exportArea">
       
       <div class="container">
@@ -743,7 +742,7 @@
 
       </div>
 
-      <!-- 3. Footer & Social Media (Sekarang ikut masuk ke dalam export-area agar ikut terunduh) -->
+      <!-- 3. Footer & Social Media -->
       <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding-top: 8px;">
           <div id="socialMediaRow" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
               <a href="https://instagram.com/kurniapedia" target="_blank" class="glass-panel kurnia-icon ig">
