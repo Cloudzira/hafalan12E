@@ -6,10 +6,10 @@
   <title>Sertifikasi 12</title>
   <link rel="icon" href="favicon.png">
   
-  <!-- Google Fonts: Outfit & Plus Jakarta Sans untuk Kesan Profesional & Futuristik -->
+  <!-- Google Fonts: Plus Jakarta Sans & Inter untuk Kesan Modern, Aesthetic, dan Clean -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Library html2canvas untuk Fitur Screenshot -->
@@ -17,7 +17,7 @@
 
   <style>
     :root {
-      /* Tema Putra & Portal Utama: Light Glassmorphism Ice Blue dengan Aksen Blue & Green */
+      /* Tema Putra & Portal Utama: Light Glassmorphism Ice Blue dengan Aksen Elegan */
       --bg-main: #f8fafc;
       --bg-image: radial-gradient(circle at 50% -20%, #e2e8f0 0%, #f8fafc 70%);
       
@@ -29,17 +29,17 @@
       --text-muted: #64748b;
       --text-title: #0f172a;
       
-      --card-bg: rgba(255, 255, 255, 0.82);
+      --card-bg: rgba(255, 255, 255, 0.85);
       --card-border: rgba(255, 255, 255, 1);
       --input-bg: rgba(248, 250, 252, 0.9);
       
       --table-header-bg: rgba(241, 245, 249, 0.95);
       --table-row-border: rgba(226, 232, 240, 0.8);
-      --badge-bg: rgba(37, 99, 235, 0.08);
-      --badge-border: rgba(37, 99, 235, 0.2);
+      --badge-bg: rgba(37, 99, 235, 0.06);
+      --badge-border: rgba(37, 99, 235, 0.15);
       --badge-color: #2563eb;
       
-      --shadow-neon: 0 10px 25px -5px rgba(37, 99, 235, 0.15);
+      --shadow-neon: 0 10px 25px -5px rgba(37, 99, 235, 0.12);
       --glass-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
     }
 
@@ -56,17 +56,17 @@
       --text-muted: #64748b;
       --text-title: #1e293b;
       
-      --card-bg: rgba(255, 255, 255, 0.82);
+      --card-bg: rgba(255, 255, 255, 0.85);
       --card-border: rgba(255, 255, 255, 1);
       --input-bg: rgba(253, 242, 248, 0.9);
       
       --table-header-bg: rgba(253, 242, 248, 0.95);
       --table-row-border: rgba(251, 207, 232, 0.7);
-      --badge-bg: rgba(219, 39, 119, 0.08);
-      --badge-border: rgba(219, 39, 119, 0.2);
+      --badge-bg: rgba(219, 39, 119, 0.06);
+      --badge-border: rgba(219, 39, 119, 0.15);
       --badge-color: #db2777;
       
-      --shadow-neon: 0 10px 25px -5px rgba(219, 39, 119, 0.15);
+      --shadow-neon: 0 10px 25px -5px rgba(219, 39, 119, 0.12);
       --glass-shadow: 0 20px 40px -15px rgba(131, 24, 67, 0.05);
     }
 
@@ -81,8 +81,8 @@
     }
 
     body {
-      /* Menggunakan font Outfit untuk kesan geometri futuristik yang bersih dan profesional */
-      font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+      /* Menggunakan Plus Jakarta Sans & Inter untuk estetika modern, bersih, dan tidak kaku */
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
       background-color: var(--bg-main);
       background-image: var(--bg-image);
       min-height: 100vh;
@@ -117,26 +117,25 @@
     .header .subtitle {
       font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 3px;
+      letter-spacing: 2px;
       color: var(--neon-green);
-      font-weight: 700;
+      font-weight: 600;
       margin-bottom: 6px;
       line-height: 1.3;
     }
 
     .header h1 {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       color: var(--text-title);
       margin-bottom: 10px;
-      font-weight: 800;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: -0.3px;
       line-height: 1.2;
     }
 
     .header-divider {
-      width: 50px;
-      height: 4px;
+      width: 40px;
+      height: 3px;
       background: linear-gradient(90deg, var(--neon-green), var(--neon-blue), var(--neon-purple));
       margin: 0 auto;
       border-radius: 4px;
@@ -155,7 +154,7 @@
 
     /* Login Box & Auth Box */
     .login-box {
-      max-width: 500px;
+      max-width: 480px;
       margin: 0 auto 20px auto;
       width: 100%;
       background: var(--card-bg);
@@ -170,52 +169,52 @@
     }
 
     .login-box i.icon-header {
-      font-size: 2.2rem;
+      font-size: 2rem;
       color: var(--neon-green);
       margin-bottom: 14px;
     }
 
     .login-box h2 {
-      font-size: 1.25rem;
-      margin-bottom: 8px;
+      font-size: 1.2rem;
+      margin-bottom: 6px;
       color: var(--text-title);
-      font-weight: 700;
+      font-weight: 600;
       letter-spacing: -0.2px;
     }
 
     .login-box p {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
       margin-bottom: 24px;
-      font-weight: 500;
+      font-weight: 400;
     }
 
     /* Form Login PIN/Angka */
     .pin-input-group {
       position: relative;
-      max-width: 280px;
+      max-width: 260px;
       margin: 0 auto 16px auto;
     }
 
     .pin-input-group input {
       width: 100%;
       padding: 12px 42px 12px 16px;
-      border: 1.5px solid rgba(203, 213, 225, 0.8);
+      border: 1px solid rgba(203, 213, 225, 0.8);
       border-radius: 12px;
       outline: none;
-      font-size: 1.2rem;
-      letter-spacing: 6px;
+      font-size: 1.1rem;
+      letter-spacing: 5px;
       text-align: center;
       background: var(--input-bg);
       color: var(--text-title);
-      font-weight: 700;
+      font-weight: 500;
       transition: all 0.25s ease;
       font-family: inherit;
     }
 
     .pin-input-group input:focus {
       border-color: var(--neon-blue);
-      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
       background: #ffffff;
     }
 
@@ -228,7 +227,7 @@
       border: none;
       color: var(--text-muted);
       cursor: pointer;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       padding: 4px;
       transition: color 0.2s;
     }
@@ -239,14 +238,14 @@
 
     .btn-login-submit {
       width: 100%;
-      max-width: 280px;
+      max-width: 260px;
       background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
       color: #ffffff;
       border: none;
-      padding: 12px 16px;
+      padding: 11px 16px;
       border-radius: 12px;
-      font-size: 0.9rem;
-      font-weight: 700;
+      font-size: 0.85rem;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.25s ease;
       font-family: inherit;
@@ -255,19 +254,18 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      letter-spacing: 0.5px;
     }
 
     .btn-login-submit:hover {
       opacity: 0.95;
-      transform: translateY(-2px);
-      box-shadow: 0 12px 28px -6px rgba(37, 99, 235, 0.3);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px -4px rgba(37, 99, 235, 0.25);
     }
 
     .error-msg {
       color: #ef4444;
       font-size: 0.78rem;
-      font-weight: 600;
+      font-weight: 500;
       margin-top: 10px;
       display: none;
     }
@@ -287,11 +285,11 @@
     }
 
     .class-group-label {
-      font-size: 0.75rem;
-      font-weight: 700;
+      font-size: 0.72rem;
+      font-weight: 600;
       color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 1.5px;
+      letter-spacing: 1px;
       text-align: left;
       margin-bottom: 8px;
       padding-left: 4px;
@@ -309,20 +307,20 @@
       color: var(--text-main);
       padding: 12px 8px;
       border-radius: 12px;
-      font-size: 0.85rem;
-      font-weight: 700;
+      font-size: 0.82rem;
+      font-weight: 600;
       cursor: pointer;
-      transition: all 0.25s ease;
+      transition: all 0.2s ease;
       font-family: inherit;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 6px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.01);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.01);
     }
 
     .btn-class-option i {
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: var(--neon-blue);
     }
 
@@ -368,17 +366,17 @@
     }
 
     .panel-header h2 {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: var(--text-title);
-      font-weight: 700;
+      font-weight: 600;
       letter-spacing: -0.2px;
     }
 
     .download-date-tag {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
-      font-weight: 600;
-      padding: 5px 12px;
+      font-weight: 500;
+      padding: 4px 10px;
       background: rgba(255, 255, 255, 0.7);
       border-radius: 8px;
       border: 1px solid rgba(226, 232, 240, 0.8);
@@ -405,10 +403,10 @@
       background: rgba(255, 255, 255, 0.8);
       color: var(--neon-green);
       border: 1px solid var(--neon-green);
-      padding: 6px 14px;
+      padding: 6px 12px;
       border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 700;
+      font-size: 0.72rem;
+      font-weight: 600;
       cursor: pointer;
       font-family: inherit;
       transition: all 0.2s ease;
@@ -421,13 +419,13 @@
     }
 
     .btn-screenshot {
-      background: rgba(37, 99, 235, 0.08);
+      background: rgba(37, 99, 235, 0.06);
       color: var(--neon-blue);
       border: 1px solid var(--neon-blue);
-      padding: 6px 14px;
+      padding: 6px 12px;
       border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 700;
+      font-size: 0.72rem;
+      font-weight: 600;
       cursor: pointer;
       font-family: inherit;
       display: flex;
@@ -445,7 +443,7 @@
     .search-box {
       position: relative;
       flex: 1;
-      max-width: 260px;
+      max-width: 240px;
     }
 
     .search-box i {
@@ -454,16 +452,16 @@
       top: 50%;
       transform: translateY(-50%);
       color: var(--neon-blue);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
     }
 
     .search-box input {
       width: 100%;
-      padding: 8px 12px 8px 34px;
+      padding: 7px 12px 7px 32px;
       border: 1px solid rgba(203, 213, 225, 0.8);
       border-radius: 20px;
       outline: none;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       background: var(--input-bg);
       color: var(--text-main);
       font-family: inherit;
@@ -473,7 +471,7 @@
     .search-box input:focus {
       background: #ffffff;
       border-color: var(--neon-blue);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
     }
 
     .loading {
@@ -484,9 +482,9 @@
 
     .spinner {
       display: inline-block;
-      width: 32px;
-      height: 32px;
-      border: 3px solid rgba(5, 150, 105, 0.15);
+      width: 30px;
+      height: 30px;
+      border: 2.5px solid rgba(5, 150, 105, 0.15);
       border-radius: 50%;
       border-top-color: var(--neon-green);
       animation: spin 0.8s infinite linear;
@@ -512,18 +510,18 @@
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
     }
 
     .student-table th {
       background: var(--table-header-bg);
       padding: 10px 14px;
-      font-weight: 700;
-      font-size: 0.7rem;
+      font-weight: 600;
+      font-size: 0.68rem;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
+      letter-spacing: 0.6px;
       color: var(--text-muted);
-      border-bottom: 2px solid var(--table-row-border);
+      border-bottom: 1.5px solid var(--table-row-border);
       white-space: nowrap;
     }
 
@@ -544,30 +542,29 @@
       background-color: rgba(255, 255, 255, 0.6);
     }
 
-    /* Padding vertikal rapat & rapi */
     .student-table td {
       padding: 9px 14px;
       color: var(--text-main);
       vertical-align: middle;
-      line-height: 1.3;
+      line-height: 1.35;
     }
 
     .td-no { text-align: center; }
 
     .no-badge {
       display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 700;
+      font-size: 0.68rem;
+      font-weight: 600;
       color: var(--badge-color);
       background: var(--badge-bg);
       border: 1px solid var(--badge-border);
-      padding: 2px 8px;
+      padding: 2px 7px;
       border-radius: 6px;
     }
 
     .student-name {
-      font-weight: 600;
-      font-size: 0.8rem;
+      font-weight: 500;
+      font-size: 0.78rem;
       color: var(--text-title);
     }
 
@@ -575,21 +572,21 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-size: 0.78rem;
-      font-weight: 500;
+      font-size: 0.75rem;
+      font-weight: 400;
       color: var(--text-main);
     }
 
     .capaian-tag i.fa-star { 
       color: var(--neon-purple); 
-      font-size: 0.7rem;
+      font-size: 0.68rem;
     }
 
     .no-results {
       text-align: center;
       padding: 40px 15px;
       color: var(--text-muted);
-      font-size: 0.75rem;
+      font-size: 0.72rem;
     }
 
     /* Footer & Social Media Styling Tambahan */
@@ -602,14 +599,14 @@
     }
     
     .kurnia-icon {
-      width: 2.2rem;
-      height: 2.2rem;
+      width: 2.1rem;
+      height: 2.1rem;
       border-radius: 9999px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #64748b;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       transition: all 0.3s ease;
       text-decoration: none;
       border: 1px solid rgba(203, 213, 225, 0.6); 
@@ -628,7 +625,7 @@
     <div id="authSection">
       <header class="header">
         <div class="subtitle">Laporan Al Quran Kelas XII</div>
-        <h1 style="letter-spacing: 1.5px;">AKSES SISTEM</h1>
+        <h1 style="letter-spacing: 1px;">AKSES SISTEM</h1>
         <div class="header-divider"></div>
       </header>
 
@@ -746,7 +743,7 @@
       <!-- Loading State -->
       <div id="loading" class="loading">
         <div class="spinner"></div>
-        <p style="margin-top: 12px; color: var(--text-muted); font-size: 0.75rem; font-weight: 500;">Mengambil data kelas...</p>
+        <p style="margin-top: 10px; color: var(--text-muted); font-size: 0.72rem; font-weight: 400;">Mengambil data kelas...</p>
       </div>
 
       <!-- Table Container -->
@@ -787,7 +784,7 @@
 
         <!-- Footer -->
         <footer style="text-align: center; font-size: 11px; color: #64748b; font-family: sans-serif;">
-            <p>Crafted with ♥ by <span style="font-weight: 600;">Kurniapedia</span> 2026</p>
+            <p>Crafted with ♥ by <span style="font-weight: 500;">Kurniapedia</span> 2026</p>
         </footer>
 
     </div>
@@ -924,7 +921,7 @@
           <tr>
             <td colspan="3">
               <div class="no-results">
-                <i class="fa-regular fa-folder-open" style="font-size: 1.5rem; margin-bottom: 6px; color: var(--neon-green);"></i>
+                <i class="fa-regular fa-folder-open" style="font-size: 1.4rem; margin-bottom: 6px; color: var(--neon-green);"></i>
                 <p>Tidak ada data siswa untuk kelas ini.</p>
               </div>
             </td>
@@ -967,9 +964,9 @@
       tableBody.innerHTML = `
         <tr>
           <td colspan="3">
-            <div style="text-align: center; color: #ef4444; background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.2); padding: 12px; border-radius: 10px; margin: 12px;">
-              <i class="fa-solid fa-triangle-exclamation" style="font-size: 1rem; margin-bottom: 4px;"></i>
-              <p style="font-weight: 600; font-size: 0.75rem;">${message}</p>
+            <div style="text-align: center; color: #ef4444; background: rgba(239, 68, 68, 0.06); border: 1px solid rgba(239, 68, 68, 0.2); padding: 12px; border-radius: 10px; margin: 12px;">
+              <i class="fa-solid fa-triangle-exclamation" style="font-size: 0.95rem; margin-bottom: 4px;"></i>
+              <p style="font-weight: 500; font-size: 0.72rem;">${message}</p>
             </div>
           </td>
         </tr>
