@@ -17,7 +17,6 @@
 
   <style>
     :root {
-      /* Tema Utama / Putra: Deep Slate & Sophisticated Midnight Indigo dengan Glassmorphism */
       --bg-main: #0b0f19;
       --bg-image: 
         radial-gradient(circle at 15% 15%, rgba(79, 70, 229, 0.15) 0%, transparent 45%),
@@ -35,7 +34,6 @@
       
       --card-bg: rgba(15, 23, 42, 0.75);
       --card-border: rgba(255, 255, 255, 0.08);
-      --card-border-glow: rgba(99, 102, 241, 0.3);
       --input-bg: rgba(30, 41, 59, 0.6);
       
       --table-header-bg: rgba(30, 41, 59, 0.85);
@@ -47,7 +45,6 @@
       --shadow-glass: 0 20px 40px -12px rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
     }
 
-    /* Tema Khusus Putri (Kelas XII E, F, G, H): Deep Amethyst & Rose Quartz Glass */
     body.theme-putri {
       --bg-main: #0f0711;
       --bg-image: 
@@ -66,7 +63,6 @@
       
       --card-bg: rgba(35, 15, 38, 0.75);
       --card-border: rgba(255, 255, 255, 0.08);
-      --card-border-glow: rgba(219, 39, 119, 0.3);
       --input-bg: rgba(54, 23, 58, 0.6);
       
       --table-header-bg: rgba(54, 23, 58, 0.85);
@@ -104,7 +100,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Wrapper utama agar halaman login/menu posisinya center sempurna di tengah layar */
     .page-wrapper {
       width: 100%;
       max-width: 520px;
@@ -179,16 +174,6 @@
       overflow: hidden;
     }
 
-    .login-box::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    }
-
     .login-box i.icon-header {
       font-size: 1.8rem;
       background: var(--accent-gradient);
@@ -231,7 +216,6 @@
       color: var(--text-title);
       font-weight: 600;
       font-family: inherit;
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     .pin-toggle-btn {
@@ -479,28 +463,31 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Tabel Full Terbuka Tanpa Scroll & Bersih dari Sisa List Abu-abu */
+    /* Tabel dan kontainer dibersihkan agar presisi tanpa sisa bayangan abu-abu */
     .table-container {
-      background: var(--card-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: transparent;
       border-radius: 16px;
-      border: 1px solid var(--card-border);
-      box-shadow: var(--shadow-glass);
-      overflow: visible;
+      overflow: hidden;
       width: 100%;
     }
 
     .student-table {
       width: 100%;
-      border-collapse: collapse;
+      border-collapse: separate;
+      border-spacing: 0;
       text-align: left;
       font-size: 0.72rem;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      box-shadow: var(--shadow-glass);
     }
 
     .student-table th {
       background: var(--table-header-bg);
-      padding: 8px 10px;
+      padding: 9px 10px;
       font-weight: 600;
       font-size: 0.65rem;
       text-transform: uppercase;
@@ -508,6 +495,9 @@
       color: var(--text-muted);
       border-bottom: 1.5px solid var(--table-row-border);
     }
+
+    .student-table th:first-child { border-top-left-radius: 16px; }
+    .student-table th:last-child { border-top-right-radius: 16px; }
 
     .student-table th.col-no { width: 45px; text-align: center; }
     .student-table th.col-nama { width: 55%; }
@@ -517,14 +507,26 @@
       border-bottom: 1px solid var(--table-row-border);
     }
 
+    .student-table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    .student-table tbody tr:last-child td:first-child { border-bottom-left-radius: 16px; }
+    .student-table tbody tr:last-child td:last-child { border-bottom-right-radius: 16px; }
+
     .student-table tbody tr:hover {
       background-color: rgba(255, 255, 255, 0.04);
     }
 
     .student-table td {
-      padding: 6px 10px;
+      padding: 7px 10px;
       color: var(--text-main);
       vertical-align: middle;
+      border-bottom: 1px solid var(--table-row-border);
+    }
+
+    .student-table tbody tr:last-child td {
+      border-bottom: none;
     }
 
     .td-no { text-align: center; }
@@ -594,8 +596,8 @@
 </head>
 <body>
 
-  <div class="page-wrapper" id="exportArea">
-    <div class="container">
+  <div class="page-wrapper">
+    <div class="container" id="exportArea">
       
       <!-- 0. Halaman Login Angka (PIN Protection) -->
       <div id="authSection">
@@ -736,28 +738,29 @@
         </div>
       </div>
 
-      <!-- 3. Footer Kurniapedia -->
-      <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding-top: 4px;">
-          <div id="socialMediaRow" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-              <a href="https://instagram.com/kurniapedia" target="_blank" class="glass-panel kurnia-icon ig">
-                  <i class="fa-brands fa-instagram"></i>
-              </a>
-              <a href="https://tiktok.com/@kurniapedia" target="_blank" class="glass-panel kurnia-icon tt">
-                  <i class="fa-brands fa-tiktok"></i>
-              </a>
-              <a href="https://www.youtube.com/@kurniapedia" target="_blank" class="glass-panel kurnia-icon yt">
-                  <i class="fa-brands fa-youtube"></i>
-              </a>
-              <a href="https://wa.me/+6285870906050" target="_blank" class="glass-panel kurnia-icon wa">
-                  <i class="fa-brands fa-whatsapp"></i>
-              </a>
-          </div>
-          <footer style="text-align: center; font-size: 10px; color: var(--text-muted);">
-              <p>Crafted with ♥ by <span style="font-weight: 500; color: var(--text-main);">Kurniapedia</span> 2026</p>
-          </footer>
-      </div>
-
     </div>
+
+    <!-- 3. Footer Kurniapedia (Berada di luar area export/unduh agar bersih) -->
+    <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding-top: 16px;">
+        <div id="socialMediaRow" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+            <a href="https://instagram.com/kurniapedia" target="_blank" class="glass-panel kurnia-icon ig">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://tiktok.com/@kurniapedia" target="_blank" class="glass-panel kurnia-icon tt">
+                <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="https://www.youtube.com/@kurniapedia" target="_blank" class="glass-panel kurnia-icon yt">
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+            <a href="https://wa.me/+6285870906050" target="_blank" class="glass-panel kurnia-icon wa">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+        </div>
+        <footer style="text-align: center; font-size: 10px; color: var(--text-muted);">
+            <p>Crafted with ♥ by <span style="font-weight: 500; color: var(--text-main);">Kurniapedia</span> 2026</p>
+        </footer>
+    </div>
+
   </div>
 
   <script>
