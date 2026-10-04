@@ -470,7 +470,7 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Tabel yang lebih efisien, padat, dan ringkas */
+    /* Tabel yang disesuaikan proporsi lebarnya: Nama diperkecil proporsional, Capaian diperlebar */
     .table-container {
       background: var(--card-bg);
       backdrop-filter: blur(20px);
@@ -486,14 +486,14 @@
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      font-size: 0.64rem; /* Font diperkecil */
+      font-size: 0.64rem;
       background: transparent;
       border: none;
     }
 
     .student-table th {
       background: var(--table-header-bg);
-      padding: 6px 8px; /* Padding header diperkecil */
+      padding: 6px 8px;
       font-weight: 600;
       font-size: 0.6rem;
       text-transform: uppercase;
@@ -502,10 +502,10 @@
       border-bottom: 1.5px solid var(--table-row-border);
     }
 
-    /* Kolom nomor diperkecil lebarnya */
+    /* Proporsi lebar kolom diperbarui: Kolom Nama dikurangi, Kolom Capaian Akhir diperlebar */
     .student-table th.col-no { width: 32px; text-align: center; }
-    .student-table th.col-nama { width: 58%; }
-    .student-table th.col-capaian { width: 38%; }
+    .student-table th.col-nama { width: 42%; }
+    .student-table th.col-capaian { width: 54%; }
 
     .student-table tr {
       border-bottom: 1px solid var(--table-row-border);
@@ -520,7 +520,7 @@
     }
 
     .student-table td {
-      padding: 4px 8px; /* Padding antar baris diperkecil agar lebih rapat/efisien */
+      padding: 4px 8px;
       color: var(--text-main);
       vertical-align: middle;
       border-bottom: 1px solid var(--table-row-border);
@@ -545,7 +545,7 @@
 
     .student-name {
       font-weight: 500;
-      font-size: 0.66rem; /* Ukuran font nama siswa disesuaikan lebih efisien */
+      font-size: 0.66rem;
       color: var(--text-title);
     }
 
@@ -553,7 +553,7 @@
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      font-size: 0.64rem; /* Ukuran font capaian diperkecil */
+      font-size: 0.64rem;
       color: var(--text-title);
     }
 
